@@ -1,0 +1,25 @@
+{
+  "app": "superset",
+  "entrypoints": {
+    "preamble": {
+      "css": [],
+      "js": []
+    },
+    "menu": {
+      "css": [],
+      "js": []
+    },
+    "spa": {
+      "css": [],
+      "js": []
+    },
+    "embedded": {
+      "css": [],
+      "js": []
+    },
+    "service-worker": {
+      "css": [],
+      "js": []
+    }
+  }
+}

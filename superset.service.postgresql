@@ -1,0 +1,22 @@
+[Unit]
+Description=Apache Superset
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/custom_superset
+Environment="PATH=/opt/custom_superset/venv/bin"
+Environment="SUPERSET_SECRET_KEY=change-me-in-production"
+Environment="SUPERSET_DB_HOST=localhost"
+Environment="SUPERSET_DB_PORT=5432"
+Environment="SUPERSET_DB_USER=superset"
+Environment="SUPERSET_DB_PASS=superset"
+Environment="SUPERSET_DB_NAME=superset"
+Environment="FLASK_APP=superset"
+ExecStart=/opt/custom_superset/venv/bin/superset run -h 0.0.0.0 -p 8088
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

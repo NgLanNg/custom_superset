@@ -1,0 +1,22 @@
+{
+  "session_id": "2b141d0b-668f-4eb3-ba04-91b438a7d7e9",
+  "timestamp": "20260316_130125",
+  "user": "alan",
+  "hostname": "Alans-MacBook-Pro.local",
+  "cwd": "/Users/alan/dashboard",
+  "end_reason": "unknown",
+  "system_info": {
+    "os": "Darwin",
+    "version": "25.1.0",
+    "arch": "arm64"
+  },
+  "usage": {
+  "input": 0,
+  "output": 0,
+  "cache_read": 0,
+  "cache_create": 0,
+  "calls": 0,
+  "cost_usd": 0
+},
+  "models": {}
+}

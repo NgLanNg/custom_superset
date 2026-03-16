@@ -1,0 +1,8 @@
+project_name: Custom Superset Configuration
+framework: Apache Superset (Flask Backend, React Frontend)
+language: Python 3.11, TypeScript/JavaScript
+description: A customized deployment of Apache Superset built from source to support editable table grids and isolated chart embedding into external applications without standard navigation elements.
+test_command: npm run test (Frontend), pytest (Backend)
+phase: Phase 1 - Analysis & Bootstrap
+roles:
+  - dev

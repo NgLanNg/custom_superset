@@ -1,0 +1,87 @@
+step:
+  id: "01-scope"
+  name: "Define Scope"
+  phase: "Phase 2: Planning"
+
+  inputs:
+    - "docs/project-context.md"
+
+  outputs:
+    - "docs/scope.md"
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# ============================================
+graph:
+  initial: read_context
+
+  nodes:
+    read_context:
+      type: action
+      action: load_project_context
+      description: "Read project-context.md and summarize overarching goal"
+      outputs:
+        - project_goal
+        - problem_statement
+
+    define_boundaries:
+      type: action
+      action: identify_scope
+      description: "Define in-scope and out-of-scope items"
+      inputs:
+        - project_goal
+      outputs:
+        - in_scope
+        - out_of_scope
+
+    define_success:
+      type: action
+      action: success_criteria
+      description: "Define 3-5 bullet points for success"
+      inputs:
+        - in_scope
+      outputs:
+        - success_criteria
+
+    draft_document:
+      type: action
+      action: write_scope
+      description: "Draft and write docs/scope.md"
+      inputs:
+        - project_goal
+        - in_scope
+        - out_of_scope
+        - success_criteria
+      outputs:
+        - scope_md
+
+    checkpoint_scope:
+      type: checkpoint
+      description: "User approves scope document"
+      human_in_loop: true
+      prompt: "Scope document drafted. Approve and proceed?"
+      options:
+        A: task_breakdown
+        P: party
+        C: read_context
+
+    task_breakdown:
+      type: terminal
+      action: advance_to_tasks
+      description: "Advance to 02-task-breakdown"
+      next_phase: "phase-2-planning/02-task-breakdown"
+
+    party:
+      type: terminal
+      action: celebrate
+      description: "Update context and lessons learned"
+
+  edges:
+    - read_context -> define_boundaries
+    - define_boundaries -> define_success
+    - define_success -> draft_document
+    - draft_document -> checkpoint_scope
+    - checkpoint_scope -> {A: task_breakdown, P: party, C: read_context}
+
+  checkpoints:
+    - checkpoint_scope

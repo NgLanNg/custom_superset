@@ -1,0 +1,25 @@
+{
+    "name": "@superset-ui/plugin-chart-scenario",
+    "version": "0.1.0",
+    "description": "Superset Chart - Scenario Creator",
+    "sideEffects": false,
+    "main": "lib/index.js",
+    "module": "esm/index.js",
+    "files": [
+        "esm",
+        "lib"
+    ],
+    "author": "Antigravity",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "echarts": "^5.5.0",
+        "antd": "^5.0.0"
+    },
+    "peerDependencies": {
+        "@apache-superset/core": "*",
+        "@superset-ui/chart-controls": "*",
+        "@superset-ui/core": "*",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    }
+}

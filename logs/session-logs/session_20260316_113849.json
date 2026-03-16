@@ -1,0 +1,47 @@
+{
+  "session_id": "e48db08a-e88c-4362-a4fd-e945c78d1602",
+  "timestamp": "20260316_113849",
+  "user": "alan",
+  "hostname": "Alans-MacBook-Pro.local",
+  "cwd": "/Users/alan/dashboard",
+  "end_reason": "unknown",
+  "system_info": {
+    "os": "Darwin",
+    "version": "25.1.0",
+    "arch": "arm64"
+  },
+  "usage": {
+  "input": 14084484,
+  "output": 43690,
+  "cache_read": 0,
+  "cache_create": 0,
+  "calls": 169,
+  "cost_usd": 39.0342
+},
+  "models": {
+  "qwen3-coder-next": {
+    "input": 12543427,
+    "output": 42000,
+    "cache_read": 0,
+    "cache_create": 0,
+    "calls": 157,
+    "cost_usd": 38.2603
+  },
+  "<synthetic>": {
+    "input": 0,
+    "output": 0,
+    "cache_read": 0,
+    "cache_create": 0,
+    "calls": 1,
+    "cost_usd": 0.0
+  },
+  "kimi-k2.5": {
+    "input": 1541057,
+    "output": 1690,
+    "cache_read": 0,
+    "cache_create": 0,
+    "calls": 11,
+    "cost_usd": 0.7739
+  }
+}
+}

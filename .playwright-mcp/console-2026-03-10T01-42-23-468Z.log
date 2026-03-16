@@ -1,0 +1,23 @@
+[    1287ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[    1613ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    1614ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[    2288ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:9000/static/assets/images/pwa/icon-192.png:0
+[    2289ms] [WARNING] Error while trying to use the following icon from the Manifest: http://localhost:9000/static/assets/images/pwa/icon-192.png (Download error or resource isn't a valid image) @ http://localhost:9000/superset/welcome/:0
+[    2290ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:9000/superset/log/?explode=events:0
+[    2705ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    2705ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[    4765ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    4765ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[    8841ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    8841ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[   16866ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[   16867ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[   33043ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[   33044ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[   65074ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[   65074ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  129177ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  129177ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  257283ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:9000/static/assets/spa.c6da402355158332cffb.hot-update.json:0
+[  257283ms] [WARNING] [HMR] Cannot find update. Need to do a full reload! @ webpack-internal:///./node_modules/webpack/hot/log.js:44
+[  257283ms] [WARNING] [HMR] (Probably because of restarting the webpack-dev-server) @ webpack-internal:///./node_modules/webpack/hot/log.js:44

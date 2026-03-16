@@ -1,0 +1,86 @@
+step:
+  id: "09-course-correction"
+  name: "Course Correction & Scope Sync"
+  phase: "Phase 4: Implementation"
+
+  execution:
+    primary_role: "pm"
+    required_system: "PRD & Sprint Plan"
+
+  contracts:
+    inputs:
+      - path: "docs/prd.md"
+        must_exist: true
+      - path: "docs/sprint_plan.md"
+        must_exist: true
+    outputs:
+      - path: "docs/change_proposal.md"
+        type: "decision_log"
+
+  strict_nyquist_rules:
+    - "No silent scope changes. All shifts must be documented."
+    - "Impact on deadline MUST be explicitly stated."
+
+graph:
+  initial: step_01_diagnose
+  nodes:
+    step_01_diagnose:
+      type: action
+      action: rca_diagnosis
+      description: "Identify root cause of why the current sprint is off track"
+      outputs: [root_cause, issue_type, delta_analysis]
+
+    decision_01:
+      type: decision
+      description: "Determine if issue requires scope down, timeline extension, or re-solution"
+      options: [scope_down, extend_timeline, re_solution]
+
+    step_02_proposal:
+      type: action
+      action: draft_change_proposal
+      description: "Create change_proposal.md with new success criteria and required approvals"
+      outputs: [change_proposal, approval_required]
+
+    checkpoint_01:
+      type: checkpoint
+      human_in_loop: true
+      description: "User approval on the change proposal and updated path forward"
+      options:
+        C: proceed_replanning
+        A: revise_proposal
+        R: reject_and_halt
+
+    step_03_replan:
+      type: action
+      action: update_sprint_plan
+      description: "Update sprint_plan.md and re-solution impacted epics"
+      outputs: [updated_sprint_plan, re_solutioned_epics]
+
+    checkpoint_02:
+      type: checkpoint
+      human_in_loop: true
+      description: "NYQUIST GATE: Verify new plan is technically sound"
+      options:
+        C: resume_implementation
+        A: revise_replanning
+        R: abort_correction
+
+    terminal_resume:
+      type: terminal
+      description: "Resume implementation with updated plan"
+
+    terminal_reject:
+      type: terminal
+      description: "Correction rejected, return to previous state"
+
+  edges:
+    - step_01_diagnose -> decision_01
+    - decision_01 -> {scope_down: step_02_proposal, extend_timeline: step_02_proposal, re_solution: step_02_proposal}
+    - step_02_proposal -> checkpoint_01
+    - checkpoint_01 -> {C: step_03_replan, A: step_02_proposal, R: terminal_reject}
+    - step_03_replan -> checkpoint_02
+    - checkpoint_02 -> {C: terminal_resume, A: step_03_replan, R: terminal_reject}
+
+  checkpoints:
+    - checkpoint_01
+    - checkpoint_02

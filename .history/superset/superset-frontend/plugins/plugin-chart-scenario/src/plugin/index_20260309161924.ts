@@ -1,0 +1,28 @@
+import { t, ChartMetadata, ChartPlugin } from '@superset-ui/core';
+import buildQuery from './buildQuery';
+import controlPanel from './controlPanel';
+import transformProps from './transformProps';
+import ScenarioChart from '../ScenarioChart';
+import { ScenarioChartFormData, ScenarioChartProps } from '../types';
+
+const metadata = new ChartMetadata({
+    description: 'Interactive Grid to adjust Scenario percentages.',
+    name: t('Scenario Creator'),
+    thumbnail: '',
+    useLegacyApi: false,
+});
+
+export default class ScenarioChartPlugin extends ChartPlugin<
+    ScenarioChartFormData,
+    ScenarioChartProps
+> {
+    constructor() {
+        super({
+            buildQuery,
+            controlPanel,
+            loadChart: () => Promise.resolve(ScenarioChart),
+            metadata,
+            transformProps,
+        });
+    }
+}

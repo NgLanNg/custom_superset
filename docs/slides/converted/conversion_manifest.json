@@ -1,0 +1,89 @@
+{
+    "batch_id": "20260127_162403",
+    "files": [
+        {
+            "source": "Output NOJV LNGC.xlsx",
+            "target": "Output NOJV LNGC.xml",
+            "hash": "b6a29245c1444d818421f4bd29a8b7ea7ab292547c729bd2263abf297a73599f",
+            "type": "data"
+        },
+        {
+            "source": "Output PFLNG.xlsx",
+            "target": "Output PFLNG.xml",
+            "hash": "5bc14282d34d21ece632cd3d910f36219bf111b0f322395fcb2e1c81c3460dc9",
+            "type": "data"
+        },
+        {
+            "source": "Output NOJV ELNG.xlsx",
+            "target": "Output NOJV ELNG.xml",
+            "hash": "53bb807226aad92d2f26355c2b33e93372bfb00f0aed508b85efa5403c8aef19",
+            "type": "data"
+        },
+        {
+            "source": "Output NOJV GMB.xlsx",
+            "target": "Output NOJV GMB.xml",
+            "hash": "caea64a9cb95e6045e9b850fb77bb751b9b68f6753770e9492df0f34756bf20b",
+            "type": "data"
+        },
+        {
+            "source": "Output NOJV GLNG.xlsx",
+            "target": "Output NOJV GLNG.xml",
+            "hash": "02fe270dcc7705eeb346a6c73b2289dda3c7dfe0298be0c76c004530e8a8638a",
+            "type": "data"
+        },
+        {
+            "source": "Output NOJV KPSB.xlsx",
+            "target": "Output NOJV KPSB.xml",
+            "hash": "0eb355fe316f2b57f0719787aae6f4e95b8e50d45f01613490b8e8cf6c432c12",
+            "type": "data"
+        },
+        {
+            "source": "Output PLC.xlsx",
+            "target": "Output PLC.xml",
+            "hash": "43a3978a6600f1309247ba8df81e3642aed0936d07e9bb502a279731c556f5e5",
+            "type": "data"
+        },
+        {
+            "source": "Output GPU.xlsx",
+            "target": "Output GPU.xml",
+            "hash": "69d871711bf0daeab8f806d0d10d4ccbe928355e609b824c278d01e0dd52c4ac",
+            "type": "data"
+        },
+        {
+            "source": "Output NOJV TTM (M).xlsx",
+            "target": "Output NOJV TTM (M).xml",
+            "hash": "d3a43f7525fb9d9460e9b8f8be9f713c0e4bce76ceed560f09f2ba1d3b4bddbf",
+            "type": "data"
+        },
+        {
+            "source": "Output NOJV PGSSB.xlsx",
+            "target": "Output NOJV PGSSB.xml",
+            "hash": "0551d221dedc19b1c56522b8375f129815be339a6d5e559f1921a50f5e7193d8",
+            "type": "data"
+        },
+        {
+            "source": "Output NOJV TTM (T).xlsx",
+            "target": "Output NOJV TTM (T).xml",
+            "hash": "fde592314f089d2c77dc5ac114184b71651ea41635b9cdd4037631d3a5336c77",
+            "type": "data"
+        },
+        {
+            "source": "Output SBD Growth.xlsx",
+            "target": "Output SBD Growth.xml",
+            "hash": "80141a92b808ef4fe05b53e33f89a804398334898c2be58062fe41fc4e246ffb",
+            "type": "data"
+        },
+        {
+            "source": "Output GTR.xlsx",
+            "target": "Output GTR.xml",
+            "hash": "9004339761ad1a89e55ba2190b317ec64240745e8e28f15885c2bfd5da55c29b",
+            "type": "data"
+        },
+        {
+            "source": "PETH BRD_GHG Forecasting Simulation Model_V1.0 (002).pdf",
+            "target": "PETH BRD_GHG Forecasting Simulation Model_V1.0 (002).md",
+            "hash": "dc776f49af327cf94ea35d4a2455b0b9f188d5d2d4ea98a605e951d5a8234207",
+            "type": "requirement"
+        }
+    ]
+}

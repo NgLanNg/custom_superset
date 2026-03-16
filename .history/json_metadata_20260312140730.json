@@ -1,0 +1,69 @@
+{
+  "native_filter_configuration": [
+    {
+      "id": "NATIVE_FILTER-year",
+      "name": "Year",
+      "filterType": "filter_select",
+      "targets": [
+        {
+          "datasetId": 2,
+          "column": {
+            "name": "year"
+          }
+        },
+        {
+          "datasetId": 3,
+          "column": {
+            "name": "year"
+          }
+        }
+      ],
+      "controlValues": {
+        "multiSelect": true,
+        "inverseSelection": false,
+        "required": false,
+        "defaultToFirstItem": false,
+        "sortAscending": true
+      },
+      "type": "NATIVE_FILTER",
+      "scope": {
+        "rootPath": [
+          "ROOT_ID"
+        ],
+        "excluded": []
+      },
+      "cascadingFilters": [],
+      "description": "Filter by Year"
+    },
+    {
+      "id": "NATIVE_FILTER-opu",
+      "name": "OPU / Metric",
+      "filterType": "filter_select",
+      "targets": [
+        {
+          "datasetId": 2,
+          "column": {
+            "name": "metric"
+          }
+        }
+      ],
+      "controlValues": {
+        "multiSelect": true,
+        "inverseSelection": false,
+        "required": false,
+        "defaultToFirstItem": false,
+        "sortAscending": true
+      },
+      "type": "NATIVE_FILTER",
+      "scope": {
+        "rootPath": [
+          "ROOT_ID"
+        ],
+        "excluded": []
+      },
+      "cascadingFilters": [],
+      "description": "Filter by OPU/Metric"
+    }
+  ],
+  "color_scheme": "supersetColors"
+}

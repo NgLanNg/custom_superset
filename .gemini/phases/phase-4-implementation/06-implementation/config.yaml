@@ -1,0 +1,209 @@
+step:
+  id: "06-implementation"
+  name: "Developer Implementation (Build + Dash)"
+  phase: "Phase 4: Implementation"
+
+  execution:
+    primary_role: "dev" # Unified Developer role
+    required_system: "dbt + SQL + Git + BI-Tool"
+
+  contracts:
+    inputs:
+      - path: "docs/architecture.md"
+        must_exist: true
+      - path: "docs/dashboard_spec.md"
+        must_exist: true
+      - path: "docs/stories/"
+    outputs:
+      - type: "sql-models"
+      - type: "dashboard"
+      - path: "docs/implementation_report.md"
+
+  strict_nyquist_rules:
+    - "No hardcoding credentials in git."
+    - "All data models must pass dbt tests."
+    - "All visualizations must strictly follow the docs/dashboard_spec.md."
+    - "Data value validation is mandatory (manual query check against BI display)."
+    - "Push for QA testing only when both backend and frontend are parity-checked."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# Based on instructions.md 10-step workflow
+# ============================================
+graph:
+  initial: find_task
+
+  nodes:
+    find_task:
+      type: action
+      action: discover_ready_task
+      description: "Read docs/tasks.md, find first 'ready' task"
+      file: "instructions.md#step-1"
+      outputs:
+        - task_definition
+        - acceptance_criteria
+        - dependencies
+
+    check_task_found:
+      type: decision
+      action: validate_task
+      description: "Check if ready task exists"
+      branches:
+        found: load_context
+        not_found: no_task_halt
+
+    no_task_halt:
+      type: terminal
+      action: halt_no_task
+      description: "No ready task found - suggest /plan-tasks"
+
+    load_context:
+      type: action
+      action: load_project_context
+      description: "Load project context and story information"
+      file: "instructions.md#step-2"
+      outputs:
+        - coding_standards
+        - story_context
+
+    detect_review:
+      type: decision
+      action: check_review_continuation
+      description: "Check for existing review sections"
+      file: "instructions.md#step-3"
+      branches:
+        has_review: mark_in_progress_review
+        no_review: mark_in_progress_fresh
+
+    mark_in_progress_review:
+      type: action
+      action: set_review_mode
+      description: "Set review_continuation=true, extract pending items"
+      outputs:
+        - review_continuation
+        - pending_items
+
+    mark_in_progress_fresh:
+      type: action
+      action: set_fresh_mode
+      description: "Set review_continuation=false, start fresh"
+      outputs:
+        - review_continuation
+
+    implement_red:
+      type: action
+      action: write_failing_tests
+      description: "RED: Write failing tests first"
+      file: "instructions.md#step-5"
+      outputs:
+        - failing_tests
+
+    implement_green:
+      type: action
+      action: minimal_implementation
+      description: "GREEN: Write minimal code to pass tests"
+      outputs:
+        - implementation
+
+    implement_refactor:
+      type: action
+      action: refactor_code
+      description: "REFACTOR: Improve structure while keeping tests green"
+      outputs:
+        - refactored_code
+
+    author_tests:
+      type: action
+      action: comprehensive_tests
+      description: "Create unit, integration, e2e tests"
+      file: "instructions.md#step-6"
+      outputs:
+        - test_suite
+
+    run_validations:
+      type: decision
+      action: test_and_lint
+      description: "Run all tests and quality checks"
+      file: "instructions.md#step-7"
+      branches:
+        pass: validate_complete
+        fail: implement_red
+
+    validate_complete:
+      type: decision
+      action: validate_task_completion
+      description: "Verify all conditions for task completion"
+      file: "instructions.md#step-8"
+      branches:
+        complete: check_remaining_tasks
+        incomplete: implement_red
+
+    check_remaining_tasks:
+      type: decision
+      action: check_tasks
+      description: "Check if more tasks remain"
+      branches:
+        remain: implement_red
+        done: story_completion
+
+    story_completion:
+      type: checkpoint
+      action: dod_validation
+      description: "Definition of Done validation"
+      file: "instructions.md#step-9"
+      human_in_loop: true
+      prompt: "All tasks complete. Story ready for review?"
+      branches:
+        pass: completion_comm
+        fail: implement_red
+
+    completion_comm:
+      type: terminal
+      action: notify_complete
+      description: "Notify user story is ready for review"
+      file: "instructions.md#step-10"
+      next_phase: "phase-4-implementation/07-qa-testing"
+
+  edges:
+    - from: find_task
+      to:
+        found: load_context
+        not_found: no_task_halt
+    - from: load_context
+      to: detect_review
+    - from: detect_review
+      to:
+        has_review: mark_in_progress_review
+        no_review: mark_in_progress_fresh
+    - from: mark_in_progress_review
+      to: implement_red
+    - from: mark_in_progress_fresh
+      to: implement_red
+    - from: implement_red
+      to: implement_green
+    - from: implement_green
+      to: implement_refactor
+    - from: implement_refactor
+      to: author_tests
+    - from: author_tests
+      to: run_validations
+    - from: run_validations
+      to:
+        pass: validate_complete
+        fail: implement_red
+    - from: validate_complete
+      to:
+        complete: check_remaining_tasks
+        incomplete: implement_red
+    - from: check_remaining_tasks
+      to:
+        remain: implement_red
+        done: story_completion
+    - from: story_completion
+      to:
+        pass: completion_comm
+        fail: implement_red
+
+  # Human approval required at story completion
+  checkpoints:
+    - story_completion

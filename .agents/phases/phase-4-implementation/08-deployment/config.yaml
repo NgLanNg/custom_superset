@@ -1,0 +1,177 @@
+step:
+  id: "08-deployment"
+  name: "Final Deployment & Go-Live"
+  phase: "Phase 4: Implementation"
+
+  execution:
+    primary_role: "dev"
+    required_system: "CI/CD / Cloud Console"
+
+  contracts:
+    inputs:
+      - path: "docs/qa_report.md"
+        must_exist: true
+      - path: "src/"
+    outputs:
+      - path: "docs/deployment_log.md"
+        type: "ops-record"
+
+  strict_nyquist_rules:
+    - "No deployment allowed if QA report indicates any 'Critical' failures."
+    - "Rollback plan must be documented in the deployment log."
+
+# LangGraph-style State Graph Definition
+graph:
+  initial: pre_deployment_check
+
+  nodes:
+    # Pre-deployment verification
+    pre_deployment_check:
+      type: decision
+      action: validate_deployment_readiness
+      description: "Verify QA report has no critical failures and all prerequisites are met"
+      inputs:
+        - qa_report
+        - rollback_plan
+      branches:
+        ready: checkpoint_pre_deploy
+        not_ready: terminal_blocked
+
+    # Human-in-the-loop checkpoint before deployment
+    checkpoint_pre_deploy:
+      type: checkpoint
+      action: human_approval
+      description: "Human approval required before deploying to production"
+      human_in_loop: true
+      branches:
+        C: deploy_staging
+        A: terminal_blocked
+        P: terminal_paused
+
+    # Deploy to staging environment
+    deploy_staging:
+      type: action
+      action: deploy_to_environment
+      description: "Deploy artifacts to staging environment"
+      inputs:
+        - build_artifacts
+        - environment_config
+      outputs:
+        - staging_deployment_id
+
+    # Run smoke tests in staging
+    smoke_test_staging:
+      type: decision
+      action: run_smoke_tests
+      description: "Execute smoke tests in staging environment"
+      inputs:
+        - staging_deployment_id
+      branches:
+        pass: checkpoint_prod_deploy
+        fail: rollback_staging
+
+    # Rollback staging deployment on failure
+    rollback_staging:
+      type: action
+      action: rollback_deployment
+      description: "Rollback staging deployment due to smoke test failures"
+      inputs:
+        - staging_deployment_id
+      outputs:
+        - rollback_status
+      next: terminal_failed
+
+    # Human-in-the-loop checkpoint for production
+    checkpoint_prod_deploy:
+      type: checkpoint
+      action: human_approval
+      description: "Final approval for production deployment"
+      human_in_loop: true
+      branches:
+        C: deploy_production
+        A: terminal_blocked
+        P: terminal_paused
+
+    # Deploy to production
+    deploy_production:
+      type: action
+      action: deploy_to_environment
+      description: "Deploy artifacts to production environment using canary/linear strategy"
+      inputs:
+        - build_artifacts
+        - production_config
+      outputs:
+        - production_deployment_id
+
+    # Verify production deployment
+    verify_production:
+      type: decision
+      action: verify_deployment_health
+      description: "Monitor CloudWatch metrics and validate deployment success"
+      inputs:
+        - production_deployment_id
+      branches:
+        healthy: checkpoint_post_deploy
+        unhealthy: rollback_production
+
+    # Rollback production on failure
+    rollback_production:
+      type: action
+      action: rollback_deployment
+      description: "Emergency rollback of production deployment"
+      inputs:
+        - production_deployment_id
+      outputs:
+        - rollback_status
+      next: terminal_failed
+
+    # Post-deployment checkpoint
+    checkpoint_post_deploy:
+      type: checkpoint
+      action: human_verification
+      description: "Verify business metrics and sign off on deployment"
+      human_in_loop: true
+      branches:
+        C: complete
+        A: rollback_production
+        P: terminal_paused
+
+    # Terminal states
+    terminal_blocked:
+      type: terminal
+      action: block_deployment
+      description: "Deployment blocked due to failed prerequisites or rejection"
+
+    terminal_paused:
+      type: terminal
+      action: pause_deployment
+      description: "Deployment paused for manual intervention"
+
+    terminal_failed:
+      type: terminal
+      action: mark_failed
+      description: "Deployment failed and rolled back"
+
+    complete:
+      type: terminal
+      action: finalize_deployment
+      description: "Deployment completed successfully"
+
+  # Graph edges defining state transitions
+  edges:
+    - pre_deployment_check -> {ready: checkpoint_pre_deploy, not_ready: terminal_blocked}
+    - checkpoint_pre_deploy -> {C: deploy_staging, A: terminal_blocked, P: terminal_paused}
+    - deploy_staging -> smoke_test_staging
+    - smoke_test_staging -> {pass: checkpoint_prod_deploy, fail: rollback_staging}
+    - rollback_staging -> terminal_failed
+    - checkpoint_prod_deploy -> {C: deploy_production, A: terminal_blocked, P: terminal_paused}
+    - deploy_production -> verify_production
+    - verify_production -> {healthy: checkpoint_post_deploy, unhealthy: rollback_production}
+    - rollback_production -> terminal_failed
+    - checkpoint_post_deploy -> {C: complete, A: rollback_production, P: terminal_paused}
+
+  # Human-in-the-loop checkpoints
+  checkpoints:
+    - checkpoint_pre_deploy
+    - checkpoint_prod_deploy
+    - checkpoint_post_deploy

@@ -1,0 +1,81 @@
+{
+ "name": "tech-doc-diagram-rules",
+ "version": "1.0.0",
+ "rules": [
+ {
+ "id": "system_context",
+ "type": "mermaid",
+ "diagram_type": "C4Context",
+ "trigger": "always",
+ "priority": 1,
+ "description": "High-level system context showing external interactions",
+ "template": "c4_context"
+ },
+ {
+ "id": "architecture",
+ "type": "mermaid",
+ "diagram_type": "graph",
+ "trigger": "keywords_any(['architecture', 'component', 'module', 'service', 'microservice']) OR scope IN ['detailed', 'implementation']",
+ "priority": 2,
+ "description": "System architecture showing components and relationships",
+ "template": "architecture"
+ },
+ {
+ "id": "sequence",
+ "type": "mermaid",
+ "diagram_type": "sequenceDiagram",
+ "trigger": "keywords_any(['api', 'endpoint', 'integration', 'flow', 'request', 'response', 'interaction'])",
+ "priority": 3,
+ "description": "Sequence diagram showing API calls or process flows",
+ "template": "sequence"
+ },
+ {
+ "id": "er_diagram",
+ "type": "mermaid",
+ "diagram_type": "erDiagram",
+ "trigger": "keywords_any(['database', 'schema', 'data model', 'entity', 'table', 'relationship']) OR data_model != ''",
+ "priority": 4,
+ "description": "Entity-Relationship diagram showing data model",
+ "template": "er"
+ },
+ {
+ "id": "deployment",
+ "type": "drawio",
+ "diagram_type": "deployment",
+ "trigger": "keywords_any(['deployment', 'infrastructure', 'cloud', 'aws', 'gcp', 'azure', 'kubernetes', 'docker']) OR deployment != ''",
+ "priority": 5,
+ "description": "Deployment architecture showing infrastructure",
+ "template": "deployment"
+ },
+ {
+ "id": "state",
+ "type": "mermaid",
+ "diagram_type": "stateDiagram",
+ "trigger": "keywords_any(['state', 'workflow', 'lifecycle', 'status', 'transition'])",
+ "priority": 6,
+ "description": "State diagram showing entity lifecycle or workflow states",
+ "template": "state"
+ }
+ ],
+ "templates": {
+ "c4_context": {
+ "mermaid": "C4Context\n title {{system_name}} - System Context\n \n Person(user, \"User\", \"End user of the system\")\n System(system, \"{{system_name}}\", \"{{description}}\")\n {{#integrations}}\n System_Ext({{id}}, \"{{name}}\", \"{{description}}\")\n {{/integrations}}\n \n Rel(user, system, \"Uses\")\n {{#integrations}}\n Rel(system, {{id}}, \"{{relationship}}\")\n {{/integrations}}"
+ },
+ "architecture": {
+ "mermaid": "graph TB\n {{#components}}\n {{id}}[{{name}}]\n {{/components}}\n \n {{#relationships}}\n {{from}} -->|{{label}}| {{to}}\n {{/relationships}}"
+ },
+ "sequence": {
+ "mermaid": "sequenceDiagram\n {{#actors}}\n participant {{id}} as {{name}}\n {{/actors}}\n \n {{#interactions}}\n {{from}}->>{{to}}: {{message}}\n {{#response}}\n {{to}}-->>{{from}}: {{response}}\n {{/response}}\n {{/interactions}}"
+ },
+ "er": {
+ "mermaid": "erDiagram\n {{#entities}}\n {{name}} {\n {{#attributes}}\n {{type}} {{name}}\n {{/attributes}}\n }\n {{/entities}}\n \n {{#relationships}}\n {{entity1}} {{cardinality1}}--{{cardinality2}} {{entity2}} : {{label}}\n {{/relationships}}"
+ },
+ "state": {
+ "mermaid": "stateDiagram-v2\n [*] --> {{initial_state}}\n {{#transitions}}\n {{from}} --> {{to}} : {{event}}\n {{/transitions}}\n {{final_state}} --> [*]"
+ }
+ },
+ "keyword_extraction": {
+ "method": "case_insensitive_search",
+ "fields": ["system_name", "components", "integrations", "constraints", "deployment", "tech_stack"]
+ }
+}

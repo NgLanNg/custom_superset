@@ -1,0 +1,141 @@
+step:
+  id: "00-mcp"
+  name: "MCP Tool Usage"
+  phase: "Phase 1: Analysis"
+
+  execution:
+    primary_role: "dev"
+    required_system: "MCP Servers"
+
+  contracts:
+    inputs:
+      - path: "vault/active_context.md"
+        must_exist: true
+    outputs:
+      - path: "docs/mcp-usage/ YYYY-MM-DD-{tool}.md"
+        type: "ops-record"
+
+  strict_nyquist_rules:
+    - "Always delegate to mcp-manager subagent for MCP tool usage."
+    - "Use mcp-builder subagent for troubleshooting MCP server issues."
+    - "No ad-hoc script creation for MCP integrations."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# ============================================
+graph:
+  initial: detect_tool
+
+  nodes:
+    detect_tool:
+      type: action
+      action: identify_mcp_tool
+      description: "Identify the appropriate MCP tool for the task"
+      file: "00-mcp/workflow.md"
+      outputs:
+        - selected_tool
+        - tool_capabilities
+      next: checkpoint_01
+
+    checkpoint_01:
+      type: checkpoint
+      description: "User approves MCP tool selection"
+      human_in_loop: true
+      options:
+        A: execute_tool
+        P: pause
+        C: detect_tool
+
+    execute_tool:
+      type: action
+      action: delegate_to_mcp_manager
+      description: "Delegate tool execution to mcp-manager subagent"
+      file: "00-mcp/workflow.md"
+      inputs:
+        - selected_tool
+      outputs:
+        - tool_result
+        - knowledge_gained
+      next: checkpoint_02
+
+    checkpoint_02:
+      type: checkpoint
+      description: "User validates MCP tool result"
+      human_in_loop: true
+      options:
+        A: document
+        P: pause
+        C: execute_tool
+
+    document:
+      type: action
+      action: document_mcp_usage
+      description: "Document MCP tool usage in ops record"
+      file: "00-mcp/workflow.md"
+      inputs:
+        - selected_tool
+        - tool_result
+      outputs:
+        - documentation_path
+      next: checkpoint_03
+
+    checkpoint_03:
+      type: checkpoint
+      description: "User confirms documentation complete"
+      human_in_loop: true
+      options:
+        A: complete
+        P: pause
+        C: document
+
+    pause:
+      type: decision
+      description: "Wait for user instruction"
+      branches:
+        resume: checkpoint_01
+        abort: failed
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "MCP workflow complete"
+      outputs:
+        - documentation_path
+        - knowledge_updated
+
+    failed:
+      type: terminal
+      action: mark_failed
+      description: "Workflow aborted by user"
+
+  edges:
+    - from: detect_tool
+      to: checkpoint_01
+    - from: checkpoint_01
+      to:
+        A: execute_tool
+        P: pause
+        C: detect_tool
+    - from: execute_tool
+      to: checkpoint_02
+    - from: checkpoint_02
+      to:
+        A: document
+        P: pause
+        C: execute_tool
+    - from: document
+      to: checkpoint_03
+    - from: checkpoint_03
+      to:
+        A: complete
+        P: pause
+        C: document
+    - from: pause
+      to:
+        resume: checkpoint_01
+        abort: failed
+
+  checkpoints:
+    - checkpoint_01
+    - checkpoint_02
+    - checkpoint_03

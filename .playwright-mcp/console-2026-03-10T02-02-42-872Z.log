@@ -1,0 +1,2 @@
+[   36306ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Gateway Timeout) @ http://localhost:9000/explore/?datasource=22__table&viz_type=scenario_chart:0
+[   36331ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Gateway Timeout) @ http://localhost:9000/favicon.ico:0

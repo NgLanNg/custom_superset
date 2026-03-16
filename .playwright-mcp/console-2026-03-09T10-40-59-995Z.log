@@ -1,0 +1,73 @@
+[    1119ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[    1181ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    1181ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[    2231ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    2231ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[    4273ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    4273ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[    8370ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    8370ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[   16467ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[   16467ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[   21270ms] [ERROR] Failed to load resource: the server responded with a status of 400 (BAD REQUEST) @ http://localhost:8088/api/v1/scenario/writeback:0
+[   21273ms] [ERROR] Failed to load resource: the server responded with a status of 400 (BAD REQUEST) @ http://localhost:8088/api/v1/scenario/writeback:0
+[   21275ms] [ERROR] Failed to load resource: the server responded with a status of 400 (BAD REQUEST) @ http://localhost:8088/api/v1/scenario/writeback:0
+[   21278ms] [ERROR] Failed to load resource: the server responded with a status of 400 (BAD REQUEST) @ http://localhost:8088/api/v1/scenario/writeback:0
+[   32505ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[   32505ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[   52534ms] [ERROR] Failed to load resource: the server responded with a status of 400 (BAD REQUEST) @ http://localhost:8088/api/v1/scenario/writeback:0
+[   52545ms] [ERROR] Failed to load resource: the server responded with a status of 400 (BAD REQUEST) @ http://localhost:8088/api/v1/scenario/writeback:0
+[   64578ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[   64579ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  128652ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  128652ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  200818ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[  200883ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  200883ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  201932ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  201932ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  203949ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  203949ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  205621ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[  205679ms] [ERROR] [webpack-dev-server] Errors while compiling. Reload prevented. @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  205679ms] [ERROR] [webpack-dev-server] ERROR in ./src/core/editors/AceEditorProvider.tsx:37:28
+TS2307: Cannot find module 'react-ace' or its corresponding type declarations.
+    35 |   type Ref,
+    36 | } from 'react';
+  > 37 | import type AceEditor from 'react-ace';
+       |                            ^^^^^^^^^^^
+    38 | import type { editors } from '@apache-superset/core';
+    39 | import {
+    40 |   FullSQLEditor, @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  208688ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[  208735ms] [ERROR] [webpack-dev-server] Errors while compiling. Reload prevented. @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  208735ms] [ERROR] [webpack-dev-server] ERROR in ./src/core/editors/AceEditorProvider.tsx:37:28
+TS2307: Cannot find module 'react-ace' or its corresponding type declarations.
+    35 |   type Ref,
+    36 | } from 'react';
+  > 37 | import type AceEditor from 'react-ace';
+       |                            ^^^^^^^^^^^
+    38 | import type { editors } from '@apache-superset/core';
+    39 | import {
+    40 |   FullSQLEditor, @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  212929ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[  213019ms] [ERROR] TypeError: Failed to fetch @ webpack-internal:///./src/views/CRUD/utils.tsx:300
+[  213534ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[  213584ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  213616ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  215085ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[  215138ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  215169ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  216210ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  216211ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  217820ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[  217875ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  217875ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  218932ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  218932ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  221035ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  221035ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  225048ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  225048ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  233064ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  233064ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612

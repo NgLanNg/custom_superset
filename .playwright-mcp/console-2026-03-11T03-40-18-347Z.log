@@ -1,0 +1,149 @@
+[    1149ms] [WARNING] [React Refresh] Failed to set up the socket connection. @ webpack-internal:///./node_modules/@pmmmwh/react-refresh-webpack-plugin/client/utils/retry.js:7
+[    1351ms] [ERROR] Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s%s 
+
+Check the render method of `EmotionCssPropInternal`. 
+    at Button (webpack-internal:///./packages/superset-ui-core/src/components/Button/index.tsx:92:13)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/TriggerWrapper.js:12:24)
+    at DomWrapper (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/DomWrapper.js:24:90)
+    at SingleObserver (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/index.js:24:24)
+    at ResizeObserver (webpack-internal:///./node_modules/rc-resize-observer/es/index.js:24:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/index.js:62:34)
+    at Dropdown (webpack-internal:///./node_modules/rc-dropdown/es/Dropdown.js:33:28)
+    at Dropdown (webpack-internal:///./node_modules/antd/es/dropdown/dropdown.js:56:5)
+    at Dropdown
+    at FilterBarSettings (webpack-internal:///./src/dashboard/components/nativeFilters/FilterBar/FilterBarSettings/index.tsx:103:88)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at Header (webpack-internal:///./src/dashboard/components/nativeFilters/FilterBar/Header/index.tsx:90:19)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at VerticalFilterBar (webpack-internal:///./src/dashboard/components/nativeFilters/FilterBar/Vertical.tsx:154:30)
+    at FilterBar (webpack-internal:///./src/dashboard/components/nativeFilters/FilterBar/index.tsx:184:22)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:62:9)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at ResizableSidebar (webpack-internal:///./src/components/ResizableSidebar/index.tsx:55:29)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at DashboardWrapper (webpack-internal:///./src/dashboard/components/DashboardBuilder/DashboardWrapper.tsx:131:29)
+    at DashboardBuilder (webpack-internal:///./src/dashboard/components/DashboardBuilder/DashboardBuilder.tsx:384:78)
+    at Dashboard (webpack-internal:///./src/dashboard/components/Dashboard.tsx:222:9)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at AutoRefreshProvider (webpack-internal:///./src/dashboard/contexts/AutoRefreshContext.tsx:43:36)
+    at CrudThemeProvider (webpack-internal:///./src/components/CrudThemeProvider.tsx:68:34)
+    at DashboardPage (webpack-internal:///./src/dashboard/containers/DashboardPage.tsx:150:26)
+    at DashboardRoute (webpack-internal:///./src/pages/Dashboard/index.tsx:34:85)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:62:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:57:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:77:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:644:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:846:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:84:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:28:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:10:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:47:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:163:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:48:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:34:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:20:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:20:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:136:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:438:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:95:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:150:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:32:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:54:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:263:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:45:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[    1377ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `PageHeaderWithActions`.  It was passed a child from Header. 
+    at MetadataBar (webpack-internal:///./packages/superset-ui-core/src/components/MetadataBar/MetadataBar.tsx:159:28)
+    at PageHeaderWithActions (webpack-internal:///./packages/superset-ui-core/src/components/PageHeaderWithActions/index.tsx:125:34)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at Header (webpack-internal:///./src/dashboard/components/Header/index.tsx:204:78)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at DashboardWrapper (webpack-internal:///./src/dashboard/components/DashboardBuilder/DashboardWrapper.tsx:131:29)
+    at DashboardBuilder (webpack-internal:///./src/dashboard/components/DashboardBuilder/DashboardBuilder.tsx:384:78)
+    at Dashboard (webpack-internal:///./src/dashboard/components/Dashboard.tsx:222:9)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at AutoRefreshProvider (webpack-internal:///./src/dashboard/contexts/AutoRefreshContext.tsx:43:36)
+    at CrudThemeProvider (webpack-internal:///./src/components/CrudThemeProvider.tsx:68:34)
+    at DashboardPage (webpack-internal:///./src/dashboard/containers/DashboardPage.tsx:150:26)
+    at DashboardRoute (webpack-internal:///./src/pages/Dashboard/index.tsx:34:85)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:62:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:57:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:77:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:644:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:846:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:84:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:28:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:10:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:47:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:163:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:48:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:34:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:20:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:20:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:136:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:438:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:95:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:150:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:32:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:54:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:263:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:45:35)
+    at App @ webpack-internal:///./node_modules/react/cjs/react-jsx-dev-runtime.development.js:119
+[    1412ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1412ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1448ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1450ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1450ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1636ms] [ERROR] Warning: [antd: Dropdown] `dropdownRender` is deprecated. Please use `popupRender` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:39
+[    1643ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[    1770ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1770ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1770ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1770ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1770ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1770ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1770ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1770ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1770ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1770ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1771ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1771ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1771ms] [ERROR] The pseudo class ":nth-child" is potentially unsafe when doing server-side rendering. Try changing it to ":nth-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:208
+[    1790ms] [WARNING] [ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload. @ webpack-internal:///./node_modules/echarts/lib/util/log.js:74
+[   50394ms] [ERROR] Warning: [antd: notification] Static function can not consume context like dynamic theme. Please use 'App' component instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:39

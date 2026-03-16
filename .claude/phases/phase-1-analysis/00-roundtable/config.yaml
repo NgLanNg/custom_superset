@@ -1,0 +1,175 @@
+step:
+  id: "00-roundtable"
+  name: "Boss Roundtable"
+  phase: "Phase 1: Analysis"
+
+  execution:
+    primary_role: "dev"
+    required_system: "Expert Personas"
+
+  contracts:
+    inputs:
+      - path: "vault/active_context.md"
+        must_exist: true
+    outputs:
+      - path: "docs/decisions/YYYY-MM-DD-{topic}.md"
+        type: "decision-record"
+
+  strict_nyquist_rules:
+    - "Large diversity of perspectives (Architect, Security, Pragmatist, etc.)."
+    - "Collaborative debate to identify trade-offs."
+    - "Synthesis into a final recommendation."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# ============================================
+graph:
+  initial: define_topic
+
+  nodes:
+    define_topic:
+      type: action
+      action: establish_roundtable_topic
+      description: "Define the problem topic for expert debate"
+      file: "00-roundtable/workflow.md"
+      outputs:
+        - topic
+        - problem_statement
+        - success_criteria
+      next: checkpoint_01
+
+    checkpoint_01:
+      type: checkpoint
+      description: "User approves roundtable topic"
+      human_in_loop: true
+      options:
+        A: assemble_squad
+        P: pause
+        C: define_topic
+
+    assemble_squad:
+      type: action
+      action: select_expert_personas
+      description: "Select appropriate expert personas for the topic"
+      file: "00-roundtable/workflow.md"
+      inputs:
+        - topic
+      outputs:
+        - personas
+        - expert_roles
+      next: checkpoint_02
+
+    checkpoint_02:
+      type: checkpoint
+      description: "User approves expert selection"
+      human_in_loop: true
+      options:
+        A: debate
+        P: pause
+        C: assemble_squad
+
+    debate:
+      type: action
+      action: execute_debate_session
+      description: "Simulate expert debate on the topic"
+      file: "00-roundtable/workflow.md"
+      inputs:
+        - topic
+        - personas
+      outputs:
+        - debate_summary
+        - trade_offs_identified
+        - consensus_points
+      next: checkpoint_03
+
+    checkpoint_03:
+      type: checkpoint
+      description: "User validates debate results"
+      human_in_loop: true
+      options:
+        A: synthesize
+        P: pause
+        C: debate
+
+    synthesize:
+      type: action
+      action: create_decision_document
+      description: "Synthesize debate into decision document"
+      file: "00-roundtable/workflow.md"
+      inputs:
+        - topic
+        - debate_summary
+        - consensus_points
+      outputs:
+        - decision_document_path
+        - strategic_recommendation
+      next: checkpoint_04
+
+    checkpoint_04:
+      type: checkpoint
+      description: "User approves final decision document"
+      human_in_loop: true
+      options:
+        A: complete
+        P: pause
+        C: synthesize
+
+    pause:
+      type: decision
+      description: "Wait for user instruction"
+      branches:
+        resume: checkpoint_01
+        abort: failed
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "Roundtable workflow complete"
+      outputs:
+        - decision_document_path
+        - strategic_consensus
+
+    failed:
+      type: terminal
+      action: mark_failed
+      description: "Workflow aborted by user"
+
+  edges:
+    - from: define_topic
+      to: checkpoint_01
+    - from: checkpoint_01
+      to:
+        A: assemble_squad
+        P: pause
+        C: define_topic
+    - from: assemble_squad
+      to: checkpoint_02
+    - from: checkpoint_02
+      to:
+        A: debate
+        P: pause
+        C: assemble_squad
+    - from: debate
+      to: checkpoint_03
+    - from: checkpoint_03
+      to:
+        A: synthesize
+        P: pause
+        C: debate
+    - from: synthesize
+      to: checkpoint_04
+    - from: checkpoint_04
+      to:
+        A: complete
+        P: pause
+        C: synthesize
+    - from: pause
+      to:
+        resume: checkpoint_01
+        abort: failed
+
+  checkpoints:
+    - checkpoint_01
+    - checkpoint_02
+    - checkpoint_03
+    - checkpoint_04

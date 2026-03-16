@@ -1,0 +1,12 @@
+superset_postgres:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      threads: 4
+      host: "{{ env_var('SUPERSET_DB_HOST', 'localhost') }}"
+      port: "{{ env_var('SUPERSET_DB_PORT', '5432') | as_number }}"
+      user: "{{ env_var('SUPERSET_DB_USER', 'superset') }}"
+      pass: "{{ env_var('SUPERSET_DB_PASS', 'superset') }}"
+      dbname: "{{ env_var('SUPERSET_DB_NAME', 'superset') }}"
+      schema: public

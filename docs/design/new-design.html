@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-gray-50" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Scenario Planning - Variation 1</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style data-purpose="custom-typography">
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <style data-purpose="custom-layout">
+        /* Custom scrollbar for the large table */
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        /* Sticky header styles */
+        .sticky-header th {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            background-color: #f8fafc;
+        }
+
+        .sticky-col {
+            position: sticky;
+            left: 0;
+            z-index: 20;
+            background-color: white;
+        }
+
+        .sticky-col-header {
+            position: sticky;
+            left: 0;
+            z-index: 40;
+            background-color: #f8fafc;
+        }
+
+        /* Visual feedback for edited cells */
+        .cell-edited {
+            background-color: #f5f3ff;
+            border: 1px solid #6366f1 !important;
+            position: relative;
+        }
+
+        .sync-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .sync-pending {
+            background-color: #6366f1;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .4;
+            }
+        }
+
+        @keyframes chart-pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .chart-syncing {
+            animation: chart-pulse 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="h-full">
+    <!-- BEGIN: MainHeader -->
+    <header class="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+            <h1 class="text-xl font-bold text-gray-900">Scenario Planning</h1>
+        </div>
+    </header>
+    <!-- END: MainHeader -->
+    <main class="p-6 max-w-[1600px] mx-auto space-y-6 pb-12">
+        <!-- BEGIN: Breadcrumbs & Actions -->
+        <div class="flex items-center justify-between">
+            <nav aria-label="Breadcrumb" class="text-sm text-gray-500 font-medium">
+                Scenario Creator
+            </nav>
+        </div>
+        <!-- END: Breadcrumbs & Actions -->
+        <!-- BEGIN: ScenarioCreationForm -->
+        <section class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Scenario Creation</h2>
+                    <p class="text-sm text-gray-500 mt-1">Configure equity shares and growth parameters for the
+                        simulation.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path
+                                d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                        Save Draft
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 shadow-sm">
+                        Submit for Approval
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <label class="block text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">Name</label>
+                    <input
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                        placeholder="e.g. Base Case 2026" type="text" />
+                </div>
+                <div>
+                    <label
+                        class="block text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">Description</label>
+                    <input
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                        placeholder="Brief description" type="text" />
+                </div>
+            </div>
+            <!-- Main Tabs -->
+            <div class="border-b border-gray-200">
+                <nav class="flex space-x-8">
+                    <button
+                        class="pb-3 px-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">Equity
+                        Share Configuration</button>
+                    <button
+                        class="pb-3 px-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">Growth
+                        Configuration</button>
+                    <button class="pb-3 px-1 border-b-2 border-blue-500 text-sm font-semibold text-blue-600">OPU
+                        Configuration</button>
+                </nav>
+            </div>
+            <!-- Sub Tabs -->
+            <div class="mt-4 flex space-x-6">
+                <button class="text-sm font-semibold text-blue-600 border-b-2 border-blue-600 pb-1">Emission by
+                    Sources</button>
+                <button class="text-sm font-medium text-gray-500 hover:text-gray-700">Production</button>
+                <button class="text-sm font-medium text-gray-500 hover:text-gray-700">Emission by Gases</button>
+                <button class="text-sm font-medium text-gray-500 hover:text-gray-700">Energy Consumption</button>
+                <button class="text-sm font-medium text-gray-500 hover:text-gray-700">Intensity</button>
+                <button class="text-sm font-medium text-gray-500 hover:text-gray-700">Reduction</button>
+            </div>
+        </section>
+        <!-- END: ScenarioCreationForm -->
+        <!-- BEGIN: ChartSection -->
+        <section class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-1.5 h-6 bg-blue-600 rounded-full"></div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 tracking-tight">Comparative Total GHG Emissions</h3>
+                        <p class="text-[11px] text-gray-400 font-medium uppercase tracking-wider">Forecasted trajectory
+                            to 2050 (tCO2e)</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-200 rounded-md text-xs font-semibold text-gray-600 hover:bg-gray-50 transition-colors shadow-sm">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path
+                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                        Filter Data
+                    </button>
+                    <div class="h-4 w-px bg-gray-200 mx-1"></div>
+                    <button class="p-1.5 text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path
+                                d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="relative w-full aspect-[24/9] min-h-[380px] rounded-xl overflow-hidden bg-white">
+                    <canvas class="w-full h-full" data-purpose="emission-forecast-chart" id="emissionChart"></canvas>
+                </div>
+                <div class="mt-6 flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-gray-50">
+                    <div class="flex items-center gap-8">
+                        <div class="flex items-center gap-3">
+                            <div class="flex items-center">
+                                <span class="w-3 h-3 rounded-full bg-blue-600 mr-2"></span>
+                                <span class="text-sm font-bold text-gray-800">Scenario A</span>
+                            </div>
+                            <span class="text-xs text-gray-400 font-medium">Baseline (2024)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="flex items-center">
+                                <span class="w-3 h-0.5 bg-indigo-500 mr-2"></span>
+                                <span class="text-sm font-bold text-gray-800">Scenario B</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-1.5 px-2 py-0.5 bg-indigo-50 border border-indigo-100 rounded-full">
+                                <span class="sync-indicator sync-pending"></span>
+                                <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-tight">Pending
+                                    Updates</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-[11px] text-gray-400 font-medium italic">
+                        Data last updated 2 minutes ago
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: ChartSection -->
+        <!-- BEGIN: DataTableSection -->
+        <section class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden relative">
+            <!-- Filtering UI -->
+            <div class="p-4 bg-gray-50 border-b border-gray-100 flex flex-wrap gap-4 items-center">
+                <div class="flex flex-col gap-1.5">
+                    <span class="text-[10px] font-bold text-gray-500 uppercase">Business Unit</span>
+                    <div
+                        class="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-2 py-1.5 min-w-[240px]">
+                        <div class="flex flex-wrap gap-1">
+                            <span
+                                class="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded">
+                                LNGA
+                                <svg class="w-3 h-3 cursor-pointer" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"></path>
+                                </svg>
+                            </span>
+                            <span
+                                class="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded">
+                                G&amp;P
+                                <svg class="w-3 h-3 cursor-pointer" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <svg class="w-4 h-4 text-gray-400 ml-auto" fill="none" stroke="currentColor"
+                            viewbox="0 0 24 24">
+                            <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <span class="text-[10px] font-bold text-gray-500 uppercase">Region</span>
+                    <div
+                        class="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-2 py-1.5 min-w-[200px]">
+                        <div class="flex flex-wrap gap-1">
+                            <span
+                                class="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded">
+                                Sarawak
+                                <svg class="w-3 h-3 cursor-pointer" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <svg class="w-4 h-4 text-gray-400 ml-auto" fill="none" stroke="currentColor"
+                            viewbox="0 0 24 24">
+                            <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+                <button class="mt-5 text-sm font-medium text-blue-600 hover:text-blue-700">Clear all</button>
+            </div>
+            <!-- Integrated Action Header -->
+            <div class="p-6 border-b border-gray-100 flex items-center justify-between bg-white sticky top-0 z-[35]">
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-1 h-5 bg-blue-600 rounded-full"></div>
+                        <h3 class="font-bold text-gray-800 uppercase tracking-wide text-sm">Operational Control —
+                            Emission by Sources</h3>
+                    </div>
+                    <!-- Visible only when changes exist -->
+                    <div class="flex items-center gap-3 px-3 py-1 bg-indigo-50 border border-indigo-100 rounded-full">
+                        <span class="sync-indicator sync-pending"></span>
+                        <span class="text-[11px] font-semibold text-indigo-700 uppercase tracking-tight">3 unsaved
+                            changes</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button
+                        class="px-3 py-1.5 text-xs font-bold text-gray-500 hover:text-gray-800 transition-colors uppercase tracking-wider">Discard</button>
+                    <button
+                        class="px-5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded shadow-sm transition-all flex items-center gap-2 uppercase tracking-wider">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+                            </path>
+                        </svg>
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+            <div class="table-container overflow-x-auto max-h-[600px] overflow-y-auto">
+                <table class="w-full border-collapse text-xs text-left" id="configuration-table">
+                    <thead class="sticky-header">
+                        <tr class="bg-slate-50 border-y border-gray-200">
+                            <th class="p-3 font-bold text-gray-500 uppercase tracking-tighter sticky-col-header">BU</th>
+                            <th
+                                class="p-3 font-bold text-gray-500 uppercase tracking-tighter sticky-col-header left-[50px]">
+                                OPU</th>
+                            <th class="p-3 font-bold text-gray-500 uppercase tracking-tighter">Scope</th>
+                            <!-- Year Headers -->
+                            <th class="p-3 font-bold text-gray-400">2022</th>
+                            <th class="p-3 font-bold text-gray-400">2023</th>
+                            <th class="p-3 font-bold text-gray-400">2024</th>
+                            <th class="p-3 font-bold text-gray-400">2025</th>
+                            <th class="p-3 font-bold text-gray-400">2026</th>
+                            <th class="p-3 font-bold text-gray-400">2027</th>
+                            <th class="p-3 font-bold text-gray-400">2028</th>
+                            <th class="p-3 font-bold text-gray-400">2029</th>
+                            <th class="p-3 font-bold text-gray-400">2030</th>
+                            <th class="p-3 font-bold text-gray-400">2031</th>
+                            <th class="p-3 font-bold text-indigo-600 bg-indigo-50/50">2032</th>
+                            <th class="p-3 font-bold text-indigo-600 bg-indigo-50/50">2033</th>
+                            <th class="p-3 font-bold text-gray-400">2034</th>
+                            <th class="p-3 font-bold text-gray-400">2035</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="p-3 text-gray-600 sticky-col">LNGA</td>
+                            <td class="p-3 font-bold text-gray-900 sticky-col left-[50px]">MLNG</td>
+                            <td class="p-3 text-gray-500">Scope 1</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-indigo-700 font-bold bg-indigo-50 cell-edited group">
+                                <div class="flex flex-col">
+                                    <div class="flex items-center justify-between">
+                                        <span>65%</span>
+                                        <span class="text-[8px] bg-indigo-600 text-white px-1 rounded ml-1">MOD</span>
+                                    </div>
+                                    <span class="text-[9px] text-indigo-400 mt-0.5 font-medium tracking-tight">Was
+                                        70%</span>
+                                </div>
+                            </td>
+                            <td class="p-3 text-indigo-700 font-bold bg-indigo-50 cell-edited group">
+                                <div class="flex flex-col">
+                                    <div class="flex items-center justify-between">
+                                        <span>65%</span>
+                                        <span class="text-[8px] bg-indigo-600 text-white px-1 rounded ml-1">MOD</span>
+                                    </div>
+                                    <span class="text-[9px] text-indigo-400 mt-0.5 font-medium tracking-tight">Was
+                                        70%</span>
+                                </div>
+                            </td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="p-3 text-gray-600 sticky-col">LNGA</td>
+                            <td class="p-3 font-bold text-gray-900 sticky-col left-[50px]">MLNG Dua</td>
+                            <td class="p-3 text-gray-500">Scope 1</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="p-3 text-gray-600 sticky-col">LNGA</td>
+                            <td class="p-3 font-bold text-gray-900 sticky-col left-[50px]">MLNG Tiga</td>
+                            <td class="p-3 text-gray-500">Scope 1</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                            <td class="p-3 text-gray-600">70%</td>
+                        </tr>
+                        <!-- Row 4 -->
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="p-3 text-gray-600 sticky-col">LNGA</td>
+                            <td class="p-3 font-bold text-gray-900 sticky-col left-[50px]">PFLNG 1</td>
+                            <td class="p-3 text-gray-500">Scope 1</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                        </tr>
+                        <!-- Row 5 -->
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="p-3 text-gray-600 sticky-col">LNGA</td>
+                            <td class="p-3 font-bold text-gray-900 sticky-col left-[50px]">PFLNG 2</td>
+                            <td class="p-3 text-gray-500">Scope 1</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-indigo-700 font-bold bg-indigo-50 cell-edited group">
+                                <div class="flex flex-col">
+                                    <div class="flex items-center justify-between">
+                                        <span>95%</span>
+                                        <span class="text-[8px] bg-indigo-600 text-white px-1 rounded ml-1">MOD</span>
+                                    </div>
+                                    <span class="text-[9px] text-indigo-400 mt-0.5 font-medium tracking-tight">Was
+                                        100%</span>
+                                </div>
+                            </td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                            <td class="p-3 text-gray-600">100%</td>
+                        </tr>
+                        <!-- Row 6 -->
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="p-3 text-gray-600 sticky-col">G&amp;P</td>
+                            <td class="p-3 font-bold text-gray-900 sticky-col left-[50px]">GPU</td>
+                            <td class="p-3 text-gray-500">Scope 1</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                            <td class="p-3 text-gray-600">51%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- END: DataTableSection -->
+    </main>
+    <script data-purpose="canvas-setup">
+        window.onload = function () {
+            const canvas = document.getElementById('emissionChart');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.parentElement.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                draw();
+            }
+
+            function draw() {
+                const w = canvas.width / (window.devicePixelRatio || 1);
+                const h = canvas.height / (window.devicePixelRatio || 1);
+                const paddingLeft = 50;
+                const paddingRight = 40;
+                const paddingTop = 40;
+                const paddingBottom = 60;
+
+                ctx.clearRect(0, 0, w, h);
+
+                // Grid lines (horizontal)
+                ctx.strokeStyle = '#f1f5f9';
+                ctx.setLineDash([]);
+                ctx.lineWidth = 1;
+                const maxValue = 600;
+                [0, 150, 300, 450, 600].forEach((val, i) => {
+                    const y = h - paddingBottom - (val / maxValue) * (h - paddingBottom - paddingTop);
+                    ctx.beginPath();
+                    ctx.moveTo(paddingLeft, y);
+                    ctx.lineTo(w - paddingRight, y);
+                    ctx.stroke();
+
+                    // Y Labels
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.font = '500 10px Inter';
+                    ctx.textAlign = 'right';
+                    ctx.fillText(val, paddingLeft - 15, y + 4);
+                });
+
+                // X Labels (Years)
+                const years = ['2024', '2025', '2030', '2035', '2040', '2050'];
+                const xStep = (w - paddingLeft - paddingRight) / (years.length - 1);
+                years.forEach((year, i) => {
+                    const x = paddingLeft + i * xStep;
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = '600 11px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(year, x, h - paddingBottom + 30);
+
+                    // Small vertical tick
+                    ctx.strokeStyle = '#e2e8f0';
+                    ctx.beginPath();
+                    ctx.moveTo(x, h - paddingBottom);
+                    ctx.lineTo(x, h - paddingBottom + 8);
+                    ctx.stroke();
+                });
+
+                const baselineData = [480, 480, 400, 350, 320, 300];
+                const scenarioBData = [480, 480, 380, 300, 270, 250];
+
+                // Fill Area for Baseline (Gradient)
+                const gradient = ctx.createLinearGradient(0, paddingTop, 0, h - paddingBottom);
+                gradient.addColorStop(0, 'rgba(37, 99, 235, 0.08)');
+                gradient.addColorStop(1, 'rgba(37, 99, 235, 0)');
+
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.moveTo(paddingLeft, h - paddingBottom);
+                baselineData.forEach((val, i) => {
+                    const x = paddingLeft + i * xStep;
+                    const y = h - paddingBottom - (val / maxValue) * (h - paddingBottom - paddingTop);
+                    ctx.lineTo(x, y);
+                });
+                ctx.lineTo(paddingLeft + (years.length - 1) * xStep, h - paddingBottom);
+                ctx.closePath();
+                ctx.fill();
+
+                // Scenario B Line (Secondary)
+                ctx.strokeStyle = '#818cf8';
+                ctx.lineWidth = 2.5;
+                ctx.setLineDash([6, 4]);
+                ctx.beginPath();
+                scenarioBData.forEach((val, i) => {
+                    const x = paddingLeft + i * xStep;
+                    const y = h - paddingBottom - (val / maxValue) * (h - paddingBottom - paddingTop);
+                    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                });
+                ctx.stroke();
+
+                // Baseline Line (Primary)
+                ctx.setLineDash([]);
+                ctx.strokeStyle = '#2563eb';
+                ctx.lineWidth = 3.5;
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                baselineData.forEach((val, i) => {
+                    const x = paddingLeft + i * xStep;
+                    const y = h - paddingBottom - (val / maxValue) * (h - paddingBottom - paddingTop);
+                    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                });
+                ctx.stroke();
+
+                // Interaction Dots for Baseline
+                baselineData.forEach((val, i) => {
+                    const x = paddingLeft + i * xStep;
+                    const y = h - paddingBottom - (val / maxValue) * (h - paddingBottom - paddingTop);
+
+                    // Glow/Shadow effect for dots
+                    ctx.shadowBlur = 4;
+                    ctx.shadowColor = 'rgba(37, 99, 235, 0.3)';
+                    ctx.fillStyle = '#2563eb';
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4.5, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // White center
+                    ctx.shadowBlur = 0;
+                    ctx.fillStyle = 'white';
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+        }
+    </script>
+</body>
+
+</html>

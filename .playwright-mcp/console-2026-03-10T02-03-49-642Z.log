@@ -1,0 +1,59 @@
+[   36544ms] [ERROR] Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s%s 
+
+Check the render method of `EmotionCssPropInternal`. 
+    at Button (webpack-internal:///./packages/superset-ui-core/src/components/Button/index.tsx:92:13)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/TriggerWrapper.js:12:24)
+    at DomWrapper (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/DomWrapper.js:24:90)
+    at SingleObserver (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/index.js:24:24)
+    at ResizeObserver (webpack-internal:///./node_modules/rc-resize-observer/es/index.js:24:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/index.js:62:34)
+    at Dropdown (webpack-internal:///./node_modules/rc-dropdown/es/Dropdown.js:33:28)
+    at Dropdown (webpack-internal:///./node_modules/antd/es/dropdown/dropdown.js:56:5)
+    at Dropdown
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at PageHeaderWithActions (webpack-internal:///./packages/superset-ui-core/src/components/PageHeaderWithActions/index.tsx:125:34)
+    at ExploreChartHeader (webpack-internal:///./src/explore/components/ExploreChartHeader/index.tsx:135:31)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at ExploreContainer (webpack-internal:///./src/explore/components/ExploreContainer/index.tsx:74:29)
+    at ExploreViewContainer (webpack-internal:///./src/explore/components/ExploreViewContainer/index.tsx:308:99)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at ExplorePage (webpack-internal:///./src/pages/Chart/index.tsx:195:84)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:62:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:57:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:77:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:644:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:846:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:84:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:28:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:10:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:47:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:163:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:48:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:34:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:20:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:20:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:136:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:438:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:95:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:150:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:32:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:54:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:263:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:45:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[   36606ms] [ERROR] Warning: [antd: Tooltip] `destroyTooltipOnHide` is deprecated. Please use `destroyOnHidden` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:39
+[   40789ms] [WARNING] The resource http://localhost:9000/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:9000/explore/?form_data_key=Lx4lPLXLRlk&datasource=22__table&viz_type=scenario_chart&datasource_id=22&datasource_type=table:0

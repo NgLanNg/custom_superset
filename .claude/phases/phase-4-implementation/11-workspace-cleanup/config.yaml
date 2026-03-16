@@ -1,0 +1,241 @@
+step:
+  id: "11-workspace-cleanup"
+  name: "Workspace Cleanup"
+  phase: "Phase 4: Implementation"
+
+  execution:
+    primary_role: "dev"
+    required_system: "Hygiene Protocol"
+
+  contracts:
+    inputs:
+      - path: "vault/active_context.md"
+        must_exist: true
+    outputs:
+      - path: "_archive/YYYY-MM-DD/"
+        type: "archived-artifacts"
+      - path: "vault/reports/YYYY-MM-DD-hygiene-report.md"
+        type: "hygiene-report"
+
+  strict_nyquist_rules:
+    - "No Data Loss: Archive everything before deleting."
+    - "Signal Over Noise: Clean repo leads to better reasoning."
+    - "Predictable Structure: Always use date-based archive folders."
+    - "Never rm: Always archive first, then delete."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# ============================================
+graph:
+  initial: identify_clutter
+
+  nodes:
+    identify_clutter:
+      type: action
+      action: scan_for_redundant_files
+      description: "Locate all files not part of core project structure"
+      file: "11-workspace-cleanup/steps/step-01-scan.md"
+      outputs:
+        - redundant_files
+        - temp_files
+        - log_files
+        - backup_files
+      next: checkpoint_01
+
+    checkpoint_01:
+      type: checkpoint
+      description: "User validates clutter identification"
+      human_in_loop: true
+      options:
+        A: categorize_artifacts
+        P: pause
+        C: identify_clutter
+
+    categorize_artifacts:
+      type: action
+      action: group_by_type
+      description: "Group files by type for appropriate archival"
+      file: "11-workspace-cleanup/steps/step-02-categorize.md"
+      inputs:
+        - redundant_files
+        - temp_files
+        - log_files
+        - backup_files
+      outputs:
+        - categorized_artifacts
+        - archive_groups
+      next: checkpoint_02
+
+    checkpoint_02:
+      type: checkpoint
+      description: "User validates artifact groups"
+      human_in_loop: true
+      options:
+        A: archive_artifacts
+        P: pause
+        C: categorize_artifacts
+
+    archive_artifacts:
+      type: action
+      action: move_to_archive
+      description: "Move identified files to date-based archive folder"
+      file: "11-workspace-cleanup/steps/step-03-archive.md"
+      inputs:
+        - categorized_artifacts
+      outputs:
+        - archive_path
+        - archived_files_count
+        - archive_manifest
+      next: checkpoint_03
+
+    checkpoint_03:
+      type: checkpoint
+      description: "User validates archive operation"
+      human_in_loop: true
+      options:
+        A: rotate_logs
+        P: pause
+        C: archive_artifacts
+
+    rotate_logs:
+      type: action
+      action: consolidate_logs
+      description: "Consolidate or archive large log files"
+      file: "11-workspace-cleanup/steps/step-04-log-rotation.md"
+      inputs:
+        - log_files
+      outputs:
+        - rotated_logs
+        - log_summary
+      next: checkpoint_04
+
+    checkpoint_04:
+      type: checkpoint
+      description: "User validates log rotation"
+      human_in_loop: true
+      options:
+        A: prune_context
+        P: pause
+        C: rotate_logs
+
+    prune_context:
+      type: action
+      action: update_active_context
+      description: "Review and update vault/active_context.md"
+      file: "11-workspace-cleanup/steps/step-05-prune-context.md"
+      inputs:
+        - archived_files_count
+      outputs:
+        - updated_context
+        - context_prune_report
+      next: checkpoint_05
+
+    checkpoint_05:
+      type: checkpoint
+      description: "User validates context pruning"
+      human_in_loop: true
+      options:
+        A: generate_report
+        P: pause
+        C: prune_context
+
+    generate_report:
+      type: action
+      action: create_hygiene_report
+      description: "Generate hygiene report for the session"
+      file: "11-workspace-cleanup/steps/step-06-report.md"
+      inputs:
+        - archive_path
+        - archived_files_count
+        - log_summary
+        - context_prune_report
+      outputs:
+        - report_path
+        - hygiene_score
+      next: checkpoint_06
+
+    checkpoint_06:
+      type: checkpoint
+      description: "User confirms cleanup complete"
+      human_in_loop: true
+      options:
+        A: complete
+        P: pause
+        C: generate_report
+
+    pause:
+      type: decision
+      description: "Wait for user instruction"
+      branches:
+        resume: checkpoint_01
+        abort: failed
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "Workspace cleanup workflow complete"
+      outputs:
+        - archive_path
+        - report_path
+        - hygiene_score
+
+    failed:
+      type: terminal
+      action: mark_failed
+      description: "Workflow aborted by user"
+
+  edges:
+    - from: identify_clutter
+      to: checkpoint_01
+    - from: checkpoint_01
+      to:
+        A: categorize_artifacts
+        P: pause
+        C: identify_clutter
+    - from: categorize_artifacts
+      to: checkpoint_02
+    - from: checkpoint_02
+      to:
+        A: archive_artifacts
+        P: pause
+        C: categorize_artifacts
+    - from: archive_artifacts
+      to: checkpoint_03
+    - from: checkpoint_03
+      to:
+        A: rotate_logs
+        P: pause
+        C: archive_artifacts
+    - from: rotate_logs
+      to: checkpoint_04
+    - from: checkpoint_04
+      to:
+        A: prune_context
+        P: pause
+        C: rotate_logs
+    - from: prune_context
+      to: checkpoint_05
+    - from: checkpoint_05
+      to:
+        A: generate_report
+        P: pause
+        C: prune_context
+    - from: generate_report
+      to: checkpoint_06
+    - from: checkpoint_06
+      to:
+        A: complete
+        P: pause
+        C: generate_report
+    - from: pause
+      to:
+        resume: checkpoint_01
+        abort: failed
+
+  checkpoints:
+    - checkpoint_01
+    - checkpoint_02
+    - checkpoint_03
+    - checkpoint_04
+    - checkpoint_05
+    - checkpoint_06

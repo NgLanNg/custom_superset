@@ -1,0 +1,11 @@
+[    1263ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[    1335ms] [ERROR] [webpack-dev-server] Errors while compiling. Reload prevented. @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[    1335ms] [ERROR] [webpack-dev-server] ERROR in ./src/core/editors/AceEditorProvider.tsx:37:28
+TS2307: Cannot find module 'react-ace' or its corresponding type declarations.
+    35 |   type Ref,
+    36 | } from 'react';
+  > 37 | import type AceEditor from 'react-ace';
+       |                            ^^^^^^^^^^^
+    38 | import type { editors } from '@apache-superset/core';
+    39 | import {
+    40 |   FullSQLEditor, @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612

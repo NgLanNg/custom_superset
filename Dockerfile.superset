@@ -1,0 +1,43 @@
+# Dockerfile for Custom Superset with plugin-chart-scenario
+# This extends the official Superset image to include our custom plugin
+# The plugin is already built (lib/ directory) - no npm build needed
+
+FROM apachesuperset.docker.scarf.sh/apache/superset:4.1.2
+
+# Create a working directory
+WORKDIR /app
+
+# Copy the custom superset_config.py (from root superset/ dir)
+COPY superset/superset_config_local.py /app/superset_config.py
+
+# Copy the custom scenario views (already in superset container, but copy our custom ones)
+COPY superset/superset/views/scenario_writeback.py /app/superset/superset/views/scenario_writeback.py
+COPY superset/superset/views/scenario_metadata.py /app/superset/superset/views/scenario_metadata.py
+COPY superset/superset/views/scenario.py /app/superset/superset/views/scenario.py
+
+# Copy the plugin (pre-built lib directory - no npm build needed)
+COPY superset/superset-frontend/plugins/plugin-chart-scenario /app/superset-frontend/plugins/plugin-chart-scenario
+
+# Copy the SQL init scripts
+COPY scripts/init_db_script /app/scripts/init_db_script
+
+# Copy the entrypoint script
+COPY --chown=superset:superset superset-entrypoint.sh /app/superset-entrypoint.sh
+RUN chown superset:superset /app/superset-entrypoint.sh
+
+# Set environment variables
+ENV SUPERSET_CONFIG_PATH=/app/superset_config.py
+ENV PYTHONPATH=/app
+
+# Install required Python packages
+RUN pip install --no-cache-dir psycopg2-binary
+
+# Change to superset user for running
+USER superset
+
+# Expose the Superset port
+EXPOSE 8088
+
+# Set the entrypoint to start Superset
+ENTRYPOINT ["/app/superset-entrypoint.sh"]
+CMD ["superset", "run", "-p", "8088", "--host", "0.0.0.0"]

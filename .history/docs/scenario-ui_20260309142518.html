@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scenario Creation — Superset Embed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-50:  #EFF6FF;
+      --blue-100: #DBEAFE;
+      --blue-500: #3B82F6;
+      --blue-600: #2563EB;
+      --blue-700: #1D4ED8;
+      --gray-50:  #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --white:    #FFFFFF;
+      --red-500:  #EF4444;
+      --green-500:#10B981;
+      --amber-400:#FBBF24;
+      --sidebar-w: 220px;
+      --header-h:  60px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 6px rgba(0,0,0,.07);
+      --shadow-lg: 0 10px 24px rgba(0,0,0,.10);
+      --radius: 8px;
+      --transition: 150ms ease;
+    }
+
+    html, body { height: 100%; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--gray-900); background: var(--gray-50); }
+
+    /* ── LAYOUT ── */
+    .app { display: flex; height: 100vh; overflow: hidden; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--white);
+      border-right: 1px solid var(--gray-200);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .logo-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-icon svg { color: white; }
+    .logo-text { font-weight: 700; font-size: 16px; color: var(--gray-900); letter-spacing: -0.3px; }
+
+    .sidebar-section-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gray-400);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 20px 20px 6px;
+    }
+    .sidebar-nav { padding: 4px 10px; display: flex; flex-direction: column; gap: 2px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--gray-600);
+      font-weight: 500;
+      transition: background var(--transition), color var(--transition);
+      user-select: none;
+    }
+    .nav-item:hover { background: var(--gray-100); color: var(--gray-900); }
+    .nav-item.active { background: var(--blue-50); color: var(--blue-700); }
+    .nav-item svg { flex-shrink: 0; }
+    .nav-item span { font-size: 13px; }
+
+    .sidebar-divider { height: 1px; background: var(--gray-100); margin: 12px 20px; }
+
+    /* ── MAIN ── */
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+    /* ── TOP HEADER ── */
+    .topbar {
+      height: var(--header-h);
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .search-box {
+      flex: 1;
+      max-width: 440px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      height: 36px;
+      background: var(--gray-100);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 0 12px 0 36px;
+      font-size: 13px;
+      color: var(--gray-700);
+      outline: none;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .search-box input:focus { background: var(--white); border-color: var(--blue-500); }
+    .search-box svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--gray-400); }
+    .topbar-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+    .icon-btn {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: var(--gray-500);
+      transition: background var(--transition), color var(--transition);
+    }
+    .icon-btn:hover { background: var(--gray-100); color: var(--gray-700); }
+    .user-chip {
+      display: flex; align-items: center; gap: 10px;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .user-chip:hover { background: var(--gray-50); }
+    .user-info { text-align: right; }
+    .user-info .name { font-weight: 600; font-size: 13px; }
+    .user-info .role { font-size: 11px; color: var(--gray-400); }
+    .avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-500), #6366F1);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 12px; color: white;
+      flex-shrink: 0;
+    }
+    .avatar-dot {
+      width: 8px; height: 8px;
+      background: var(--green-500);
+      border-radius: 50%;
+      border: 2px solid white;
+      position: absolute;
+      bottom: -1px; right: -1px;
+    }
+    .avatar-wrap { position: relative; }
+
+    /* ── PAGE CONTENT ── */
+    .page-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray-400); }
+    .breadcrumb a { color: var(--gray-400); text-decoration: none; cursor: pointer; }
+    .breadcrumb a:hover { color: var(--blue-600); }
+    .breadcrumb .current { color: var(--blue-600); font-weight: 500; }
+    .breadcrumb svg { color: var(--gray-300); }
+
+    /* Page heading */
+    .page-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .heading-group { display: flex; align-items: center; gap: 14px; }
+    .back-btn {
+      width: 36px; height: 36px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: var(--gray-500);
+      flex-shrink: 0;
+      transition: background var(--transition), color var(--transition);
+    }
+    .back-btn:hover { background: var(--gray-100); color: var(--gray-900); }
+    .page-title { font-size: 22px; font-weight: 700; letter-spacing: -.4px; }
+    .page-subtitle { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
+    .btn-row { display: flex; align-items: center; gap: 10px; }
+    .btn {
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .btn-outline {
+      border: 1px solid var(--gray-200);
+      background: var(--white);
+      color: var(--gray-700);
+    }
+    .btn-outline:hover { background: var(--gray-50); border-color: var(--gray-300); }
+    .btn-primary {
+      border: none;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-700));
+      color: white;
+      box-shadow: 0 2px 8px rgba(37,99,235,.35);
+    }
+    .btn-primary:hover { background: linear-gradient(135deg, var(--blue-700), #1e40af); box-shadow: 0 4px 12px rgba(37,99,235,.45); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* Info banner */
+    .info-banner {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--blue-50);
+      border: 1px solid var(--blue-100);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .info-banner svg { flex-shrink: 0; color: var(--blue-500); margin-top: 1px; }
+    .info-banner .info-text { font-size: 13px; }
+    .info-banner .info-text strong { color: var(--blue-700); }
+    .info-banner .info-text p { color: var(--gray-600); margin-top: 2px; font-size: 12px; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--gray-200); }
+    .tab {
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-500);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color var(--transition), border-color var(--transition);
+      white-space: nowrap;
+    }
+    .tab:hover { color: var(--gray-900); }
+    .tab.active { color: var(--blue-600); border-bottom-color: var(--blue-600); font-weight: 600; }
+
+    /* Tab panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: flex; flex-direction: column; gap: 20px; }
+
+    /* CHART ── */
+    .chart-panel {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .chart-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .chart-title { font-size: 15px; font-weight: 700; }
+    .chart-meta { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+    .chart-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-up { background: #D1FAE5; color: #065F46; }
+    .badge-down { background: #FEE2E2; color: #991B1B; }
+    .chart-wrap { position: relative; height: 200px; }
+
+    /* Section */
+    .section-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .section-title-wrap { display: flex; align-items: center; gap: 10px; }
+    .section-accent { width: 3px; height: 20px; background: var(--blue-500); border-radius: 99px; flex-shrink: 0; }
+    .section-title { font-size: 15px; font-weight: 700; }
+    .filter-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 12px;
+      border: 1px solid var(--gray-200);
+      border-radius: 6px;
+      background: var(--white);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .filter-btn:hover { background: var(--gray-50); }
+
+    /* DATA TABLE */
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead th {
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--gray-500);
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+      text-align: center;
+      white-space: nowrap;
+    }
+    thead th:first-child,
+    thead th:nth-child(2) { text-align: left; }
+    tbody tr { border-bottom: 1px solid var(--gray-100); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--gray-50); }
+    tbody td {
+      padding: 9px 12px;
+      text-align: center;
+      color: var(--gray-700);
+    }
+    tbody td:first-child { color: var(--gray-400); font-weight: 500; font-size: 12px; }
+    tbody td:nth-child(2) { font-weight: 600; color: var(--gray-800); text-align: left; }
+
+    /* Editable cell */
+    .cell-edit {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cell-input {
+      width: 58px;
+      height: 28px;
+      padding: 0 6px;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-700);
+      background: transparent;
+      outline: none;
+      cursor: default;
+      transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    }
+    .cell-input:hover { border-color: var(--gray-300); background: var(--white); cursor: text; }
+    .cell-input:focus {
+      border-color: var(--blue-500);
+      background: var(--blue-50);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+      cursor: text;
+    }
+    .cell-input.changed { color: var(--blue-700); font-weight: 700; }
+    .cell-input.highlighted { background: #DBEAFE; border-color: var(--blue-500); color: var(--blue-700); font-weight: 700; }
+
+    /* Tooltip */
+    .tooltip {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gray-900);
+      color: white;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition);
+      z-index: 50;
+    }
+    .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--gray-900);
+    }
+    .cell-input:focus + .tooltip { opacity: 1; }
+
+    /* Stats row */
+    .stats-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .stat-card {
+      flex: 1; min-width: 140px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-label { font-size: 11px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: .05em; }
+    .stat-value { font-size: 22px; font-weight: 700; margin-top: 4px; letter-spacing: -.5px; }
+    .stat-delta { font-size: 12px; margin-top: 4px; font-weight: 500; }
+    .delta-up { color: var(--green-500); }
+    .delta-dn { color: var(--red-500); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6.75v6.75" />
+        </svg>
+      </div>
+      <span class="logo-text">Superset</span>
+    </div>
+
+    <div class="sidebar-section-label">Main Menu</div>
+    <nav class="sidebar-nav">
+      <div class="nav-item" onclick="setNav(this)">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.235 2.235 0 00-.1.661z" />
+        </svg>
+        <span>Advance Analytics</span>
+      </div>
+      <div class="nav-item active" onclick="setNav(this)">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+        </svg>
+        <span>Scenarios</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section-label">Management</div>
+    <nav class="sidebar-nav">
+      <div class="nav-item" onclick="setNav(this)">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
+        </svg>
+        <span>General Settings</span>
+      </div>
+      <div class="nav-item" onclick="setNav(this)">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Approval Workflow</span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <div class="main">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="search-box">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+        </svg>
+        <input type="text" placeholder="Search assets, parameters, or configurations…" id="global-search" />
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" title="Notifications">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+          </svg>
+        </button>
+        <div class="user-chip">
+          <div class="user-info">
+            <div class="name">John Doe</div>
+            <div class="role">Gas Sustainability Leader</div>
+          </div>
+          <div class="avatar-wrap">
+            <div class="avatar">JD</div>
+            <div class="avatar-dot"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <div class="page-content">
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="#">Scenarios</a>
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+        <a href="#">Scenarios Management</a>
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+        <span class="current">Scenario Creation</span>
+      </div>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="heading-group">
+          <button class="back-btn" title="Go back">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
+          </button>
+          <div>
+            <div class="page-title">Scenario Creation</div>
+            <div class="page-subtitle">Configure equity shares and growth parameters for the simulation.</div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-outline">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+            Save Draft
+          </button>
+          <button class="btn btn-primary">
+            Submit for Approval
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Info Banner -->
+      <div class="info-banner">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+        <div class="info-text">
+          <strong>Source File Reference:</strong> <a href="#" style="color:var(--blue-600)">Output SBD Growth.xlsx</a>
+          <p>Edits propagate in real time and prepare the scenario for submission. Changes to equity share % are reflected in the chart below.</p>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs" id="main-tabs">
+        <div class="tab active" onclick="setTab('equity')">Equity Share Configuration</div>
+        <div class="tab" onclick="setTab('growth')">Growth Configuration</div>
+        <div class="tab" onclick="setTab('opu')">OPU Configuration</div>
+      </div>
+
+      <!-- ── TAB: EQUITY ── -->
+      <div class="tab-panel active" id="tab-equity">
+
+        <!-- Live Chart -->
+        <div class="chart-panel">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Equity Share Overview — Live Preview</div>
+              <div class="chart-meta">Updates as you edit values in the table below</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="chart-badge badge-up" id="avg-badge">
+                <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" /></svg>
+                Avg <span id="avg-label">72.5%</span>
+              </span>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="equityChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Total Assets</div>
+            <div class="stat-value" id="stat-total">10</div>
+            <div class="stat-delta delta-up">rows configured</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg Equity Share</div>
+            <div class="stat-value" id="stat-avg">72.5<small style="font-size:14px">%</small></div>
+            <div class="stat-delta delta-up" id="stat-avg-delta">Above 70% threshold</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Max Equity</div>
+            <div class="stat-value" id="stat-max">100<small style="font-size:14px">%</small></div>
+            <div class="stat-delta" style="color:var(--gray-400)">Reference baseline</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Min Equity</div>
+            <div class="stat-value" id="stat-min">50<small style="font-size:14px">%</small></div>
+            <div class="stat-delta delta-dn" id="stat-min-delta">Below threshold</div>
+          </div>
+        </div>
+
+        <!-- Existing Assets Table -->
+        <div class="section-card">
+          <div class="section-head">
+            <div class="section-title-wrap">
+              <div class="section-accent"></div>
+              <div class="section-title">Equity Share — Existing Assets</div>
+            </div>
+            <button class="filter-btn">
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+              </svg>
+              Filter
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table id="existing-table">
+              <thead>
+                <tr>
+                  <th>BU</th>
+                  <th>GPU</th>
+                  <th>2020</th><th>2021</th><th>2022</th><th>2023</th>
+                  <th>2024</th><th>2025</th><th>2026</th><th>2027</th>
+                  <th>2028</th><th>2029</th><th>2030</th>
+                </tr>
+              </thead>
+              <tbody id="existing-tbody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Growth Projects Table -->
+        <div class="section-card">
+          <div class="section-head">
+            <div class="section-title-wrap">
+              <div class="section-accent"></div>
+              <div class="section-title">Equity Share — Growth Projects</div>
+            </div>
+            <button class="filter-btn">
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+              </svg>
+              Filter
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table id="growth-table">
+              <thead>
+                <tr>
+                  <th>BU</th>
+                  <th>Projects</th>
+                  <th>2020</th><th>2021</th><th>2022</th><th>2023</th>
+                  <th>2024</th><th>2025</th><th>2026</th><th>2027</th>
+                  <th>2028</th><th>2029</th><th>2030</th>
+                </tr>
+              </thead>
+              <tbody id="growth-tbody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /tab-equity -->
+
+      <!-- ── TAB: GROWTH ── -->
+      <div class="tab-panel" id="tab-growth">
+        <div class="section-card" style="padding:40px;text-align:center;color:var(--gray-400)">
+          <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1" style="margin:0 auto 12px;display:block;color:var(--gray-300)">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+          </svg>
+          <div style="font-weight:600;font-size:15px;color:var(--gray-500)">Growth Configuration</div>
+          <div style="margin-top:6px;font-size:13px">Configure growth project parameters and forecasting inputs here.</div>
+        </div>
+      </div>
+
+      <!-- ── TAB: OPU ── -->
+      <div class="tab-panel" id="tab-opu">
+        <div class="section-card" style="padding:40px;text-align:center;color:var(--gray-400)">
+          <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1" style="margin:0 auto 12px;display:block;color:var(--gray-300)">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+          </svg>
+          <div style="font-weight:600;font-size:15px;color:var(--gray-500)">OPU Configuration</div>
+          <div style="margin-top:6px;font-size:13px">Configure operating performance unit inputs here.</div>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+
+const YEARS = [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030];
+
+const EXISTING_ROWS = [
+  { bu:'LNGA', gpu:'MLNG',      vals: [70,70,70,70,70,70,70,70,70,70,70] },
+  { bu:'LNGA', gpu:'MLNG DUA',  vals: [70,70,70,70,70,70,70,70,70,70,70] },
+  { bu:'LNGA', gpu:'MLNG TIGA', vals: [70,70,70,70,70,70,70,70,70,70,70] },
+  { bu:'LNGA', gpu:'TRAIN 9',   vals: [70,70,70,70,70,70,70,70,70,70,70] },
+  { bu:'LNGA', gpu:'PFLNG 1',   vals: [100,100,100,100,100,100,100,100,100,100,100] },
+  { bu:'LNGA', gpu:'PFLNG 2',   vals: [100,100,100,100,100,100,100,100,100,100,100] },
+  { bu:'G&P',  gpu:'GPU',       vals: [51,51,51,51,51,51,51,51,51,51,51] },
+  { bu:'G&P',  gpu:'GTR',       vals: [51,51,51,51,51,51,51,51,51,51,51] },
+  { bu:'MISC', gpu:'MISC',      vals: [50,50,50,50,50,50,50,50,50,50,50] },
+];
+
+const GROWTH_ROWS = [
+  { bu:'LNGA', proj:'LNGC2',      vals: [50,50,50,50,50,50,50,50,50,50,50] },
+  { bu:'LNGA', proj:'Suriname F2',vals: [50,50,50,50,50,50,50,50,50,50,50] },
+  { bu:'LNGA', proj:'Lake Charles',vals:[50,50,50,50,50,50,50,50,50,50,50] },
+  { bu:'G&P',  proj:'Calathea',   vals: [50,50,50,50,50,50,50,50,50,50,50] },
+  { bu:'G&P',  proj:'Asters',     vals: [50,50,50,50,50,50,50,50,50,50,50] },
+];
+
+// ─── CHART SETUP ─────────────────────────────────────────────────────────────
+
+const ctx = document.getElementById('equityChart').getContext('2d');
+const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+gradient.addColorStop(0, 'rgba(59,130,246,0.25)');
+gradient.addColorStop(1, 'rgba(59,130,246,0.01)');
+
+const chart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: EXISTING_ROWS.map(r => r.gpu),
+    datasets: [{
+      label: 'Latest Year Equity %',
+      data: EXISTING_ROWS.map(r => r.vals[r.vals.length - 1]),
+      fill: true,
+      backgroundColor: gradient,
+      borderColor: '#3B82F6',
+      borderWidth: 2.5,
+      pointBackgroundColor: '#3B82F6',
+      pointBorderColor: '#fff',
+      pointBorderWidth: 2,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+      tension: 0.35,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1E293B',
+        titleColor: '#94A3B8',
+        bodyColor: '#F1F5F9',
+        cornerRadius: 8,
+        padding: 10,
+        callbacks: {
+          label: ctx => ` ${ctx.parsed.y}%`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        border: { display: false },
+        ticks: { color: '#6B7280', font: { size: 11 } }
+      },
+      y: {
+        min: 0, max: 110,
+        grid: { color: '#F3F4F6', drawBorder: false },
+        border: { display: false },
+        ticks: {
+          color: '#6B7280',
+          font: { size: 11 },
+          callback: v => v + '%'
+        }
+      }
+    }
+  }
+});
+
+// ─── BUILD TABLES ─────────────────────────────────────────────────────────────
+
+function makeCell(rowIdx, colIdx, initialVal, tablePrefix) {
+  const id = `${tablePrefix}-r${rowIdx}-c${colIdx}`;
+  return `
+    <td>
+      <div class="cell-edit">
+        <input
+          class="cell-input"
+          id="${id}"
+          type="number"
+          min="0" max="100"
+          value="${initialVal}"
+          data-original="${initialVal}"
+          data-row="${rowIdx}"
+          data-col="${colIdx}"
+          data-table="${tablePrefix}"
+          onchange="onCellChange(this)"
+          oninput="onCellChange(this)"
+        />
+        <div class="tooltip">Baseline: ${initialVal}%</div>
+      </div>
+    </td>`;
+}
+
+function buildExistingTable() {
+  const tbody = document.getElementById('existing-tbody');
+  tbody.innerHTML = EXISTING_ROWS.map((row, ri) =>
+    `<tr>
+      <td>${row.bu}</td>
+      <td>${row.gpu}</td>
+      ${row.vals.map((v, ci) => makeCell(ri, ci, v, 'ex')).join('')}
+    </tr>`
+  ).join('');
+}
+
+function buildGrowthTable() {
+  const tbody = document.getElementById('growth-tbody');
+  tbody.innerHTML = GROWTH_ROWS.map((row, ri) =>
+    `<tr>
+      <td>${row.bu}</td>
+      <td>${row.proj}</td>
+      ${row.vals.map((v, ci) => makeCell(ri, ci, v, 'gr')).join('')}
+    </tr>`
+  ).join('');
+}
+
+// ─── LIVE UPDATE ─────────────────────────────────────────────────────────────
+
+function onCellChange(input) {
+  let val = parseFloat(input.value);
+  if (isNaN(val)) val = 0;
+  val = Math.min(100, Math.max(0, val));
+  input.value = val;
+
+  const original = parseFloat(input.dataset.original);
+  input.classList.toggle('changed', val !== original);
+  input.classList.toggle('highlighted', false);
+
+  const ri = parseInt(input.dataset.row);
+  const ci = parseInt(input.dataset.col);
+  const tablePrefix = input.dataset.table;
+
+  // Update source data
+  if (tablePrefix === 'ex') {
+    EXISTING_ROWS[ri].vals[ci] = val;
+  } else {
+    GROWTH_ROWS[ri].vals[ci] = val;
+  }
+
+  rebuildChart();
+  updateStats();
+}
+
+function getLastYearVals() {
+  return EXISTING_ROWS.map(r => r.vals[r.vals.length - 1]);
+}
+
+function rebuildChart() {
+  const vals = getLastYearVals();
+  chart.data.datasets[0].data = vals;
+  chart.update('active');
+}
+
+function updateStats() {
+  // Compute all vals from existing table
+  const allVals = EXISTING_ROWS.flatMap(r => r.vals);
+  const avg = allVals.reduce((a, b) => a + b, 0) / allVals.length;
+  const mx = Math.max(...allVals);
+  const mn = Math.min(...allVals);
+
+  document.getElementById('stat-avg').innerHTML = avg.toFixed(1) + '<small style="font-size:14px">%</small>';
+  document.getElementById('stat-max').innerHTML = mx + '<small style="font-size:14px">%</small>';
+  document.getElementById('stat-min').innerHTML = mn + '<small style="font-size:14px">%</small>';
+
+  document.getElementById('avg-label').textContent = avg.toFixed(1) + '%';
+  const badge = document.getElementById('avg-badge');
+  if (avg >= 70) {
+    badge.className = 'chart-badge badge-up';
+    document.getElementById('stat-avg-delta').textContent = 'Above 70% threshold';
+    document.getElementById('stat-avg-delta').className = 'stat-delta delta-up';
+  } else {
+    badge.className = 'chart-badge badge-down';
+    document.getElementById('stat-avg-delta').textContent = 'Below 70% threshold';
+    document.getElementById('stat-avg-delta').className = 'stat-delta delta-dn';
+  }
+}
+
+// ─── TABS ────────────────────────────────────────────────────────────────────
+
+function setTab(name) {
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    const panels = ['equity','growth','opu'];
+    t.classList.toggle('active', panels[i] === name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    p.classList.toggle('active', p.id === 'tab-' + name);
+  });
+}
+
+// ─── NAV ─────────────────────────────────────────────────────────────────────
+
+function setNav(el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+
+buildExistingTable();
+buildGrowthTable();
+updateStats();
+</script>
+</body>
+</html>

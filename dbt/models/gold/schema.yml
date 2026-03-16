@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: gold_scenario_equity_share
+    description: "Deduplicated, analytics-ready view of scenario data per OPU per year"
+    columns:
+      - name: id
+        tests:
+          - not_null
+      - name: scenario_name
+        tests:
+          - not_null
+      - name: bu
+        tests:
+          - not_null
+      - name: opu
+        tests:
+          - not_null
+      - name: year
+        tests:
+          - not_null
+      - name: equity_pct
+        tests:
+          - not_null
+          
+    tests:
+      - unique:
+          column_name: "(scenario_name || '-' || opu || '-' || year)"

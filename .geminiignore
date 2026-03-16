@@ -1,0 +1,27 @@
+# Gemini CLI ignore patterns
+.DS_Store
+.env.production
+.git/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+node_modules/
+dist/
+build/
+*.pyc
+*.bak
+*.sql
+*.log
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.pdf
+_archive/
+.history/
+superset_home/
+dbt/target/
+dbt/logs/
+logs/

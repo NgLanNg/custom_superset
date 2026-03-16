@@ -1,0 +1,179 @@
+step:
+  id: "04-audit"
+  name: "Security & Tech Debt Audit"
+  phase: "Phase 1: Analysis"
+
+  execution:
+    primary_role: "dev"
+    required_system: "Security Tools + Tech Debt Analytics"
+
+  contracts:
+    inputs:
+      - path: "vault/active_context.md"
+        must_exist: true
+    outputs:
+      - path: "docs/warnings/security-issues.md"
+        type: "security-report"
+      - path: "docs/warnings/tech-debt-report.md"
+        type: "tech-debt-report"
+
+  strict_nyquist_rules:
+    - "Focus on baseline assessment without code modification."
+    - "Security scan for CVEs and dependency health."
+    - "Tech debt analysis for complexity, duplication, and coverage."
+    - "Critical findings fed into next sprint planning."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# ============================================
+graph:
+  initial: scan_dependencies
+
+  nodes:
+    scan_dependencies:
+      type: action
+      action: vulnerability_scan
+      description: "Check CVEs and dependency health"
+      file: "04-audit/workflow.md"
+      outputs:
+        - cve_findings
+        - dependency_health
+      next: checkpoint_01
+
+    checkpoint_01:
+      type: checkpoint
+      description: "User validates vulnerability scan results"
+      human_in_loop: true
+      options:
+        A: tech_debt_assessment
+        P: pause
+        C: scan_dependencies
+
+    tech_debt_assessment:
+      type: action
+      action: analyze_complexity
+      description: "Analyze complexity, duplication, and coverage"
+      file: "04-audit/workflow.md"
+      inputs:
+        - cve_findings
+      outputs:
+        - complexity_metrics
+        - duplication_score
+        - coverage_analysis
+      next: checkpoint_02
+
+    checkpoint_02:
+      type: checkpoint
+      description: "User validates tech debt assessment"
+      human_in_loop: true
+      options:
+        A: generate_security_report
+        P: pause
+        C: tech_debt_assessment
+
+    generate_security_report:
+      type: action
+      action: document_security_findings
+      description: "Create security issues report"
+      file: "04-audit/workflow.md"
+      inputs:
+        - cve_findings
+        - dependency_health
+      outputs:
+        - security_report_path
+        - security_summary
+      next: checkpoint_03
+
+    checkpoint_03:
+      type: checkpoint
+      description: "User validates security report"
+      human_in_loop: true
+      options:
+        A: generate_tech_debt_report
+        P: pause
+        C: generate_security_report
+
+    generate_tech_debt_report:
+      type: action
+      action: document_tech_debt
+      description: "Create tech debt report documenting findings"
+      file: "04-audit/workflow.md"
+      inputs:
+        - complexity_metrics
+        - duplication_score
+        - coverage_analysis
+      outputs:
+        - tech_debt_report_path
+        - tech_debt_summary
+        - sprint_planning_feed
+      next: checkpoint_04
+
+    checkpoint_04:
+      type: checkpoint
+      description: "User approves final audit reports"
+      human_in_loop: true
+      options:
+        A: complete
+        P: pause
+        C: generate_tech_debt_report
+
+    pause:
+      type: decision
+      description: "Wait for user instruction"
+      branches:
+        resume: checkpoint_01
+        abort: failed
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "Audit workflow complete"
+      outputs:
+        - security_report_path
+        - tech_debt_report_path
+        - sprint_planning_feed
+
+    failed:
+      type: terminal
+      action: mark_failed
+      description: "Workflow aborted by user"
+
+  edges:
+    - from: scan_dependencies
+      to: checkpoint_01
+    - from: checkpoint_01
+      to:
+        A: tech_debt_assessment
+        P: pause
+        C: scan_dependencies
+    - from: tech_debt_assessment
+      to: checkpoint_02
+    - from: checkpoint_02
+      to:
+        A: generate_security_report
+        P: pause
+        C: tech_debt_assessment
+    - from: generate_security_report
+      to: checkpoint_03
+    - from: checkpoint_03
+      to:
+        A: generate_tech_debt_report
+        P: pause
+        C: generate_security_report
+    - from: generate_tech_debt_report
+      to: checkpoint_04
+    - from: checkpoint_04
+      to:
+        A: complete
+        P: pause
+        C: generate_tech_debt_report
+    - from: pause
+      to:
+        resume: checkpoint_01
+        abort: failed
+
+  checkpoints:
+    - checkpoint_01
+    - checkpoint_02
+    - checkpoint_03
+    - checkpoint_04

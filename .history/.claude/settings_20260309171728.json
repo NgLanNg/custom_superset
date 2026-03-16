@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(SUPERSET_SECRET_KEY=test-secret-key-for-ci ./.venv/bin/python -m pytest tests/integration_tests/views/test_scenario_writeback.py -v)"
+    ]
+  }
+}

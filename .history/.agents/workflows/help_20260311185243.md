@@ -1,0 +1,83 @@
+---
+description: Master entry point and session router. Bootstraps context and directs to the correct workflow.
+---
+
+# /start & /help
+
+**Purpose: The single entry point router for all developer workflows. Automates project discovery, synchronizes session context, and suggests the next high-rigor action.**
+
+**Scope:** `daily`
+**Phase:** Multi-phase (Bootstrap & Routing)
+**Deep Mode:** (Routing command — delegates to specific Phase workflows)
+
+## When to Use
+
+- At the beginning of every session (automatically triggered by BMAD rules).
+- Whenever you start a new task or session.
+- When you aren't sure which specific slash command to run or context feels stale.
+- To avoid manual directory navigation for process discovery.
+
+## Execution Path
+>
+> **Mandatory Session Bootstrapping & Routing**
+
+1. **Context Loading**:
+   - Always read `vault/active_context.md` and `vault/tasks/todo.md` first.
+   - Verify environment variables and run quick health checks if applicable.
+2. **Comprehensive Project Scan**: Perform a comprehensive scan of the codebase relevant to the current objective. For large repositories, use `repomix` or full directory loads.
+3. **Phase Identification**: Determine the current lifecycle phase (1-7) based on the objective.
+4. **Discipline Injection**:
+   - If the task is complex, automatically break it down into **Epics and Stories**.
+   - Inject **Discovery** and **Verification** gates into the `todo.md`.
+5. **Role Adoption**: Check `.agents/roles/INDEX.md` and adopt the appropriate specialist role.
+6. **Next Action**: State the exact workflow and mode being triggered (e.g., "Executing `/quick-spec`").
+
+## Output
+
+- Fully grounded agent ready for rigorous execution.
+- Immediate execution of the correct high-rigor workflow.
+
+## Key Principles
+
+- **Automatic by Default**: In BMAD, we don't wait for permission to start properly.
+- **Context First**: Never act before reading the `vault`.
+- **No Detective Work**: The agent finds the context; the user just provides the goal.
+- **Rigor by Default**: Suggest the most disciplined path (e.g., `/write-spec` before `/build`).
+
+---
+
+## Workflow Paths (Show These to the User)
+
+When responding to a `/start` or `/help` request, always present the relevant path from below so the user immediately knows the next command to run.
+
+### New Project (Greenfield)
+
+```txt
+/start -> /init -> /research -> /brainstorm -> /spec -> /design-architect -> /tickets -> /todo
+                                                                                  |
+                                                                               (Dev Loop)
+```
+
+### Existing Codebase (Brownfield)
+
+```txt
+/start -> /scan -> /audit -> /todo -> /test -> /code -> /review
+```
+
+### Daily Dev Loop (Sprint)
+
+```txt
+/sprint -> /test -> /code -> /review -> /docs -> /clean
+    ^                                               |
+    |_______________ (next sprint) _________________|
+```
+
+### If You Are Stuck
+
+```txt
+Stuck on logic?        -> /likeaboss
+Need external data?    -> /mcp
+Plan is wrong?         -> /rethink -> /brainstorm
+Declutter workspace?   -> /clean
+Lost entirely?         -> /start (you are here)
+```

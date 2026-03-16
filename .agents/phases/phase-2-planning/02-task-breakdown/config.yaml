@@ -1,0 +1,45 @@
+step:
+  id: "02-task-breakdown"
+  name: "Task Breakdown"
+  phase: "Phase 2: Planning"
+
+  inputs:
+    - "docs/scope.md"
+    - "docs/architecture.md"
+
+  outputs:
+    - "docs/tasks.md"
+
+graph:
+  initial: context_read
+  nodes:
+    context_read:
+      type: action
+      action: read_context
+      description: "Read scope.md and architecture.md to internalize what will be built"
+      outputs: [context_loaded]
+    generate_tasks:
+      type: action
+      action: generate_task_list
+      description: "Break down scope into independent deliverables and write to docs/tasks.md"
+      outputs: [tasks_generated]
+    review_checkpoint:
+      type: checkpoint
+      human_in_loop: true
+      description: "Review generated task list with user for comprehensiveness"
+      options: {A: advance, P: party, C: continue}
+    refinement:
+      type: action
+      action: refine_tasks
+      description: "Refine tasks based on user feedback"
+      outputs: [tasks_refined]
+    complete:
+      type: terminal
+      description: "Task breakdown complete, ready to advance to Phase 3"
+      outputs: [phase_complete]
+  edges:
+    - context_read -> generate_tasks
+    - generate_tasks -> review_checkpoint
+    - review_checkpoint -> {A: complete, P: complete, C: refinement}
+    - refinement -> review_checkpoint
+  checkpoints: [review_checkpoint]

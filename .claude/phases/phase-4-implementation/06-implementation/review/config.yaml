@@ -1,0 +1,182 @@
+step:
+  id: "06-implementation/review"
+  name: "Code Review"
+  phase: "Phase 4: Implementation"
+
+  execution:
+    primary_role: "dev"
+    required_system: "Review Checklist"
+
+  contracts:
+    inputs:
+      - path: "vault/active_context.md"
+        must_exist: true
+      - path: "src/modified-files"
+        must_exist: true
+    outputs:
+      - path: "docs/reviews/YYYY-MM-DD-{file}-review.md"
+        type: "code-review-report"
+
+  strict_nyquist_rules:
+    - "Systematic pre-commit quality and security audit."
+    - "Use severity-based checklist (Critical/High/Medium/Low)."
+    - "Run project-specific lints and tests."
+    - "Generate concise feedback report."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# ============================================
+graph:
+  initial: ingest
+
+  nodes:
+    ingest:
+      type: action
+      action: intake_review_scope
+      description: "Identify intent, scope, and risk level"
+      file: "06-implementation/review/workflow.md"
+      outputs:
+        - files_to_review
+        - scope
+        - risk_level
+      next: checkpoint_01
+
+    checkpoint_01:
+      type: checkpoint
+      description: "User validates review scope"
+      human_in_loop: true
+      options:
+        A: systematic_review
+        P: pause
+        C: ingest
+
+    systematic_review:
+      type: action
+      action: execute_review_checklist
+      description: "Execute severity-based checklist review"
+      file: "06-implementation/review/workflow.md"
+      inputs:
+        - files_to_review
+        - risk_level
+      outputs:
+        - checklist_results
+        - critical_issues
+        - high_priority_findings
+      next: checkpoint_02
+
+    checkpoint_02:
+      type: checkpoint
+      description: "User validates review progress"
+      human_in_loop: true
+      options:
+        A: run_lints
+        P: pause
+        C: systematic_review
+
+    run_lints:
+      type: action
+      action: execute_project_tests
+      description: "Run project-specific lints and tests"
+      file: "06-implementation/review/workflow.md"
+      inputs:
+        - files_to_review
+        - critical_issues
+      outputs:
+        - lint_results
+        - test_results
+        - coverage_report
+      next: checkpoint_03
+
+    checkpoint_03:
+      type: checkpoint
+      description: "User validates test results"
+      human_in_loop: true
+      options:
+        A: generate_report
+        P: pause
+        C: run_lints
+
+    generate_report:
+      type: action
+      action: create_review_document
+      description: "Generate code review feedback report"
+      file: "06-implementation/review/workflow.md"
+      inputs:
+        - files_to_review
+        - checklist_results
+        - lint_results
+        - test_results
+      outputs:
+        - review_report_path
+        - review_summary
+        - approval_status
+      next: checkpoint_04
+
+    checkpoint_04:
+      type: checkpoint
+      description: "User approves review report"
+      human_in_loop: true
+      options:
+        A: complete
+        P: pause
+        C: generate_report
+
+    pause:
+      type: decision
+      description: "Wait for user instruction"
+      branches:
+        resume: checkpoint_01
+        abort: failed
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "Code review workflow complete"
+      outputs:
+        - review_report_path
+        - approval_status
+
+    failed:
+      type: terminal
+      action: mark_failed
+      description: "Workflow aborted by user"
+
+  edges:
+    - from: ingest
+      to: checkpoint_01
+    - from: checkpoint_01
+      to:
+        A: systematic_review
+        P: pause
+        C: ingest
+    - from: systematic_review
+      to: checkpoint_02
+    - from: checkpoint_02
+      to:
+        A: run_lints
+        P: pause
+        C: systematic_review
+    - from: run_lints
+      to: checkpoint_03
+    - from: checkpoint_03
+      to:
+        A: generate_report
+        P: pause
+        C: run_lints
+    - from: generate_report
+      to: checkpoint_04
+    - from: checkpoint_04
+      to:
+        A: complete
+        P: pause
+        C: generate_report
+    - from: pause
+      to:
+        resume: checkpoint_01
+        abort: failed
+
+  checkpoints:
+    - checkpoint_01
+    - checkpoint_02
+    - checkpoint_03
+    - checkpoint_04

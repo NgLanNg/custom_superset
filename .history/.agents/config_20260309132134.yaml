@@ -1,0 +1,95 @@
+# Lean BMAD Pilot Configuration
+# This file defines the system environment for A (IDE Extensions) and B (CLI Integrations).
+# It serves as the static resolution layer for `{}` constants in Step files.
+
+# 1. Core System Settings
+system:
+  project_name: "agent_frameworks"
+  user_name: "Alan"
+
+# 2. Project Details & Tech Stack
+project_details:
+  tech_stack:
+    - "Python"
+    - "TypeScript"
+    - "Markdown"
+  frameworks:
+    - "BMAD Framework"
+  architecture_type: "Agentic Framework"
+  environment: "Development"
+
+# 3. Agent Defaults (Injected into {communication_language}, etc)
+agent_defaults:
+  communication_language: "English"
+  document_output_language: "English"
+
+# 4. System Constants (The `{}` variables)
+# The execution engine will map these paths exactly.
+# DIRECTORY RULES:
+# - `docs/`  : For permanent project knowledge, architecture, feature specs, and tasks (Jira/Confluence equivalent).
+# - `vault/` : For instant output, temporary state, working context, and scratchpads.
+paths:
+  project_root: "." # Resolves {project-root}
+  agent_dir: ".agents" # Resolves {installed_path}
+
+  # BMAD Engine Internals (The "Engine Room")
+  bmad_dir: ".agents/bmad"
+  bmad_steps: ".agents/bmad/steps"
+  bmad_templates: ".agents/bmad/templates"
+
+  # Permanent Knowledge & Artifacts (Enduring - The "Docs OS")
+  docs_dir: "docs"
+  project_knowledge: "docs/knowledge" # (Confluence) Core domain knowledge
+  project_patterns: "docs/patterns" # (Confluence) Refined, permanent patterns picked from learning
+  planning_artifacts: "docs/plans" # BMAD Phase 1 & 2 (Briefs, PRDs)
+  architecture_artifacts: "docs/architecture" # BMAD Phase 3 (Architecture Blueprint)
+  feature_artifacts: "docs/features" # Micro-Docs (Feature Intention)
+  implementation_artifacts: "docs/specs" # BMAD Phase 4 (Jira-style Tasks, Epics, Stories)
+  sharded_architecture: "docs/architecture/index.md" # Sharded context entry point
+  sharded_prd: "docs/prd/index.md" # If PRD becomes sharded
+
+  # Active State & Instant Workspace (Temporary/Transient)
+  vault_dir: "vault"
+  active_context: "vault/active_context.md"
+  output_folder: "vault/out"
+  learning_buffer: "vault/learning" # What was learned instantly/recently
+  research_artifacts: "vault/research" # Temporary discovery & research outputs
+  task_tracking: "vault/tasks" # Instant checklists (todo.md, lessons.md)
+  archive: "_archive"
+
+# 5. Execution Engine Settings
+engine:
+  require_user_confirmation: true # Enforces the [C] Continue menu wall
+  traceability:
+    force_citation: true # Mandatory rule: Cite source documents for every requirement
+    citation_format: "[Source: {file_name}#L{line_range}]"
+  nyquist_first:
+    enabled: true
+    rule: "No code generation without a defined verification command and expected output"
+    enforce_on_phases: ["phase-4-implementation"]
+
+  # Output verbosity. Options:
+
+# 6. Enterprise Integrations & Syncing
+# Defines replication logic for pushing local "Docs OS" into enterprise tools.
+integrations:
+  jira:
+    enabled: true
+    sync_paths:
+      - "docs/specs" # Epics, Stories, and Tasks replicate to Jira issues
+      - "docs/plans" # PRDs and Briefs replicate/link to Jira Epics
+    auto_sync_on_create: true
+
+  confluence:
+    enabled: true
+    sync_paths:
+      - "docs/knowledge" # Core domain knowledge replicates to Confluence spaces
+      - "docs/architecture" # System design and blueprints replicate to Confluence
+      - "docs/patterns" # Extracted patterns from vault/learning replicate to Confluence
+      - "docs/features" # Feature micro-docs replicate to Confluence
+    auto_sync_on_create: true
+roles:
+  - ".agents/roles/po.yaml"
+  - ".agents/roles/pm.yaml"
+  - ".agents/roles/dev.yaml"
+  - ".agents/roles/qa.yaml"

@@ -1,0 +1,199 @@
+step:
+  id: "00-quick-flow/quick-dev-new-preview"
+  name: "Quick Dev New Preview"
+  phase: "Phase 4: Implementation"
+
+  execution:
+    primary_role: "dev"
+    required_system: "Git + IDE + Testing Framework"
+
+  contracts:
+    inputs:
+      - path: "vault/active_context.md"
+        must_exist: true
+    outputs:
+      - path: "docs/specs/YYYY-MM-DD-{topic}-spec.md"
+        type: "tech-spec"
+      - path: "src/modified-files"
+        type: "code-changes"
+      - path: "docs/implementation_summary.md"
+        type: "ops-record"
+
+  strict_nyquist_rules:
+    - "Unified flow: intent -> plan -> implement -> review -> PR."
+    - "Single user-facing goal within 900-1600 tokens."
+    - "All ACs use Given/When/Then, cover happy path and edge cases."
+    - "No placeholders or TBDs in ready-for-dev specs."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# ============================================
+graph:
+  initial: clarify_and_route
+
+  nodes:
+    clarify_and_route:
+      type: action
+      action: decode_user_request
+      description: "Clarify user intent, scope, and determine workflow path"
+      file: "00-quick-flow/quick-dev-new-preview/workflow.md"
+      outputs:
+        - user_request
+        - scope
+        - success_criteria
+        - selected_workflow
+      branches:
+        quick_spec: quick_spec_path
+        quick_dev: quick_dev_path
+        full_bmad: full_flow_redirect
+
+    quick_spec_path:
+      type: action
+      action: execute_quick_spec_workflow
+      description: "Run quick-spec flow for new specification"
+      file: "00-quick-flow/quick-spec/workflow.md"
+      inputs:
+        - user_request
+        - scope
+      outputs:
+        - spec_path
+        - acceptance_criteria
+      next: checkpoint_spec
+
+    checkpoint_spec:
+      type: checkpoint
+      description: "User validates spec generation"
+      human_in_loop: true
+      options:
+        A: quick_dev_path
+        P: pause
+        C: quick_spec_path
+
+    quick_dev_path:
+      type: action
+      action: execute_quick_dev_workflow
+      description: "Run quick-dev flow for implementation"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - spec_path
+        - acceptance_criteria
+      outputs:
+        - code_changes
+        - test_results
+      next: checkpoint_implementation
+
+    checkpoint_implementation:
+      type: checkpoint
+      description: "User validates implementation"
+      human_in_loop: true
+      options:
+        A: adversarial_review
+        P: pause
+        C: quick_dev_path
+
+    adversarial_review:
+      type: action
+      action: invoke_adversarial_review
+      description: "Run adversarial review on implemented changes"
+      file: "00-quick-flow/quick-dev-new-preview/workflow.md"
+      inputs:
+        - spec_path
+        - code_changes
+      outputs:
+        - review_findings
+        - severity_classification
+      next: checkpoint_review
+
+    checkpoint_review:
+      type: checkpoint
+      description: "User validates review findings resolution"
+      human_in_loop: true
+      options:
+        A: create_pr
+        P: pause
+        C: adversarial_review
+
+    create_pr:
+      type: action
+      action: generate_pull_request
+      description: "Generate PR with all changes and documentation"
+      file: "00-quick-flow/quick-dev-new-preview/workflow.md"
+      inputs:
+        - spec_path
+        - code_changes
+        - review_findings
+      outputs:
+        - pr_url
+        - pr_summary
+        - merged
+      next: checkpoint_pr
+
+    checkpoint_pr:
+      type: checkpoint
+      description: "User confirms PR creation"
+      human_in_loop: true
+      options:
+        A: complete
+        P: pause
+        C: create_pr
+
+    full_flow_redirect:
+      type: terminal
+      action: redirect_to_full_flow
+      description: "Request too complex for quick flow, use full BMAD PRD workflow"
+
+    pause:
+      type: terminal
+      action: pause_workflow
+      description: "Workflow paused for user intervention"
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "Quick dev new preview workflow complete"
+      outputs:
+        - pr_url
+        - pr_summary
+        - spec_path
+        - test_results
+
+  edges:
+    - from: clarify_and_route
+      to:
+        quick_spec: quick_spec_path
+        quick_dev: quick_dev_path
+        full_bmad: full_flow_redirect
+    - from: quick_spec_path
+      to: checkpoint_spec
+    - from: checkpoint_spec
+      to:
+        A: quick_dev_path
+        P: pause
+        C: quick_spec_path
+    - from: quick_dev_path
+      to: checkpoint_implementation
+    - from: checkpoint_implementation
+      to:
+        A: adversarial_review
+        P: pause
+        C: quick_dev_path
+    - from: adversarial_review
+      to: checkpoint_review
+    - from: checkpoint_review
+      to:
+        A: create_pr
+        P: pause
+        C: adversarial_review
+    - from: create_pr
+      to: checkpoint_pr
+    - from: checkpoint_pr
+      to:
+        A: complete
+        P: pause
+        C: create_pr
+
+  checkpoints:
+    - checkpoint_spec
+    - checkpoint_implementation
+    - checkpoint_review
+    - checkpoint_pr

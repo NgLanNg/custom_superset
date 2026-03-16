@@ -1,0 +1,20 @@
+{
+  "date": "20260315",
+  "session_count": 1,
+  "sessions": [
+    "session_20260315_235504.json"
+  ],
+  "usage": {
+    "input": 0,
+    "output": 0,
+    "cache_read": 0,
+    "cache_create": 0,
+    "calls": 0,
+    "cost_usd": 0.0
+  },
+  "models": {},
+  "end_reasons": {
+    "unknown": 1
+  },
+  "generated_at": "2026-03-15T17:16:56.075767+00:00"
+}

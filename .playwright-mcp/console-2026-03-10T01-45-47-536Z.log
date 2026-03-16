@@ -1,0 +1,104 @@
+[  528892ms] [ERROR] Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s%s 
+
+Check the render method of `EmotionCssPropInternal`. 
+    at Button (webpack-internal:///./packages/superset-ui-core/src/components/Button/index.tsx:92:13)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/TriggerWrapper.js:12:24)
+    at DomWrapper (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/DomWrapper.js:24:90)
+    at SingleObserver (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/index.js:24:24)
+    at ResizeObserver (webpack-internal:///./node_modules/rc-resize-observer/es/index.js:24:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/index.js:62:34)
+    at Dropdown (webpack-internal:///./node_modules/rc-dropdown/es/Dropdown.js:33:28)
+    at Dropdown (webpack-internal:///./node_modules/antd/es/dropdown/dropdown.js:56:5)
+    at Dropdown
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at PageHeaderWithActions (webpack-internal:///./packages/superset-ui-core/src/components/PageHeaderWithActions/index.tsx:125:34)
+    at ExploreChartHeader (webpack-internal:///./src/explore/components/ExploreChartHeader/index.tsx:135:31)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at ExploreContainer (webpack-internal:///./src/explore/components/ExploreContainer/index.tsx:74:29)
+    at ExploreViewContainer (webpack-internal:///./src/explore/components/ExploreViewContainer/index.tsx:308:99)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at ExplorePage (webpack-internal:///./src/pages/Chart/index.tsx:195:84)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:62:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:57:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:77:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:644:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:846:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:84:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:28:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:10:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:47:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:163:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:48:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:34:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:20:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:20:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:136:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:438:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:95:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:150:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:32:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:54:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:263:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:45:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[  528952ms] [ERROR] Warning: [antd: Tooltip] `destroyTooltipOnHide` is deprecated. Please use `destroyOnHidden` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:39
+[  533121ms] [WARNING] The resource http://localhost:9000/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:9000/explore/?form_data_key=SXoZQjz85vI&viz_type=scenario_chart&datasource=12__table&datasource_id=12&datasource_type=table:0
+[  779861ms] [WARNING] The resource http://localhost:9000/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:9000/explore/?form_data_key=SXoZQjz85vI&viz_type=scenario_chart&datasource=12__table&datasource_id=12&datasource_type=table:0
+[  786685ms] [WARNING] Ignored an update to unaccepted module ./plugins/plugin-chart-scenario/src/plugin/transformProps.ts -> ./plugins/plugin-chart-scenario/src/plugin/index.ts -> ./src/visualizations/presets/MainPreset.ts -> ./src/setup/setupPlugins.ts -> ./src/views/App.tsx -> ./src/views/index.tsx @ webpack-internal:///./node_modules/webpack/hot/log.js:44
+[  786685ms] [WARNING] [HMR] The following modules couldn't be hot updated: (They would need a full reload!) @ webpack-internal:///./node_modules/webpack/hot/log.js:44
+[  786685ms] [WARNING] [HMR]  - ./plugins/plugin-chart-scenario/src/plugin/transformProps.ts @ webpack-internal:///./node_modules/webpack/hot/log.js:44
+[  789687ms] [WARNING] The resource http://localhost:9000/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:9000/explore/?form_data_key=SXoZQjz85vI&viz_type=scenario_chart&datasource=12__table&datasource_id=12&datasource_type=table:0
+[  802614ms] [ERROR] [webpack-dev-server] Errors while compiling. Reload prevented. @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[  802616ms] [ERROR] [webpack-dev-server] ERROR in ./plugins/plugin-chart-scenario/test/ScenarioChart.test.tsx:58:17
+TS2741: Property 'data' is missing in type '{ height: number; width: number; }' but required in type 'ScenarioChartProps'.
+    56 |
+    57 |     test('renders tabs correctly', () => {
+  > 58 |         render(<ScenarioChart {...defaultProps} />);
+       |                 ^^^^^^^^^^^^^
+    59 |
+    60 |         // Check if the two tabs are rendered
+    61 |         expect(screen.getByText('Existing Assets')).toBeInTheDocument(); @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[  802616ms] [ERROR] [webpack-dev-server] ERROR in ./plugins/plugin-chart-scenario/test/ScenarioChart.test.tsx:66:17
+TS2741: Property 'data' is missing in type '{ height: number; width: number; }' but required in type 'ScenarioChartProps'.
+    64 |
+    65 |     test('renders the table with data', () => {
+  > 66 |         render(<ScenarioChart {...defaultProps} />);
+       |                 ^^^^^^^^^^^^^
+    67 |
+    68 |         // Check existing data rows
+    69 |         expect(screen.getByText('MLNG')).toBeInTheDocument(); @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[  802616ms] [ERROR] [webpack-dev-server] ERROR in ./plugins/plugin-chart-scenario/test/ScenarioChart.test.tsx:74:17
+TS2741: Property 'data' is missing in type '{ height: number; width: number; }' but required in type 'ScenarioChartProps'.
+    72 |
+    73 |     test('handles cell edit optimistic update and API call', async () => {
+  > 74 |         render(<ScenarioChart {...defaultProps} />);
+       |                 ^^^^^^^^^^^^^
+    75 |
+    76 |         // Find the inputs created for edits (they start with the default test data values)
+    77 |         const inputs = screen.getAllByDisplayValue('70'); @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[  805669ms] [WARNING] The resource http://localhost:9000/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:9000/explore/?form_data_key=SXoZQjz85vI&viz_type=scenario_chart&datasource=12__table&datasource_id=12&datasource_type=table:0
+[  997120ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed:  @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[  997122ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[  998191ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[  998191ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[ 1000130ms] [WARNING] The resource http://localhost:9000/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:9000/explore/?form_data_key=SXoZQjz85vI&viz_type=scenario_chart&datasource=12__table&datasource_id=12&datasource_type=table:0
+[ 1000240ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[ 1000240ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[ 1004323ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[ 1004323ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[ 1012388ms] [ERROR] WebSocket connection to 'ws://localhost:9000/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[ 1012388ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611

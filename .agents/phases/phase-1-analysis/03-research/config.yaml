@@ -1,0 +1,203 @@
+step:
+  id: "03-research"
+  name: "Technical & Market Research"
+  phase: "Phase 1: Analysis"
+
+  execution:
+    primary_role: "po"
+    required_system: "Web-Search / Knowledge-Base"
+
+  contracts:
+    inputs:
+      - path: "docs/product_brief.md"
+        must_exist: true
+    outputs:
+      - path: "docs/research_findings.md"
+        type: "research-doc"
+
+  strict_nyquist_rules:
+    - "Research must focus on identifying technical feasibility and market differentiators."
+    - "No solution architectural decisions allowed here."
+
+graph:
+  initial: select_research_type
+  nodes:
+    select_research_type:
+      type: decision
+      description: "Select research type based on user needs"
+      branches:
+        domain: domain_research_init
+        market: market_research_init
+        technical: technical_research_init
+
+    # Domain Research Sub-workflow
+    domain_research_init:
+      type: action
+      description: "Initialize domain research scope"
+      action: confirm_domain_scope
+      file: "domain-steps/step-01-init.md"
+      next: domain_industry_analysis
+    domain_industry_analysis:
+      type: action
+      description: "Analyze industry structure and market dynamics"
+      action: conduct_industry_analysis
+      file: "domain-steps/step-02-domain-analysis.md"
+      next: domain_competitive_landscape
+    domain_competitive_landscape:
+      type: action
+      description: "Analyze competitive landscape and key players"
+      action: analyze_competitive_landscape
+      file: "domain-steps/step-03-competitive-landscape.md"
+      next: domain_regulatory_focus
+    domain_regulatory_focus:
+      type: action
+      description: "Analyze regulatory requirements and compliance"
+      action: analyze_regulatory_requirements
+      file: "domain-steps/step-04-regulatory-focus.md"
+      next: domain_technical_trends
+    domain_technical_trends:
+      type: action
+      description: "Analyze technical trends and innovations"
+      action: analyze_technical_trends
+      file: "domain-steps/step-05-technical-trends.md"
+      next: domain_synthesis
+    domain_synthesis:
+      type: action
+      description: "Synthesize domain research findings"
+      action: synthesize_domain_research
+      file: "domain-steps/step-06-research-synthesis.md"
+      next: research_complete
+
+    # Market Research Sub-workflow
+    market_research_init:
+      type: action
+      description: "Initialize market research scope"
+      action: confirm_market_scope
+      file: "market-steps/step-01-init.md"
+      next: market_customer_behavior
+    market_customer_behavior:
+      type: action
+      description: "Analyze customer behavior patterns"
+      action: analyze_customer_behavior
+      file: "market-steps/step-02-customer-behavior.md"
+      next: market_pain_points
+    market_pain_points:
+      type: action
+      description: "Identify customer pain points and needs"
+      action: identify_pain_points
+      file: "market-steps/step-03-customer-pain-points.md"
+      next: market_decision_factors
+    market_decision_factors:
+      type: action
+      description: "Analyze customer decision factors"
+      action: analyze_decision_factors
+      file: "market-steps/step-04-customer-decisions.md"
+      next: market_competitive_analysis
+    market_competitive_analysis:
+      type: action
+      description: "Analyze competitive positioning"
+      action: analyze_competitive_positioning
+      file: "market-steps/step-05-competitive-analysis.md"
+      next: market_completion
+    market_completion:
+      type: action
+      description: "Complete market research with strategic synthesis"
+      action: synthesize_market_research
+      file: "market-steps/step-06-research-completion.md"
+      next: research_complete
+
+    # Technical Research Sub-workflow
+    technical_research_init:
+      type: action
+      description: "Initialize technical research scope"
+      action: confirm_technical_scope
+      file: "technical-steps/step-01-init.md"
+      next: technical_overview
+    technical_overview:
+      type: action
+      description: "Analyze technology stack landscape"
+      action: analyze_technology_stack
+      file: "technical-steps/step-02-technical-overview.md"
+      next: technical_integration_patterns
+    technical_integration_patterns:
+      type: action
+      description: "Analyze integration and API patterns"
+      action: analyze_integration_patterns
+      file: "technical-steps/step-03-integration-patterns.md"
+      next: technical_architectural_patterns
+    technical_architectural_patterns:
+      type: action
+      description: "Analyze architectural patterns"
+      action: analyze_architectural_patterns
+      file: "technical-steps/step-04-architectural-patterns.md"
+      next: technical_implementation_research
+    technical_implementation_research:
+      type: action
+      description: "Research implementation approaches"
+      action: research_implementation_approaches
+      file: "technical-steps/step-05-implementation-research.md"
+      next: technical_synthesis
+    technical_synthesis:
+      type: action
+      description: "Synthesize technical research findings"
+      action: synthesize_technical_research
+      file: "technical-steps/step-06-research-synthesis.md"
+      next: research_complete
+
+    research_complete:
+      type: terminal
+      description: "Research workflow completed successfully"
+      outputs:
+        - "docs/research_findings.md"
+
+  edges:
+    - from: select_research_type
+      to:
+        domain: domain_research_init
+        market: market_research_init
+        technical: technical_research_init
+    - from: domain_research_init
+      to: domain_industry_analysis
+    - from: domain_industry_analysis
+      to: domain_competitive_landscape
+    - from: domain_competitive_landscape
+      to: domain_regulatory_focus
+    - from: domain_regulatory_focus
+      to: domain_technical_trends
+    - from: domain_technical_trends
+      to: domain_synthesis
+    - from: domain_synthesis
+      to: research_complete
+    - from: market_research_init
+      to: market_customer_behavior
+    - from: market_customer_behavior
+      to: market_pain_points
+    - from: market_pain_points
+      to: market_decision_factors
+    - from: market_decision_factors
+      to: market_competitive_analysis
+    - from: market_competitive_analysis
+      to: market_completion
+    - from: market_completion
+      to: research_complete
+    - from: technical_research_init
+      to: technical_overview
+    - from: technical_overview
+      to: technical_integration_patterns
+    - from: technical_integration_patterns
+      to: technical_architectural_patterns
+    - from: technical_architectural_patterns
+      to: technical_implementation_research
+    - from: technical_implementation_research
+      to: technical_synthesis
+    - from: technical_synthesis
+      to: research_complete
+
+  checkpoints:
+    - select_research_type
+    - domain_research_init
+    - domain_synthesis
+    - market_research_init
+    - market_completion
+    - technical_research_init
+    - technical_synthesis

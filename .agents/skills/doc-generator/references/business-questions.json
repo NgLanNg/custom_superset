@@ -1,0 +1,125 @@
+{
+ "name": "business-doc",
+ "description": "Generate business documentation with guided requirements gathering",
+ "version": "1.0.0",
+ "structured_questions": [
+ {
+ "id": "problem_statement",
+ "question": "What problem are you solving or opportunity are you addressing?",
+ "type": "text",
+ "required": true,
+ "placeholder": "Describe the current situation and why it needs to change"
+ },
+ {
+ "id": "stakeholders",
+ "question": "Who are the key stakeholders?",
+ "type": "text",
+ "required": true,
+ "placeholder": "e.g., Executive Sponsor: Jane Doe (CTO), Users: Sales Team, Impacted: IT Operations"
+ },
+ {
+ "id": "document_type",
+ "question": "What type of business document do you need?",
+ "type": "choice",
+ "required": true,
+ "options": [
+ {"value": "brd", "label": "Business Requirements Document (BRD)"},
+ {"value": "proposal", "label": "Project Proposal"},
+ {"value": "project_plan", "label": "Project Plan"},
+ {"value": "rfp_response", "label": "RFP Response"},
+ {"value": "case_study", "label": "Business Case / Case Study"}
+ ]
+ },
+ {
+ "id": "timeline",
+ "question": "What is the timeline or deadline?",
+ "type": "text",
+ "required": false,
+ "placeholder": "e.g., Q2 2026, 3 months, By March 31st"
+ },
+ {
+ "id": "success_criteria",
+ "question": "What does success look like? How will you measure it?",
+ "type": "text",
+ "required": false,
+ "placeholder": "e.g., 20% cost reduction, 95% user adoption, $500K revenue increase"
+ }
+ ],
+ "adaptive_rules": [
+ {
+ "trigger": "document_type == 'brd' || document_type == 'proposal' || document_type == 'case_study'",
+ "questions": [
+ {
+ "id": "business_impact",
+ "question": "What is the quantified business impact? (Revenue, Cost savings, Efficiency gains, Risk reduction)",
+ "type": "text"
+ },
+ {
+ "id": "proposed_solution",
+ "question": "Describe the proposed solution or approach at a high level",
+ "type": "text"
+ }
+ ]
+ },
+ {
+ "trigger": "document_type == 'project_plan'",
+ "questions": [
+ {
+ "id": "phases",
+ "question": "What are the major phases or milestones?",
+ "type": "text",
+ "placeholder": "e.g., Phase 1: Discovery (2 weeks), Phase 2: Design (4 weeks), Phase 3: Implementation (8 weeks)"
+ },
+ {
+ "id": "resources",
+ "question": "What resources are needed? (Team, budget, tools)",
+ "type": "text"
+ }
+ ]
+ },
+ {
+ "trigger": "document_type == 'proposal' || document_type == 'rfp_response'",
+ "questions": [
+ {
+ "id": "budget",
+ "question": "What is the budget or cost estimate?",
+ "type": "text",
+ "placeholder": "e.g., $250K total, $50K/month for 5 months"
+ },
+ {
+ "id": "alternatives",
+ "question": "What alternatives were considered? Why was this approach chosen?",
+ "type": "text"
+ }
+ ]
+ },
+ {
+ "trigger": "always",
+ "questions": [
+ {
+ "id": "risks",
+ "question": "What are the main risks or challenges?",
+ "type": "text",
+ "placeholder": "e.g., Technical complexity, Resource availability, Stakeholder alignment"
+ }
+ ]
+ }
+ ],
+ "completeness_checks": [
+ {
+ "field": "problem_statement",
+ "rule": "not_empty",
+ "message": "Problem statement is required"
+ },
+ {
+ "field": "stakeholders",
+ "rule": "not_empty",
+ "message": "Please identify key stakeholders"
+ },
+ {
+ "field": "document_type",
+ "rule": "not_empty",
+ "message": "Please specify the document type"
+ }
+ ]
+}

@@ -1,0 +1,210 @@
+step:
+  id: "10-sprint-planning"
+  name: "Sprint Planning"
+  phase: "Phase 4: Implementation"
+
+  execution:
+    primary_role: "pm"
+    required_system: "Jira + Backlog Management"
+
+  contracts:
+    inputs:
+      - path: "vault/active_context.md"
+        must_exist: true
+      - path: "docs/epics.md"
+        must_exist: true
+    outputs:
+      - path: "docs/sprint_status.md"
+        type: "sprint-plan"
+      - path: "docs/sprint-backlog.yaml"
+        type: "backlog-tracker"
+
+  strict_nyquist_rules:
+    - "Dependencies First: backend/design-architecture before frontend."
+    - "No Scope Creep: Only pull stories from defined PRD and Epics."
+    - "Atomic Commits: Stories should be independently shippable."
+    - "Capacity Aware: Respect sprint bounds and team availability."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# ============================================
+graph:
+  initial: fetch_backlog
+
+  nodes:
+    fetch_backlog:
+      type: action
+      action: gather_backlog_items
+      description: "Fetch current backlog from Jira or local epics"
+      file: "10-sprint-planning/steps/step-01-fetch-backlog.md"
+      outputs:
+        - backlog_items
+        - epic_mapping
+        - priority_tags
+      next: checkpoint_01
+
+    checkpoint_01:
+      type: checkpoint
+      description: "User validates backlog contents"
+      human_in_loop: true
+      options:
+        A: analyze_dependencies
+        P: pause
+        C: fetch_backlog
+
+    analyze_dependencies:
+      type: action
+      action: map_story_dependencies
+      description: "Identify dependency order for stories"
+      file: "10-sprint-planning/steps/step-02-analyze-dependencies.md"
+      inputs:
+        - backlog_items
+      outputs:
+        - dependency_graph
+        - Blocked_stories
+        - ready_stories
+      next: checkpoint_02
+
+    checkpoint_02:
+      type: checkpoint
+      description: "User validates dependency analysis"
+      human_in_loop: true
+      options:
+        A: assess_capacity
+        P: pause
+        C: analyze_dependencies
+
+    assess_capacity:
+      type: action
+      action: calculate_sprint_capacity
+      description: "Review team capacity and allocate stories"
+      file: "10-sprint-planning/steps/step-03-assess-capacity.md"
+      inputs:
+        - ready_stories
+        - priority_tags
+      outputs:
+        - capacity_estimate
+        - story_estimates
+        - allocated_stories
+      next: checkpoint_03
+
+    checkpoint_03:
+      type: checkpoint
+      description: "User validates sprint allocation"
+      human_in_loop: true
+      options:
+        A: update_jira
+        P: pause
+        C: assess_capacity
+
+    update_jira:
+      type: action
+      action: sync_with_jira
+      description: "Update Jira sprint board and ticket statuses"
+      file: "10-sprint-planning/steps/step-04-update-jira.md"
+      inputs:
+        - allocated_stories
+      outputs:
+        - jira_update_results
+        - sprint_board_url
+      next: checkpoint_04
+
+    checkpoint_04:
+      type: checkpoint
+      description: "User validates Jira sync"
+      human_in_loop: true
+      options:
+        A: create_local_sync
+        P: pause
+        C: update_jira
+
+    create_local_sync:
+      type: action
+      action: generate_local_tracking
+      description: "Create local tracking file for agents"
+      file: "10-sprint-planning/steps/step-05-create-local-sync.md"
+      inputs:
+        - allocated_stories
+        - jira_update_results
+      outputs:
+        - sprint_status_path
+        - sprint_summary
+      next: checkpoint_05
+
+    checkpoint_05:
+      type: checkpoint
+      description: "User confirms sprint plan complete"
+      human_in_loop: true
+      options:
+        A: complete
+        P: pause
+        C: create_local_sync
+
+    pause:
+      type: decision
+      description: "Wait for user instruction"
+      branches:
+        resume: checkpoint_01
+        abort: failed
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "Sprint planning workflow complete"
+      outputs:
+        - sprint_status_path
+        - sprint_summary
+        - jira_update_results
+
+    failed:
+      type: terminal
+      action: mark_failed
+      description: "Workflow aborted by user"
+
+  edges:
+    - from: fetch_backlog
+      to: checkpoint_01
+    - from: checkpoint_01
+      to:
+        A: analyze_dependencies
+        P: pause
+        C: fetch_backlog
+    - from: analyze_dependencies
+      to: checkpoint_02
+    - from: checkpoint_02
+      to:
+        A: assess_capacity
+        P: pause
+        C: analyze_dependencies
+    - from: assess_capacity
+      to: checkpoint_03
+    - from: checkpoint_03
+      to:
+        A: update_jira
+        P: pause
+        C: assess_capacity
+    - from: update_jira
+      to: checkpoint_04
+    - from: checkpoint_04
+      to:
+        A: create_local_sync
+        P: pause
+        C: update_jira
+    - from: create_local_sync
+      to: checkpoint_05
+    - from: checkpoint_05
+      to:
+        A: complete
+        P: pause
+        C: create_local_sync
+    - from: pause
+      to:
+        resume: checkpoint_01
+        abort: failed
+
+  checkpoints:
+    - checkpoint_01
+    - checkpoint_02
+    - checkpoint_03
+    - checkpoint_04
+    - checkpoint_05

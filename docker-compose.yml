@@ -1,0 +1,27 @@
+services:
+  superset:
+    build:
+      context: .
+      dockerfile: Dockerfile.superset
+      args:
+        - SUPERSET_SECRET_KEY=${SUPERSET_SECRET_KEY:-change-me-in-production}
+        - SUPERSET_GUEST_TOKEN_SECRET=${SUPERSET_GUEST_TOKEN_SECRET:-change-me-in-production}
+    container_name: superset-base
+    ports:
+      - "8088:8088"
+    environment:
+      # Database configuration (using existing VPS PostgreSQL)
+      SUPERSET_DB_HOST: ${SUPERSET_DB_HOST:-localhost}
+      SUPERSET_DB_PORT: ${SUPERSET_DB_PORT:-5432}
+      SUPERSET_DB_USER: ${SUPERSET_DB_USER:-superset}
+      SUPERSET_DB_PASS: ${SUPERSET_DB_PASS:-superset}
+      SUPERSET_DB_NAME: ${SUPERSET_DB_NAME:-superset}
+      # Secret keys (use environment variables in production)
+      SUPERSET_SECRET_KEY: ${SUPERSET_SECRET_KEY:-change-me-in-production}
+      SUPERSET_GUEST_TOKEN_SECRET: ${SUPERSET_GUEST_TOKEN_SECRET:-change-me-in-production}
+      # Flask app entrypoint
+      FLASK_APP: superset.app:create_app()
+      # Python path
+      PYTHONPATH: /app
+    restart: unless-stopped
+    command: superset run -p 8088 --host=0.0.0.0 --with-threads

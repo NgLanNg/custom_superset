@@ -1,0 +1,171 @@
+step:
+  id: "01-project-context"
+  name: "Project Context Discovery"
+  phase: "Phase 1: Analysis"
+
+  execution:
+    primary_role: "po"
+    required_system: "Codebase Scan"
+
+  contracts:
+    inputs:
+      - path: "**/package.json"
+        must_exist: false # Discovery mode
+    outputs:
+      - path: "docs/project-context.md"
+        type: "specification"
+
+  strict_nyquist_rules:
+    - "Discovery must identify exact technology versions (e.g., dbt v1.7)."
+    - "Context MUST include file naming conventions (e.g., kebab-case)."
+    - "Context MUST identify existing testing frameworks."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# Based on actual step files in steps/ directory
+# ============================================
+graph:
+  initial: step_01_discover
+
+  nodes:
+    step_01_discover:
+      type: action
+      action: discover_context
+      description: "Check existing context, discover tech stack, identify code patterns"
+      file: "steps/step-01-discover.md"
+      outputs:
+        - tech_stack
+        - file_patterns
+        - dependencies
+        - lint_configs
+
+    checkpoint_01:
+      type: checkpoint
+      description: "User confirms tech stack and patterns"
+      human_in_loop: true
+      prompt: "Tech Stack confirmed. Continue to Pattern Extraction?"
+      options:
+        C: step_02_patterns
+        A: step_01_discover
+        P: pause
+
+    step_02_patterns:
+      type: action
+      action: identify_patterns
+      description: "Identify naming conventions and directory structure"
+      file: "steps/step-02-patterns.md"
+      inputs:
+        - file_patterns
+      outputs:
+        - naming_conventions
+        - directory_structure
+
+    checkpoint_02:
+      type: checkpoint
+      description: "User confirms naming conventions"
+      human_in_loop: true
+      prompt: "Naming convention confirmed. Continue to Rule Extraction?"
+      options:
+        C: step_03_rules
+        A: step_02_patterns
+        P: pause
+
+    step_03_rules:
+      type: action
+      action: extract_rules
+      description: "Search for ALWAYS/NEVER rules and testing requirements"
+      file: "steps/step-03-rules.md"
+      outputs:
+        - coding_rules
+        - test_requirements
+        - dev_workflow_rules
+
+    checkpoint_03:
+      type: checkpoint
+      description: "User confirms extracted rules"
+      human_in_loop: true
+      prompt: "Rules extracted. Continue to Final Serialization?"
+      options:
+        C: step_04_finalize
+        A: step_03_rules
+        P: pause
+
+    step_04_finalize:
+      type: action
+      action: serialize_context
+      description: "Compile all findings into project-context.md"
+      file: "steps/step-04-finalize.md"
+      inputs:
+        - tech_stack
+        - naming_conventions
+        - coding_rules
+      outputs:
+        - project_context_md
+
+    checkpoint_04:
+      type: checkpoint
+      description: "User confirms final document"
+      human_in_loop: true
+      prompt: "Project context finalized. Continue to Codebase Documentation?"
+      options:
+        C: complete
+        A: step_04_finalize
+        P: pause
+
+    pause:
+      type: decision
+      description: "Wait for user instruction"
+      branches:
+        resume: step_01_discover
+        abort: failed
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "Phase 1 Step 01 complete - ready for Codebase Documentation"
+      next_phase: "phase-1-analysis/02-codebase-documentation"
+
+    failed:
+      type: terminal
+      action: mark_failed
+      description: "Workflow aborted by user"
+
+  edges:
+    - from: step_01_discover
+      to: checkpoint_01
+    - from: checkpoint_01
+      to:
+        C: step_02_patterns
+        A: step_01_discover
+        P: pause
+    - from: step_02_patterns
+      to: checkpoint_02
+    - from: checkpoint_02
+      to:
+        C: step_03_rules
+        A: step_02_patterns
+        P: pause
+    - from: step_03_rules
+      to: checkpoint_03
+    - from: checkpoint_03
+      to:
+        C: step_04_finalize
+        A: step_03_rules
+        P: pause
+    - from: step_04_finalize
+      to: checkpoint_04
+    - from: checkpoint_04
+      to:
+        C: complete
+        A: step_04_finalize
+        P: pause
+    - from: pause
+      to:
+        resume: step_01_discover
+        abort: failed
+
+  checkpoints:
+    - checkpoint_01
+    - checkpoint_02
+    - checkpoint_03
+    - checkpoint_04

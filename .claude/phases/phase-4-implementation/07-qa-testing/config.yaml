@@ -1,0 +1,189 @@
+step:
+  id: "07-qa-testing"
+  name: "Quality Assurance & Adversarial Review"
+  phase: "Phase 4: Implementation"
+
+  execution:
+    primary_role: "qa"
+    required_system: "Playwright / CI"
+
+  contracts:
+    inputs:
+      - path: "docs/prd.md"
+        must_exist: true
+      - path: "docs/architecture.md"
+        must_exist: true
+      - path: "src/" # Implementation
+    outputs:
+      - path: "docs/qa_report.md"
+        type: "qa-audit"
+      - path: "test_artifacts/"
+
+  strict_nyquist_rules:
+    - "QA must explicitly try to break the implementation based on PRD edge cases."
+    - "Reject implementation if zero automated tests are present."
+    - "Verify no technical artifacts bleed into the business logic."
+
+graph:
+  initial: step_01_load_context
+  nodes:
+    step_01_load_context:
+      type: action
+      action: load_story_and_discover
+      description: "Load story context and verify against git reality"
+      outputs: [story_key, acceptance_criteria, tasks, file_list, git_changes]
+
+    step_02_build_attack_plan:
+      type: action
+      action: build_review_plan
+      description: "Prepare validation checklist from ACs and tasks"
+      outputs: [review_plan, ac_checklist, task_audit_list]
+
+    decision_01_plan_approved:
+      type: decision
+      description: "Review plan ready for execution?"
+      outputs: [approved]
+
+    step_03_unit_testing:
+      type: action
+      action: run_unit_tests
+      description: "Execute TDD cycle - Red, Green, Refactor"
+      outputs: [unit_test_results, coverage_report]
+
+    step_04_integration_testing:
+      type: action
+      action: run_integration_tests
+      description: "Verify component interactions"
+      outputs: [integration_test_results]
+
+    step_05_e2e_testing:
+      type: action
+      action: run_e2e_tests
+      description: "Validate user-centric flows"
+      outputs: [e2e_test_results]
+
+    step_06_adversarial_review:
+      type: action
+      action: execute_adversarial_review
+      description: "Validate claims against code, find 3-10 issues"
+      outputs: [review_findings, severity_counts]
+
+    decision_02_review_acceptable:
+      type: decision
+      description: "Are review findings acceptable (no critical/high issues)?"
+      outputs: [acceptable, needs_fix]
+
+    checkpoint_01_review_checkpoint:
+      type: checkpoint
+      human_in_loop: true
+      description: "Human review of adversarial findings"
+      options:
+        C: proceed_to_fix
+        R: retry_review
+        P: pause
+
+    step_07_auto_fix_issues:
+      type: action
+      action: fix_high_medium_issues
+      description: "Automatically fix HIGH/MEDIUM issues"
+      outputs: [fix_summary, updated_files]
+
+    step_08_create_action_items:
+      type: action
+      action: create_review_action_items
+      description: "Add AI-Review action items to story"
+      outputs: [action_items_added]
+
+    decision_03_fix_resolution:
+      type: decision
+      description: "Choose resolution path"
+      outputs: [auto_fix, manual_fix, skip]
+
+    checkpoint_02_fix_decision:
+      type: checkpoint
+      human_in_loop: true
+      description: "Human decision on issue resolution"
+      options:
+        F: auto_fix
+        M: manual_fix
+        S: skip_to_sync
+
+    step_09_update_story_status:
+      type: action
+      action: sync_story_and_sprint
+      description: "Update story status and sprint tracking"
+      outputs: [final_status, sprint_sync_complete]
+
+    decision_04_final_status:
+      type: decision
+      description: "Determine if work is complete"
+      outputs: [done, in_progress]
+
+    terminal_01_complete:
+      type: terminal
+      description: "QA phase complete, all ACs verified"
+      outputs: [qa_sign_off]
+
+    terminal_02_incomplete:
+      type: terminal
+      description: "QA phase incomplete, issues remain"
+      outputs: [follow_up_required]
+
+  edges:
+    # Initial flow
+    - step_01_load_context -> step_02_build_attack_plan
+    - step_02_build_attack_plan -> decision_01_plan_approved
+
+    # Plan approval branch
+    - from: decision_01_plan_approved
+      to:
+        approved: step_03_unit_testing
+        retry: step_02_build_attack_plan
+
+    # Testing sequence
+    - step_03_unit_testing -> step_04_integration_testing
+    - step_04_integration_testing -> step_05_e2e_testing
+    - step_05_e2e_testing -> step_06_adversarial_review
+
+    # Review decision
+    - step_06_adversarial_review -> decision_02_review_acceptable
+    - from: decision_02_review_acceptable
+      to:
+        acceptable: step_09_update_story_status
+        needs_fix: checkpoint_01_review_checkpoint
+
+    # Checkpoint 1 branches
+    - from: checkpoint_01_review_checkpoint
+      to:
+        C: decision_03_fix_resolution
+        R: step_06_adversarial_review
+        P: terminal_02_incomplete
+
+    # Fix resolution paths
+    - from: decision_03_fix_resolution
+      to:
+        auto_fix: step_07_auto_fix_issues
+        manual_fix: step_08_create_action_items
+        skip: step_09_update_story_status
+
+    # Checkpoint 2 branches
+    - from: checkpoint_02_fix_decision
+      to:
+        F: step_07_auto_fix_issues
+        M: step_08_create_action_items
+        S: step_09_update_story_status
+
+    # After fixes, return to adversarial review
+    - step_07_auto_fix_issues -> step_06_adversarial_review
+    - step_08_create_action_items -> step_09_update_story_status
+
+    # Final status
+    - step_09_update_story_status -> decision_04_final_status
+    - from: decision_04_final_status
+      to:
+        done: terminal_01_complete
+        in_progress: terminal_02_incomplete
+
+  checkpoints:
+    - checkpoint_01_review_checkpoint
+    - checkpoint_02_fix_decision

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core Design System - Scenario Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Primary Indigo Scheme */
+            --indigo-50: #EEF2FF;
+            --indigo-100: #E0E7FF;
+            --indigo-500: #6366F1;
+            --indigo-600: #4F46E5;
+            --indigo-700: #4338CA;
+
+            /* New Accent Palette (from Dashboard Image) */
+            --teal-accent: #26A69A;        /* Total Upon Reduction / Highlights */
+            --amber-accent: #FFB300;       /* Warning / Secondary Data */
+            --green-accent: #8BC34A;       /* Positive / Growth */
+            --lime-accent: #CDDC39;        /* Soft Data points */
+            --orange-accent: #FB8C00;      /* Alternative Scenarios */
+            --dark-blue-accent: #1A237E;   /* Misc / Legend */
+            
+            /* Backgrounds & Text */
+            --bg-gray: #F1F5F9;
+            --header-gray: #E2E8F0;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --white: #FFFFFF;
+            --border-light: #CBD5E1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-gray);
+            color: var(--text-main);
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--indigo-600);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--indigo-600);
+            border-radius: 2px;
+        }
+
+        /* Color Palette Section */
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .color-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .color-swatch {
+            height: 80px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .color-info {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .color-hex {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* Dashboard-style Navigation */
+        .dash-nav {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 32px;
+            background: #D1D5DB; /* Match the grey separator in image */
+            padding: 2px;
+            border-radius: 4px;
+        }
+
+        .nav-item {
+            flex: 1;
+            padding: 10px;
+            background: #E5E7EB;
+            text-align: center;
+            font-weight: 700;
+            font-size: 11px;
+            color: #4B5563;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-item.active {
+            background: var(--indigo-600);
+            color: var(--white);
+        }
+
+        .nav-item:hover:not(.active) {
+            background: #F3F4F6;
+        }
+
+        /* Components Showcase */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 32px;
+        }
+
+        /* Stat Cards */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            padding: 20px;
+            border-radius: 12px;
+            background: var(--white);
+            border-left: 4px solid var(--indigo-600);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .stat-card.teal { border-color: var(--teal-accent); }
+        .stat-card.amber { border-color: var(--amber-accent); }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        /* Tables */
+        .dash-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .dash-table th {
+            text-align: left;
+            padding: 10px 16px;
+            background: var(--bg-gray);
+            border-bottom: 2px solid var(--indigo-600);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+
+        .dash-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .dash-table tr:hover {
+            background: var(--indigo-50);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tag-teal { background: var(--teal-accent); color: white; }
+        .tag-amber { background: var(--amber-accent); color: white; }
+        .tag-green { background: var(--green-accent); color: white; }
+
+        /* Chart Simulation */
+        .chart-sim {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .bar {
+            flex: 1;
+            display: flex;
+            flex-direction: column-reverse;
+            border-radius: 4px 4px 0 0;
+            overflow: hidden;
+            transition: height 0.3s;
+        }
+
+        .bar-segment {
+            width: 100%;
+        }
+
+        .segment-1 { background: var(--indigo-600); }
+        .segment-2 { background: var(--teal-accent); }
+        .segment-3 { background: var(--amber-accent); }
+        .segment-4 { background: var(--green-accent); }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Core Design System Refresh</h1>
+        <p style="color: var(--text-muted); font-weight: 500;">Indigo Primary + Dash Accents</p>
+    </header>
+
+    <section>
+        <h2>Color Palette Expansion</h2>
+        <div class="palette-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--indigo-600);"></div>
+                <div class="color-info">Primary Indigo</div>
+                <div class="color-hex">#4F46E5</div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--teal-accent);"></div>
+                <div class="color-info">Deep Teal</div>
+                <div class="color-hex">#26A69A</div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--amber-accent);"></div>
+                <div class="color-info">Amber Gold</div>
+                <div class="color-hex">#FFB300</div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--green-accent);"></div>
+                <div class="color-info">Growth Green</div>
+                <div class="color-hex">#8BC34A</div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--orange-accent);"></div>
+                <div class="color-info">Pillar Orange</div>
+                <div class="color-hex">#FB8C00</div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--dark-blue-accent);"></div>
+                <div class="color-info">Support Blue</div>
+                <div class="color-hex">#1A237E</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Dashboard Navigation Concept</h2>
+        <div class="dash-nav">
+            <div class="nav-item">GHG Outlook</div>
+            <div class="nav-item active">GHG Emission - OC</div>
+            <div class="nav-item">GHG Emission - ES</div>
+            <div class="nav-item">Growth Projects</div>
+            <div class="nav-item">Energy</div>
+            <div class="nav-item">NZCE Pathway</div>
+            <div class="nav-item">NZCE Roadmap</div>
+            <div class="nav-item">Production</div>
+        </div>
+    </section>
+
+    <div class="showcase-grid">
+        <div class="left-col">
+            <section>
+                <h2>Stacked Data Visualization</h2>
+                <div class="card">
+                    <div class="chart-sim">
+                        <div class="bar" style="height: 100%;">
+                            <div class="bar-segment segment-1" style="height: 40%;"></div>
+                            <div class="bar-segment segment-2" style="height: 20%;"></div>
+                            <div class="bar-segment segment-3" style="height: 15%;"></div>
+                            <div class="bar-segment segment-4" style="height: 25%;"></div>
+                        </div>
+                        <div class="bar" style="height: 85%;">
+                            <div class="bar-segment segment-1" style="height: 35%;"></div>
+                            <div class="bar-segment segment-2" style="height: 25%;"></div>
+                            <div class="bar-segment segment-3" style="height: 20%;"></div>
+                            <div class="bar-segment segment-4" style="height: 20%;"></div>
+                        </div>
+                        <div class="bar" style="height: 90%;">
+                            <div class="bar-segment segment-1" style="height: 45%;"></div>
+                            <div class="bar-segment segment-2" style="height: 15%;"></div>
+                            <div class="bar-segment segment-3" style="height: 10%;"></div>
+                            <div class="bar-segment segment-4" style="height: 30%;"></div>
+                        </div>
+                        <div class="bar" style="height: 75%;">
+                            <div class="bar-segment segment-1" style="height: 30%;"></div>
+                            <div class="bar-segment segment-2" style="height: 30%;"></div>
+                            <div class="bar-segment segment-3" style="height: 20%;"></div>
+                            <div class="bar-segment segment-4" style="height: 20%;"></div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-around; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-top: 12px;">
+                        <span>2024</span>
+                        <span>2025</span>
+                        <span>2026</span>
+                        <span>2027</span>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Premium Data Table</h2>
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <table class="dash-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Value (Mil)</th>
+                                <th>Status</th>
+                                <th>Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: 600;">Operational Control</td>
+                                <td>18.94 M</td>
+                                <td><span class="tag tag-teal">Stabilized</span></td>
+                                <td style="color: var(--teal-accent); font-weight: 700;">&uarr; 2.4%</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Equity Share</td>
+                                <td>12.72 M</td>
+                                <td><span class="tag tag-amber">Variation</span></td>
+                                <td style="color: var(--amber-accent); font-weight: 700;">&sim; 0.1%</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Growth Assets</td>
+                                <td>5.41 M</td>
+                                <td><span class="tag tag-green">Expedited</span></td>
+                                <td style="color: var(--green-accent); font-weight: 700;">&darr; 4.8%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <div class="right-col">
+            <section>
+                <h2>Key Indicators</h2>
+                <div class="stat-card" style="margin-bottom: 16px;">
+                    <div class="stat-label">Total Forecast</div>
+                    <div class="stat-value">18.94M</div>
+                    <div style="font-size: 11px; color: var(--teal-accent); font-weight: 700; margin-top: 4px;">Baseline: 2024</div>
+                </div>
+                <div class="stat-card teal" style="margin-bottom: 16px;">
+                    <div class="stat-label">Upon Reduction</div>
+                    <div class="stat-value">14.91M</div>
+                    <div style="font-size: 11px; color: var(--teal-accent); font-weight: 700; margin-top: 4px;">&darr; 21.3% target</div>
+                </div>
+                <div class="stat-card amber" style="margin-bottom: 16px;">
+                    <div class="stat-label">Methane Leakage</div>
+                    <div class="stat-value">0.42%</div>
+                    <div style="font-size: 11px; color: var(--amber-accent); font-weight: 700; margin-top: 4px;">Attention Required</div>
+                </div>
+            </section>
+            
+            <section style="margin-top: 40px;">
+                <h2>Design Tokens</h2>
+                <div style="font-size: 12px; line-height: 1.6; color: var(--text-muted);">
+                    <p><strong>Primary:</strong> Indigo #4F46E5</p>
+                    <p><strong>Success:</strong> Teal #26A69A</p>
+                    <p><strong>Warning:</strong> Amber #FFB300</p>
+                    <p><strong>Info:</strong> Blue #3B82F6</p>
+                    <p><strong>Border:</strong> Slate #CBD5E1</p>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+step:
+  id: "02-codebase-documentation"
+  name: "Codebase Documentation Generation"
+  phase: "Phase 1: Analysis"
+
+  execution:
+    primary_role: "po"
+    required_system: "Documentation Toolkit"
+
+  contracts:
+    inputs:
+      - path: "**/project-context.md"
+        must_exist: false # Discovery mode
+    outputs:
+      - path: "docs/architecture.md"
+        type: "specification"
+      - path: "docs/readme.md"
+        type: "documentation"
+
+  strict_nyquist_rules:
+    - "Documentation MUST be based on actual code execution paths, not assumptions."
+    - "Identify all core modules/services from the file system."
+
+graph:
+  initial: step_01_modules
+  nodes:
+    step_01_modules:
+      type: action
+      action: map_core_modules
+      description: "Scan codebase directories to identify top-level modules, entry points, and test locations"
+      outputs: [module_map, entry_points, test_patterns]
+    checkpoint_a:
+      type: checkpoint
+      human_in_loop: true
+      options: {C: continue, A: retry, P: pause}
+      description: "User confirmation on high-level module map accuracy"
+    step_02_architecture:
+      type: action
+      action: extract_architecture
+      description: "Identify auth mechanisms, communication patterns, data models, and interfaces"
+      outputs: [auth_patterns, comm_patterns, data_model, interface_defs]
+    checkpoint_b:
+      type: checkpoint
+      human_in_loop: true
+      options: {C: continue, A: retry, P: pause}
+      description: "User confirmation on architecture definition accuracy"
+    step_03_finalize:
+      type: action
+      action: serialize_documentation
+      description: "Compile and save findings to docs/readme.md and docs/architecture.md"
+      outputs: [readme_md, architecture_md]
+    checkpoint_c:
+      type: checkpoint
+      human_in_loop: true
+      options: {C: continue, A: retry, P: pause}
+      description: "Final user confirmation before proceeding to Product Brief phase"
+    terminal_complete:
+      type: terminal
+      description: "Codebase documentation phase complete"
+  edges:
+    - step_01_modules -> checkpoint_a
+    - checkpoint_a -> {C: step_02_architecture, A: step_01_modules, P: pause}
+    - step_02_architecture -> checkpoint_b
+    - checkpoint_b -> {C: step_03_finalize, A: step_02_architecture, P: pause}
+    - step_03_finalize -> checkpoint_c
+    - checkpoint_c -> {C: terminal_complete, A: step_03_finalize, P: pause}
+  checkpoints: [checkpoint_a, checkpoint_b, checkpoint_c]

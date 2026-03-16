@@ -1,0 +1,8 @@
+[    1720ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[    1721ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[    2818ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[    2818ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[    4835ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[    4835ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[    8851ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[    8851ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611

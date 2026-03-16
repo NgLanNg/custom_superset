@@ -1,0 +1,191 @@
+step:
+  id: "05-technical-design"
+  name: "Generate Technical Design (Arch + Dash Spec)"
+  phase: "Phase 3: Solutioning (Developer)"
+
+  execution:
+    primary_role: "dev"
+    required_system: "Github/IDE + Figma + BI"
+
+  contracts:
+    inputs:
+      - path: "docs/scope.md"
+        type: "project-scope"
+        must_exist: true
+      - path: "docs/tasks.md"
+        type: "task-list"
+    outputs:
+      - path: "docs/architecture.md"
+        type: "technical-schema"
+      - path: "docs/dashboard_spec.md"
+        type: "dashboard-blueprint"
+
+  strict_nyquist_rules:
+    - "Developer must plan both the backend data schema (architecture.md) and the frontend visualization mapping (dashboard_spec.md)."
+    - "All data models must strictly satisfy the data required by the AC and Figma wireframes."
+    - "Architecture must map directly back to a Jira Story."
+    - "No visual design changes allowed; only technical mapping to Figma."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# Based on 8-step technical design workflow
+# ============================================
+graph:
+  initial: detect_existing_workflow
+
+  nodes:
+    detect_existing_workflow:
+      type: decision
+      action: check_existing_design
+      description: "Check if architecture.md exists with stepsCompleted"
+      branches:
+        resume: checkpoint_01_resume
+        fresh: step_01_init
+
+    step_01_init:
+      type: action
+      action: initialize_workflow
+      description: "Initialize technical design workflow"
+      file: "steps/step-01-init.md"
+      outputs:
+        - workflow_state
+
+    step_01b_continue:
+      type: action
+      action: continue_workflow
+      description: "Handle workflow continuation from existing state"
+      file: "steps/step-01b-continue.md"
+      outputs:
+        - resume_point
+
+    checkpoint_01_resume:
+      type: checkpoint
+      description: "Resume choice: Resume/Continue/Overview/Start Over"
+      human_in_loop: true
+      options:
+        resume: step_01b_continue
+        continue: step_02_context
+        overview: step_08_complete
+        start_over: step_01_init
+
+    step_02_context:
+      type: action
+      action: analyze_context
+      description: "Analyze project context and existing constraints"
+      file: "steps/step-02-context.md"
+      outputs:
+        - context_analysis
+
+    checkpoint_02_context:
+      type: checkpoint
+      description: "Context analysis review"
+      human_in_loop: true
+      options: {C: step_03_starter, A: step_02_context, P: pause}
+
+    step_03_starter:
+      type: action
+      action: evaluate_starter
+      description: "Evaluate starter templates and existing patterns"
+      file: "steps/step-03-starter.md"
+      outputs:
+        - starter_evaluation
+
+    checkpoint_03_starter:
+      type: checkpoint
+      description: "Starter template review"
+      human_in_loop: true
+      options: {C: step_04_decisions, A: step_03_starter, P: pause}
+
+    step_04_decisions:
+      type: action
+      action: architectural_decisions
+      description: "Document architectural decisions (ADR style)"
+      file: "steps/step-04-decisions.md"
+      outputs:
+        - architecture_decisions
+
+    checkpoint_04_decisions:
+      type: checkpoint
+      description: "Architectural decisions review"
+      human_in_loop: true
+      options: {C: step_05_patterns, A: step_04_decisions, P: pause}
+
+    step_05_patterns:
+      type: action
+      action: define_patterns
+      description: "Define implementation patterns and conventions"
+      file: "steps/step-05-patterns.md"
+      outputs:
+        - implementation_patterns
+
+    checkpoint_05_patterns:
+      type: checkpoint
+      description: "Implementation patterns review"
+      human_in_loop: true
+      options: {C: step_06_structure, A: step_05_patterns, P: pause}
+
+    step_06_structure:
+      type: action
+      action: define_structure
+      description: "Define project structure and file organization"
+      file: "steps/step-06-structure.md"
+      outputs:
+        - project_structure
+
+    checkpoint_06_structure:
+      type: checkpoint
+      description: "Project structure review"
+      human_in_loop: true
+      options: {C: step_07_validation, A: step_06_structure, P: pause}
+
+    step_07_validation:
+      type: action
+      action: validate_architecture
+      description: "Validate architecture against requirements"
+      file: "steps/step-07-validation.md"
+      outputs:
+        - validation_results
+
+    checkpoint_07_validation:
+      type: checkpoint
+      description: "Validation results review"
+      human_in_loop: true
+      options: {C: step_08_complete, A: step_07_validation, P: pause}
+
+    step_08_complete:
+      type: terminal
+      action: mark_complete
+      description: "Technical design complete - ready for implementation"
+      next_phase: "phase-4-implementation/06-implementation"
+
+    pause:
+      type: terminal
+      action: pause_workflow
+      description: "Workflow paused by user"
+
+  edges:
+    - detect_existing_workflow -> {resume: checkpoint_01_resume, fresh: step_01_init}
+    - step_01_init -> step_02_context
+    - step_01b_continue -> step_02_context
+    - checkpoint_01_resume -> {resume: step_01b_continue, continue: step_02_context, overview: step_08_complete, start_over: step_01_init}
+    - step_02_context -> checkpoint_02_context
+    - checkpoint_02_context -> {C: step_03_starter, A: step_02_context, P: pause}
+    - step_03_starter -> checkpoint_03_starter
+    - checkpoint_03_starter -> {C: step_04_decisions, A: step_03_starter, P: pause}
+    - step_04_decisions -> checkpoint_04_decisions
+    - checkpoint_04_decisions -> {C: step_05_patterns, A: step_04_decisions, P: pause}
+    - step_05_patterns -> checkpoint_05_patterns
+    - checkpoint_05_patterns -> {C: step_06_structure, A: step_05_patterns, P: pause}
+    - step_06_structure -> checkpoint_06_structure
+    - checkpoint_06_structure -> {C: step_07_validation, A: step_06_structure, P: pause}
+    - step_07_validation -> checkpoint_07_validation
+    - checkpoint_07_validation -> {C: step_08_complete, A: step_07_validation, P: pause}
+
+  checkpoints:
+    - checkpoint_01_resume
+    - checkpoint_02_context
+    - checkpoint_03_starter
+    - checkpoint_04_decisions
+    - checkpoint_05_patterns
+    - checkpoint_06_structure
+    - checkpoint_07_validation

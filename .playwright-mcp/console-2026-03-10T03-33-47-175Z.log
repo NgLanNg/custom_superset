@@ -1,0 +1,358 @@
+[    1228ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[    1234ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[    1974ms] [ERROR] Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s%s 
+
+Check the render method of `EmotionCssPropInternal`. 
+    at Button (webpack-internal:///./packages/superset-ui-core/src/components/Button/index.tsx:92:13)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/TriggerWrapper.js:12:24)
+    at DomWrapper (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/DomWrapper.js:24:90)
+    at SingleObserver (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/index.js:24:24)
+    at ResizeObserver (webpack-internal:///./node_modules/rc-resize-observer/es/index.js:24:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/index.js:62:34)
+    at Dropdown (webpack-internal:///./node_modules/rc-dropdown/es/Dropdown.js:33:28)
+    at Dropdown (webpack-internal:///./node_modules/antd/es/dropdown/dropdown.js:56:5)
+    at Dropdown
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at PageHeaderWithActions (webpack-internal:///./packages/superset-ui-core/src/components/PageHeaderWithActions/index.tsx:125:34)
+    at ExploreChartHeader (webpack-internal:///./src/explore/components/ExploreChartHeader/index.tsx:135:31)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at ExploreContainer (webpack-internal:///./src/explore/components/ExploreContainer/index.tsx:74:29)
+    at ExploreViewContainer (webpack-internal:///./src/explore/components/ExploreViewContainer/index.tsx:308:99)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at ExplorePage (webpack-internal:///./src/pages/Chart/index.tsx:195:84)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:62:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:57:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:77:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:644:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:846:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:84:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:28:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:10:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:47:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:163:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:48:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:34:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:20:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:20:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:136:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:438:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:95:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:150:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:32:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:54:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:263:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:45:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[    2054ms] [ERROR] Warning: [antd: Tooltip] `destroyTooltipOnHide` is deprecated. Please use `destroyOnHidden` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:39
+[    2091ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `DndSelectLabel`.  
+    at DndAdhocFilterOption (webpack-internal:///./src/explore/components/controls/DndColumnSelectControl/DndAdhocFilterOption.tsx:37:33)
+    at DndSelectLabel (webpack-internal:///./src/explore/components/controls/DndColumnSelectControl/DndSelectLabel.tsx:67:11)
+    at DndFilterSelect (webpack-internal:///./src/explore/components/controls/DndColumnSelectControl/DndFilterSelect.tsx:88:13)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:62:9)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at Control (webpack-internal:///./src/explore/components/Control.tsx:60:22)
+    at StashFormDataContainer (webpack-internal:///./src/explore/components/StashFormDataContainer/index.tsx:35:35)
+    at div
+    at div
+    at ControlRow (webpack-internal:///./src/explore/components/ControlRow.tsx:30:23)
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/PanelContent.js:17:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:21:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:52:32)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/Panel.js:28:32)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/Collapse.js:41:32)
+    at eval (webpack-internal:///./node_modules/antd/es/collapse/Collapse.js:43:83)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/TabPane.js:13:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:21:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:52:32)
+    at div
+    at div
+    at TabPanelList (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/index.js:28:18)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/Tabs.js:52:18)
+    at eval (webpack-internal:///./node_modules/antd/es/tabs/index.js:49:7)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at StyledTabs (webpack-internal:///./packages/superset-ui-core/src/components/Tabs/Tabs.tsx:64:11)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at ControlPanelsContainer (webpack-internal:///./src/explore/components/ControlPanelsContainer.tsx:259:89)
+    at div
+    at Resizable (webpack-internal:///./node_modules/re-resizable/lib/index.js:170:28)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at ExploreContainer (webpack-internal:///./src/explore/components/ExploreContainer/index.tsx:74:29)
+    at ExploreViewContainer (webpack-internal:///./src/explore/components/ExploreViewContainer/index.tsx:308:99)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at ExplorePage (webpack-internal:///./src/pages/Chart/index.tsx:195:84)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:62:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:57:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:77:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:644:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:846:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:84:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:28:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:10:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:47:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:163:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:48:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:34:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:20:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:20:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:136:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:438:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:95:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:150:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:32:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:54:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:263:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:45:35)
+    at App @ webpack-internal:///./node_modules/react/cjs/react-jsx-dev-runtime.development.js:119
+[    2373ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[    2373ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[    4390ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[    4390ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[    5657ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?slice_id=104:0
+[    7820ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[    8455ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[    8455ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[   10937ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   13331ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[   16507ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[   16507ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[   17337ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   21082ms] [ERROR] Warning: `value` in Select options should not be `null`. @ webpack-internal:///./node_modules/rc-util/es/warning.js:39
+[   25050ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   32597ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[   32597ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[   33173ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   38528ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   48133ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   50335ms] [ERROR] Warning: Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render%s List SelectTrigger SelectTrigger 
+    at SelectTrigger (webpack-internal:///./node_modules/rc-select/es/SelectTrigger.js:66:25)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-select/es/BaseSelect/index.js:62:18)
+    at eval (webpack-internal:///./node_modules/rc-select/es/Select.js:90:18)
+    at InternalSelect (webpack-internal:///./node_modules/antd/es/select/index.js:70:18)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at eval (webpack-internal:///./packages/superset-ui-core/src/components/Select/Select.tsx:95:36)
+    at StatusProvider (webpack-internal:///./node_modules/antd/es/form/FormItem/StatusProvider.js:33:3)
+    at div
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/grid/col.js:42:42)
+    at FormItemInput (webpack-internal:///./node_modules/antd/es/form/FormItemInput.js:37:5)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/grid/row.js:65:18)
+    at div
+    at ItemHolder (webpack-internal:///./node_modules/antd/es/form/FormItem/ItemHolder.js:44:7)
+    at InternalFormItem (webpack-internal:///./node_modules/antd/es/form/FormItem/index.js:77:5)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/TabPane.js:13:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:21:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:52:32)
+    at div
+    at div
+    at TabPanelList (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/index.js:28:18)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/Tabs.js:52:18)
+    at eval (webpack-internal:///./node_modules/antd/es/tabs/index.js:49:7)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at StyledTabs (webpack-internal:///./packages/superset-ui-core/src/components/Tabs/Tabs.tsx:64:11)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at form
+    at Form (webpack-internal:///./node_modules/rc-field-form/es/Form.js:29:19)
+    at NoFormStyle (webpack-internal:///./node_modules/antd/es/form/context.js:39:3)
+    at FormProvider (webpack-internal:///./node_modules/rc-field-form/es/FormContext.js:21:31)
+    at FormProvider
+    at DisabledContextProvider (webpack-internal:///./node_modules/antd/es/config-provider/DisabledContext.js:14:3)
+    at InternalForm (webpack-internal:///./node_modules/antd/es/form/Form.js:45:62)
+    at CustomForm
+    at ColumnSelectPopover (webpack-internal:///./src/explore/components/controls/DndColumnSelectControl/ColumnSelectPopover.tsx:116:32)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at Overlay (webpack-internal:///./node_modules/antd/es/popover/PurePanel.js:33:3)
+    at NoCompactStyle (webpack-internal:///./node_modules/antd/es/space/Compact.js:60:5)
+    at ContextIsolator (webpack-internal:///./node_modules/antd/es/_util/ContextIsolator.js:17:5)
+    at div
+    at div
+    at Popup (webpack-internal:///./node_modules/rc-tooltip/es/Popup.js:13:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/Popup/PopupContent.js:10:23)
+    at div
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:21:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:52:32)
+    at DomWrapper (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/DomWrapper.js:24:90)
+    at SingleObserver (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/index.js:24:24)
+    at ResizeObserver (webpack-internal:///./node_modules/rc-resize-observer/es/index.js:24:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/portal/es/Portal.js:43:20)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/Popup/index.js:33:21)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/index.js:62:34)
+    at Tooltip (webpack-internal:///./node_modules/rc-tooltip/es/Tooltip.js:29:32)
+    at eval (webpack-internal:///./node_modules/antd/es/tooltip/index.js:53:18)
+    at eval (webpack-internal:///./node_modules/antd/es/popover/index.js:45:18)
+    at Popover
+    at ControlPopover (webpack-internal:///./src/explore/components/controls/ControlPopover/ControlPopover.tsx:82:11)
+    at ColumnSelectPopoverTriggerInner (webpack-internal:///./src/explore/components/controls/DndColumnSelectControl/ColumnSelectPopoverTrigger.tsx:75:11)
+    at ColumnSelectPopoverTriggerWrapper (webpack-internal:///./src/explore/components/controls/DndColumnSelectControl/ColumnSelectPopoverTrigger.tsx:234:80)
+    at div
+    at DndColumnSelect (webpack-internal:///./src/explore/components/controls/DndColumnSelectControl/DndColumnSelect.tsx:65:13)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:62:9)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at Control (webpack-internal:///./src/explore/components/Control.tsx:60:22)
+    at StashFormDataContainer (webpack-internal:///./src/explore/components/StashFormDataContainer/index.tsx:35:35)
+    at div
+    at div
+    at ControlRow (webpack-internal:///./src/explore/components/ControlRow.tsx:30:23)
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/PanelContent.js:17:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:21:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:52:32)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/Panel.js:28:32)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/Collapse.js:41:32)
+    at eval (webpack-internal:///./node_modules/antd/es/collapse/Collapse.js:43:83)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/TabPane.js:13:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:21:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:52:32)
+    at div
+    at div
+    at TabPanelList (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/index.js:28:18)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/Tabs.js:52:18)
+    at eval (webpack-internal:///./node_modules/antd/es/tabs/index.js:49:7)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at StyledTabs (webpack-internal:///./packages/superset-ui-core/src/components/Tabs/Tabs.tsx:64:11)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at ControlPanelsContainer (webpack-internal:///./src/explore/components/ControlPanelsContainer.tsx:259:89)
+    at div
+    at Resizable (webpack-internal:///./node_modules/re-resizable/lib/index.js:170:28)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at ExploreContainer (webpack-internal:///./src/explore/components/ExploreContainer/index.tsx:74:29)
+    at ExploreViewContainer (webpack-internal:///./src/explore/components/ExploreViewContainer/index.tsx:308:99)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at ExplorePage (webpack-internal:///./src/pages/Chart/index.tsx:195:84)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:62:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:57:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:56:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:77:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:644:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:846:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:84:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:28:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:10:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:47:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:163:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:48:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:34:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:20:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:20:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:136:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:438:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:95:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:150:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:32:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:54:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:263:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:45:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[   54344ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   57497ms] [ERROR] Failed to load resource: the server responded with a status of 400 (BAD REQUEST) @ http://localhost:8088/api/v1/chart/data?form_data=%7B%22slice_id%22%3A104%7D:0
+[   61533ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   64639ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[   64639ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[   72882ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   78869ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   84945ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[   92727ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[   92771ms] [WARNING] [ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload. @ webpack-internal:///./node_modules/echarts/lib/util/log.js:74
+[   96728ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[  128716ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[  128717ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[  256781ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[  256782ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[  512910ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[  512910ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611
+[  759884ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104:0
+[  764817ms] [ERROR] Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in %s.%s the componentWillUnmount method 
+    at SaveModal (webpack-internal:///./src/explore/components/SaveModal.tsx:333:9)
+    at render (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:108:52)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:235:68)
+    at C (webpack-internal:///./node_modules/react-router/esm/react-router.js:901:37) @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[  768017ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?slice_id=104&save_action=overwrite:0
+[  770429ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:69
+[  770459ms] [WARNING] [ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload. @ webpack-internal:///./node_modules/echarts/lib/util/log.js:74
+[  774437ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.3e1c42c5.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=9Frb3sAzzXY&slice_id=104&save_action=overwrite:0
+[ 1025050ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:27
+[ 1025052ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:611

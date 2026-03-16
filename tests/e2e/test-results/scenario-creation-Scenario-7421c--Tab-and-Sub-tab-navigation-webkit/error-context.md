@@ -1,0 +1,51 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "Apache Superset" [ref=e8] [cursor=pointer]:
+          - /url: /
+          - img "Apache Superset" [ref=e10]
+        - menu
+      - generic [ref=e12]:
+        - generic [ref=e13]: flask-debug
+        - menu [ref=e14]:
+          - menuitem "down format-painter" [ref=e15] [cursor=pointer]:
+            - img "down" [ref=e16]:
+              - img [ref=e17]
+            - img "format-painter" [ref=e20]:
+              - img [ref=e21]
+          - menuitem "down Settings" [ref=e23] [cursor=pointer]:
+            - img "down" [ref=e24]:
+              - img [ref=e25]
+            - generic [ref=e27]: Settings
+        - link "login Login" [ref=e28] [cursor=pointer]:
+          - /url: /login/
+          - img "login" [ref=e29]:
+            - img [ref=e30]
+          - text: Login
+  - main [ref=e33]:
+    - generic [ref=e35]:
+      - generic [ref=e38]: Sign in
+      - generic [ref=e40]:
+        - generic [ref=e41]: "Enter your login and password below:"
+        - generic [ref=e42]:
+          - generic [ref=e44]:
+            - generic [ref=e47]: "Username:"
+            - generic [ref=e51]:
+              - img "user" [ref=e53]:
+                - img [ref=e54]
+              - textbox "Username:" [active] [ref=e56]
+          - generic [ref=e58]:
+            - generic [ref=e61]: "Password:"
+            - generic [ref=e65]:
+              - img "key" [ref=e67]:
+                - img [ref=e68]
+              - textbox "Password:" [ref=e70]
+              - img "eye-invisible" [ref=e72] [cursor=pointer]:
+                - img [ref=e73]
+          - button "Sign in" [ref=e82] [cursor=pointer]:
+            - generic [ref=e83]: Sign in
+```

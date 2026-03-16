@@ -1,0 +1,687 @@
+[    1234ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    1234ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[    2316ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    2316ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[    4381ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    4381ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[    8435ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[    8435ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[   16467ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[   16468ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[   32973ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[   32973ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[   33063ms] [ERROR] Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s%s 
+
+Check the render method of `EmotionCssPropInternal`. 
+    at Button (webpack-internal:///./packages/superset-ui-core/src/components/Button/index.tsx:93:13)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/TriggerWrapper.js:13:24)
+    at DomWrapper (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/DomWrapper.js:25:90)
+    at SingleObserver (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/index.js:25:24)
+    at ResizeObserver (webpack-internal:///./node_modules/rc-resize-observer/es/index.js:25:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/index.js:63:34)
+    at Dropdown (webpack-internal:///./node_modules/rc-dropdown/es/Dropdown.js:34:28)
+    at Dropdown (webpack-internal:///./node_modules/antd/es/dropdown/dropdown.js:57:5)
+    at Dropdown
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at PageHeaderWithActions (webpack-internal:///./packages/superset-ui-core/src/components/PageHeaderWithActions/index.tsx:126:34)
+    at ExploreChartHeader (webpack-internal:///./src/explore/components/ExploreChartHeader/index.tsx:136:31)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at ExploreContainer (webpack-internal:///./src/explore/components/ExploreContainer/index.tsx:75:29)
+    at ExploreViewContainer (webpack-internal:///./src/explore/components/ExploreViewContainer/index.tsx:309:99)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:236:68)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:236:68)
+    at ExplorePage (webpack-internal:///./src/pages/Chart/index.tsx:196:84)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:58:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:78:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:645:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:847:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:85:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:29:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:11:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:48:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:164:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:49:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:35:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:21:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:21:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:137:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:439:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:96:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:151:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:33:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:55:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:264:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:46:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[   33140ms] [ERROR] Warning: [antd: Tooltip] `destroyTooltipOnHide` is deprecated. Please use `destroyOnHidden` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[   37264ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.cda05664.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=5qJ4GOM_sL0&viz_type=scenario_chart&datasource=1__table&datasource_id=1&datasource_type=table:0
+[   46076ms] [ERROR] Warning: React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element.%s handleDatasetModal handledatasetmodal 
+    at form
+    at Form (webpack-internal:///./node_modules/rc-field-form/es/Form.js:30:19)
+    at NoFormStyle (webpack-internal:///./node_modules/antd/es/form/context.js:40:3)
+    at FormProvider (webpack-internal:///./node_modules/rc-field-form/es/FormContext.js:22:31)
+    at FormProvider
+    at DisabledContextProvider (webpack-internal:///./node_modules/antd/es/config-provider/DisabledContext.js:15:3)
+    at InternalForm (webpack-internal:///./node_modules/antd/es/form/Form.js:46:62)
+    at CustomForm
+    at AdhocMetricEditPopover (webpack-internal:///./src/explore/components/controls/MetricControl/AdhocMetricEditPopover/index.tsx:527:9)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at Overlay (webpack-internal:///./node_modules/antd/es/popover/PurePanel.js:34:3)
+    at NoCompactStyle (webpack-internal:///./node_modules/antd/es/space/Compact.js:61:5)
+    at ContextIsolator (webpack-internal:///./node_modules/antd/es/_util/ContextIsolator.js:18:5)
+    at div
+    at div
+    at Popup (webpack-internal:///./node_modules/rc-tooltip/es/Popup.js:14:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/Popup/PopupContent.js:11:23)
+    at div
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:22:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:53:32)
+    at DomWrapper (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/DomWrapper.js:25:90)
+    at SingleObserver (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/index.js:25:24)
+    at ResizeObserver (webpack-internal:///./node_modules/rc-resize-observer/es/index.js:25:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/portal/es/Portal.js:44:20)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/Popup/index.js:34:21)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/index.js:63:34)
+    at Tooltip (webpack-internal:///./node_modules/rc-tooltip/es/Tooltip.js:30:32)
+    at eval (webpack-internal:///./node_modules/antd/es/tooltip/index.js:54:18)
+    at eval (webpack-internal:///./node_modules/antd/es/popover/index.js:46:18)
+    at Popover
+    at ControlPopover (webpack-internal:///./src/explore/components/controls/ControlPopover/ControlPopover.tsx:83:11)
+    at AdhocMetricPopoverTrigger (webpack-internal:///./src/explore/components/controls/MetricControl/AdhocMetricPopoverTrigger.tsx:213:9)
+    at div
+    at DndMetricSelect (webpack-internal:///./src/explore/components/controls/DndColumnSelectControl/DndMetricSelect.tsx:117:13)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at Control (webpack-internal:///./src/explore/components/Control.tsx:61:22)
+    at StashFormDataContainer (webpack-internal:///./src/explore/components/StashFormDataContainer/index.tsx:36:35)
+    at div
+    at div
+    at ControlRow (webpack-internal:///./src/explore/components/ControlRow.tsx:31:23)
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/PanelContent.js:18:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:22:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:53:32)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/Panel.js:29:32)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/Collapse.js:42:32)
+    at eval (webpack-internal:///./node_modules/antd/es/collapse/Collapse.js:44:83)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/TabPane.js:14:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:22:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:53:32)
+    at div
+    at div
+    at TabPanelList (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/index.js:29:18)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/Tabs.js:53:18)
+    at eval (webpack-internal:///./node_modules/antd/es/tabs/index.js:50:7)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at StyledTabs (webpack-internal:///./packages/superset-ui-core/src/components/Tabs/Tabs.tsx:65:11)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at ControlPanelsContainer (webpack-internal:///./src/explore/components/ControlPanelsContainer.tsx:260:89)
+    at div
+    at Resizable (webpack-internal:///./node_modules/re-resizable/lib/index.js:171:28)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at ExploreContainer (webpack-internal:///./src/explore/components/ExploreContainer/index.tsx:75:29)
+    at ExploreViewContainer (webpack-internal:///./src/explore/components/ExploreViewContainer/index.tsx:309:99)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:236:68)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:236:68)
+    at ExplorePage (webpack-internal:///./src/pages/Chart/index.tsx:196:84)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:58:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:78:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:645:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:847:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:85:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:29:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:11:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:48:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:164:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:49:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:35:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:21:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:21:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:137:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:439:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:96:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:151:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:33:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:55:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:264:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:46:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[   46077ms] [ERROR] Warning: React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element.%s getCurrentTab getcurrenttab 
+    at form
+    at Form (webpack-internal:///./node_modules/rc-field-form/es/Form.js:30:19)
+    at NoFormStyle (webpack-internal:///./node_modules/antd/es/form/context.js:40:3)
+    at FormProvider (webpack-internal:///./node_modules/rc-field-form/es/FormContext.js:22:31)
+    at FormProvider
+    at DisabledContextProvider (webpack-internal:///./node_modules/antd/es/config-provider/DisabledContext.js:15:3)
+    at InternalForm (webpack-internal:///./node_modules/antd/es/form/Form.js:46:62)
+    at CustomForm
+    at AdhocMetricEditPopover (webpack-internal:///./src/explore/components/controls/MetricControl/AdhocMetricEditPopover/index.tsx:527:9)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at Overlay (webpack-internal:///./node_modules/antd/es/popover/PurePanel.js:34:3)
+    at NoCompactStyle (webpack-internal:///./node_modules/antd/es/space/Compact.js:61:5)
+    at ContextIsolator (webpack-internal:///./node_modules/antd/es/_util/ContextIsolator.js:18:5)
+    at div
+    at div
+    at Popup (webpack-internal:///./node_modules/rc-tooltip/es/Popup.js:14:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/Popup/PopupContent.js:11:23)
+    at div
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:22:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:53:32)
+    at DomWrapper (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/DomWrapper.js:25:90)
+    at SingleObserver (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/index.js:25:24)
+    at ResizeObserver (webpack-internal:///./node_modules/rc-resize-observer/es/index.js:25:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/portal/es/Portal.js:44:20)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/Popup/index.js:34:21)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/index.js:63:34)
+    at Tooltip (webpack-internal:///./node_modules/rc-tooltip/es/Tooltip.js:30:32)
+    at eval (webpack-internal:///./node_modules/antd/es/tooltip/index.js:54:18)
+    at eval (webpack-internal:///./node_modules/antd/es/popover/index.js:46:18)
+    at Popover
+    at ControlPopover (webpack-internal:///./src/explore/components/controls/ControlPopover/ControlPopover.tsx:83:11)
+    at AdhocMetricPopoverTrigger (webpack-internal:///./src/explore/components/controls/MetricControl/AdhocMetricPopoverTrigger.tsx:213:9)
+    at div
+    at DndMetricSelect (webpack-internal:///./src/explore/components/controls/DndColumnSelectControl/DndMetricSelect.tsx:117:13)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at Control (webpack-internal:///./src/explore/components/Control.tsx:61:22)
+    at StashFormDataContainer (webpack-internal:///./src/explore/components/StashFormDataContainer/index.tsx:36:35)
+    at div
+    at div
+    at ControlRow (webpack-internal:///./src/explore/components/ControlRow.tsx:31:23)
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/PanelContent.js:18:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:22:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:53:32)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/Panel.js:29:32)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/Collapse.js:42:32)
+    at eval (webpack-internal:///./node_modules/antd/es/collapse/Collapse.js:44:83)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/TabPane.js:14:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:22:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:53:32)
+    at div
+    at div
+    at TabPanelList (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/index.js:29:18)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/Tabs.js:53:18)
+    at eval (webpack-internal:///./node_modules/antd/es/tabs/index.js:50:7)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at StyledTabs (webpack-internal:///./packages/superset-ui-core/src/components/Tabs/Tabs.tsx:65:11)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at ControlPanelsContainer (webpack-internal:///./src/explore/components/ControlPanelsContainer.tsx:260:89)
+    at div
+    at Resizable (webpack-internal:///./node_modules/re-resizable/lib/index.js:171:28)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at ExploreContainer (webpack-internal:///./src/explore/components/ExploreContainer/index.tsx:75:29)
+    at ExploreViewContainer (webpack-internal:///./src/explore/components/ExploreViewContainer/index.tsx:309:99)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:236:68)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:236:68)
+    at ExplorePage (webpack-internal:///./src/pages/Chart/index.tsx:196:84)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:58:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:78:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:645:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:847:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:85:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:29:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:11:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:48:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:164:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:49:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:35:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:21:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:21:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:137:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:439:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:96:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:151:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:33:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:55:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:264:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:46:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[   46077ms] [ERROR] Warning: React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element.%s getCurrentLabel getcurrentlabel 
+    at form
+    at Form (webpack-internal:///./node_modules/rc-field-form/es/Form.js:30:19)
+    at NoFormStyle (webpack-internal:///./node_modules/antd/es/form/context.js:40:3)
+    at FormProvider (webpack-internal:///./node_modules/rc-field-form/es/FormContext.js:22:31)
+    at FormProvider
+    at DisabledContextProvider (webpack-internal:///./node_modules/antd/es/config-provider/DisabledContext.js:15:3)
+    at InternalForm (webpack-internal:///./node_modules/antd/es/form/Form.js:46:62)
+    at CustomForm
+    at AdhocMetricEditPopover (webpack-internal:///./src/explore/components/controls/MetricControl/AdhocMetricEditPopover/index.tsx:527:9)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at Overlay (webpack-internal:///./node_modules/antd/es/popover/PurePanel.js:34:3)
+    at NoCompactStyle (webpack-internal:///./node_modules/antd/es/space/Compact.js:61:5)
+    at ContextIsolator (webpack-internal:///./node_modules/antd/es/_util/ContextIsolator.js:18:5)
+    at div
+    at div
+    at Popup (webpack-internal:///./node_modules/rc-tooltip/es/Popup.js:14:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/Popup/PopupContent.js:11:23)
+    at div
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:22:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:53:32)
+    at DomWrapper (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/DomWrapper.js:25:90)
+    at SingleObserver (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/index.js:25:24)
+    at ResizeObserver (webpack-internal:///./node_modules/rc-resize-observer/es/index.js:25:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/portal/es/Portal.js:44:20)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/Popup/index.js:34:21)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/index.js:63:34)
+    at Tooltip (webpack-internal:///./node_modules/rc-tooltip/es/Tooltip.js:30:32)
+    at eval (webpack-internal:///./node_modules/antd/es/tooltip/index.js:54:18)
+    at eval (webpack-internal:///./node_modules/antd/es/popover/index.js:46:18)
+    at Popover
+    at ControlPopover (webpack-internal:///./src/explore/components/controls/ControlPopover/ControlPopover.tsx:83:11)
+    at AdhocMetricPopoverTrigger (webpack-internal:///./src/explore/components/controls/MetricControl/AdhocMetricPopoverTrigger.tsx:213:9)
+    at div
+    at DndMetricSelect (webpack-internal:///./src/explore/components/controls/DndColumnSelectControl/DndMetricSelect.tsx:117:13)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at Control (webpack-internal:///./src/explore/components/Control.tsx:61:22)
+    at StashFormDataContainer (webpack-internal:///./src/explore/components/StashFormDataContainer/index.tsx:36:35)
+    at div
+    at div
+    at ControlRow (webpack-internal:///./src/explore/components/ControlRow.tsx:31:23)
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/PanelContent.js:18:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:22:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:53:32)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/Panel.js:29:32)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-collapse/es/Collapse.js:42:32)
+    at eval (webpack-internal:///./node_modules/antd/es/collapse/Collapse.js:44:83)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/TabPane.js:14:25)
+    at DomWrapper (webpack-internal:///./node_modules/rc-motion/es/DomWrapper.js:22:90)
+    at eval (webpack-internal:///./node_modules/rc-motion/es/CSSMotion.js:53:32)
+    at div
+    at div
+    at TabPanelList (webpack-internal:///./node_modules/rc-tabs/es/TabPanelList/index.js:29:18)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-tabs/es/Tabs.js:53:18)
+    at eval (webpack-internal:///./node_modules/antd/es/tabs/index.js:50:7)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at StyledTabs (webpack-internal:///./packages/superset-ui-core/src/components/Tabs/Tabs.tsx:65:11)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at ControlPanelsContainer (webpack-internal:///./src/explore/components/ControlPanelsContainer.tsx:260:89)
+    at div
+    at Resizable (webpack-internal:///./node_modules/re-resizable/lib/index.js:171:28)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at ExploreContainer (webpack-internal:///./src/explore/components/ExploreContainer/index.tsx:75:29)
+    at ExploreViewContainer (webpack-internal:///./src/explore/components/ExploreViewContainer/index.tsx:309:99)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:236:68)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:236:68)
+    at ExplorePage (webpack-internal:///./src/pages/Chart/index.tsx:196:84)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:58:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:78:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:645:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:847:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:85:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:29:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:11:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:48:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:164:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:49:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:35:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:21:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:21:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:137:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:439:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:96:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:151:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:33:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:55:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:264:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:46:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[   49100ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.cda05664.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=5qJ4GOM_sL0&viz_type=scenario_chart&datasource=1__table&datasource_id=1&datasource_type=table:0
+[   65025ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[   65025ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[   76054ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.cda05664.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=5qJ4GOM_sL0&viz_type=scenario_chart&datasource=1__table&datasource_id=1&datasource_type=table:0
+[   78340ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[   82338ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.cda05664.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=5qJ4GOM_sL0&viz_type=scenario_chart&datasource=1__table&datasource_id=1&datasource_type=table:0
+[   96258ms] [ERROR] Failed to load resource: the server responded with a status of 404 (NOT FOUND) @ http://localhost:8088/api/v1/scenario/writeback:0
+[   96264ms] [ERROR] Warning: [antd: notification] Static function can not consume context like dynamic theme. Please use 'App' component instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[   99348ms] [WARNING] The resource http://localhost:8088/static/assets/DashboardContainer.cda05664.chunk.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:8088/explore/?form_data_key=5qJ4GOM_sL0&viz_type=scenario_chart&datasource=1__table&datasource_id=1&datasource_type=table:0
+[  127917ms] [ERROR] Warning: [antd: Menu] `children` is deprecated. Please use `items` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[  127973ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  127974ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  129035ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  129035ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  131079ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  131079ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  133918ms] [ERROR] Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in %s.%s a useEffect cleanup function 
+    at Overflow (webpack-internal:///./node_modules/rc-overflow/es/Overflow.js:42:32)
+    at InheritableContextProvider (webpack-internal:///./node_modules/rc-menu/es/context/MenuContext.js:32:23)
+    at eval (webpack-internal:///./node_modules/rc-menu/es/Menu.js:80:27)
+    at eval (webpack-internal:///./node_modules/antd/es/menu/menu.js:64:55)
+    at eval (webpack-internal:///./node_modules/antd/es/menu/index.js:26:64)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/grid/row.js:66:18)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at SubMenuComponent (webpack-internal:///./src/features/home/SubMenu.tsx:148:80) @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[  135166ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  135166ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  136602ms] [ERROR] Warning: [antd: Select] `dropdownStyle` is deprecated. Please use `styles.popup.root` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[  140631ms] [ERROR] Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s%s 
+
+Check the render method of `EmotionCssPropInternal`. 
+    at Button (webpack-internal:///./packages/superset-ui-core/src/components/Button/index.tsx:93:13)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/TriggerWrapper.js:13:24)
+    at DomWrapper (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/DomWrapper.js:25:90)
+    at SingleObserver (webpack-internal:///./node_modules/rc-resize-observer/es/SingleObserver/index.js:25:24)
+    at ResizeObserver (webpack-internal:///./node_modules/rc-resize-observer/es/index.js:25:24)
+    at eval (webpack-internal:///./node_modules/@rc-component/trigger/es/index.js:63:34)
+    at Dropdown (webpack-internal:///./node_modules/rc-dropdown/es/Dropdown.js:34:28)
+    at Dropdown (webpack-internal:///./node_modules/antd/es/dropdown/dropdown.js:57:5)
+    at Dropdown
+    at FilterBarSettings (webpack-internal:///./src/dashboard/components/nativeFilters/FilterBar/FilterBarSettings/index.tsx:104:88)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at Header (webpack-internal:///./src/dashboard/components/nativeFilters/FilterBar/Header/index.tsx:91:19)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at VerticalFilterBar (webpack-internal:///./src/dashboard/components/nativeFilters/FilterBar/Vertical.tsx:155:30)
+    at FilterBar (webpack-internal:///./src/dashboard/components/nativeFilters/FilterBar/index.tsx:185:22)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at ResizableSidebar (webpack-internal:///./src/components/ResizableSidebar/index.tsx:56:29)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at DashboardWrapper (webpack-internal:///./src/dashboard/components/DashboardBuilder/DashboardWrapper.tsx:132:29)
+    at DashboardBuilder (webpack-internal:///./src/dashboard/components/DashboardBuilder/DashboardBuilder.tsx:385:78)
+    at Dashboard (webpack-internal:///./src/dashboard/components/Dashboard.tsx:223:9)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:236:68)
+    at AutoRefreshProvider (webpack-internal:///./src/dashboard/contexts/AutoRefreshContext.tsx:44:36)
+    at CrudThemeProvider (webpack-internal:///./src/components/CrudThemeProvider.tsx:69:34)
+    at DashboardPage (webpack-internal:///./src/dashboard/containers/DashboardPage.tsx:151:26)
+    at DashboardRoute (webpack-internal:///./src/pages/Dashboard/index.tsx:35:85)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:58:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:78:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:645:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:847:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:85:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:29:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:11:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:48:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:164:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:49:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:35:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:21:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:21:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:137:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:439:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:96:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:151:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:33:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:55:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:264:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:46:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[  140644ms] [ERROR] Warning: Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.%s 
+
+Check the render method of `PageHeaderWithActions`.  It was passed a child from Header. 
+    at MetadataBar (webpack-internal:///./packages/superset-ui-core/src/components/MetadataBar/MetadataBar.tsx:160:28)
+    at PageHeaderWithActions (webpack-internal:///./packages/superset-ui-core/src/components/PageHeaderWithActions/index.tsx:126:34)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at Header (webpack-internal:///./src/dashboard/components/Header/index.tsx:205:78)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at DashboardWrapper (webpack-internal:///./src/dashboard/components/DashboardBuilder/DashboardWrapper.tsx:132:29)
+    at DashboardBuilder (webpack-internal:///./src/dashboard/components/DashboardBuilder/DashboardBuilder.tsx:385:78)
+    at Dashboard (webpack-internal:///./src/dashboard/components/Dashboard.tsx:223:9)
+    at ConnectFunction (webpack-internal:///./node_modules/react-redux/es/components/connectAdvanced.js:236:68)
+    at AutoRefreshProvider (webpack-internal:///./src/dashboard/contexts/AutoRefreshContext.tsx:44:36)
+    at CrudThemeProvider (webpack-internal:///./src/components/CrudThemeProvider.tsx:69:34)
+    at DashboardPage (webpack-internal:///./src/dashboard/containers/DashboardPage.tsx:151:26)
+    at DashboardRoute (webpack-internal:///./src/pages/Dashboard/index.tsx:35:85)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:58:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:78:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:645:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:847:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:85:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:29:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:11:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:48:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:164:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:49:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:35:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:21:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:21:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:137:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:439:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:96:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:151:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:33:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:55:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:264:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:46:35)
+    at App @ webpack-internal:///./node_modules/react/cjs/react-jsx-dev-runtime.development.js:120
+[  140666ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:209
+[  140667ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:209
+[  140694ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:209
+[  140696ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:209
+[  140696ms] [ERROR] The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type". @ webpack-internal:///./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js:209
+[  140991ms] [ERROR] Warning: [antd: Dropdown] `dropdownRender` is deprecated. Please use `popupRender` instead. @ webpack-internal:///./node_modules/rc-util/es/warning.js:40
+[  140998ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[  141023ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[  141150ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[  141367ms] [WARNING] deck: `path-layer-5: rounded` is deprecated and will be removed in a later version. Use `jointRounded/capRounded` instead @ webpack-internal:///./node_modules/@deck.gl/core/dist/lifecycle/create-props.js:156
+[  142395ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[  142474ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[  142557ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[  142640ms] [WARNING] Warning: componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: %s CustomLoadableRenderer @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[  142748ms] [WARNING] deck: Features not supported by GPU aggregation, falling back to CPU @ webpack-internal:///./node_modules/@deck.gl/aggregation-layers/dist/hexagon-layer/hexagon-layer.js:79
+[  143725ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  143726ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  159765ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  159765ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  169601ms] [ERROR] Warning: Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render%s List SelectTrigger SelectTrigger 
+    at SelectTrigger (webpack-internal:///./node_modules/rc-select/es/SelectTrigger.js:67:25)
+    at div
+    at eval (webpack-internal:///./node_modules/rc-select/es/BaseSelect/index.js:63:18)
+    at eval (webpack-internal:///./node_modules/rc-select/es/Select.js:91:18)
+    at InternalSelect (webpack-internal:///./node_modules/antd/es/select/index.js:71:18)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at eval (webpack-internal:///./packages/superset-ui-core/src/components/Select/AsyncSelect.tsx:148:36)
+    at span
+    at div
+    at div
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at DatabaseSelector (webpack-internal:///./src/components/DatabaseSelector/index.tsx:214:29)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at TableSelector (webpack-internal:///./src/components/TableSelector/index.tsx:188:26)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at LeftPanel (webpack-internal:///./src/features/datasets/AddDataset/LeftPanel/index.tsx:143:22)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at ResizableSidebar (webpack-internal:///./src/components/ResizableSidebar/index.tsx:56:29)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at DatasetLayout (webpack-internal:///./src/features/datasets/DatasetLayout/index.tsx:34:26)
+    at AddDataset (webpack-internal:///./src/pages/DatasetCreation/index.tsx:99:84)
+    at ErrorBoundary (webpack-internal:///./src/components/ErrorBoundary/index.tsx:63:9)
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at main
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:58:18)
+    at Content
+    at eval (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:57:66)
+    at div
+    at eval (webpack-internal:///./node_modules/antd/es/layout/layout.js:78:42)
+    at Layout
+    at Suspense
+    at Route (webpack-internal:///./node_modules/react-router/esm/react-router.js:645:29)
+    at Switch (webpack-internal:///./node_modules/react-router/esm/react-router.js:847:29)
+    at ExtensionsStartup (webpack-internal:///./src/extensions/ExtensionsStartup.tsx:85:30)
+    at QueryParamProviderInner (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:29:3)
+    at ReactRouter5Adapter (webpack-internal:///./node_modules/use-query-params/adapters/react-router-5/index.js:11:3)
+    at QueryParamProvider (webpack-internal:///./node_modules/use-query-params/dist/QueryParamProvider.js:48:3)
+    at DynamicPluginProvider (webpack-internal:///./src/components/DynamicPlugins/index.tsx:164:34)
+    at EmbeddedUiConfigProvider (webpack-internal:///./src/components/UiConfigContext/index.tsx:49:37)
+    at eval (webpack-internal:///./node_modules/react-dnd/dist/esm/common/DndProvider.js:35:23)
+    at Provider (webpack-internal:///./node_modules/react-redux/es/components/Provider.js:21:20)
+    at MotionWrapper (webpack-internal:///./node_modules/antd/es/config-provider/MotionWrapper.js:21:59)
+    at ProviderChildren (webpack-internal:///./node_modules/antd/es/config-provider/index.js:137:5)
+    at ConfigProvider (webpack-internal:///./node_modules/antd/es/config-provider/index.js:439:54)
+    at ThemeProvider (webpack-internal:///./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js:96:50)
+    at Theme.SupersetThemeProvider (webpack-internal:///./packages/superset-core/src/theme/Theme.tsx:151:29)
+    at SupersetThemeProvider (webpack-internal:///./src/theme/ThemeProvider.tsx:33:34)
+    at RootContextProviders (webpack-internal:///./src/views/RootContextProviders.tsx:55:33)
+    at Router (webpack-internal:///./node_modules/react-router/esm/react-router.js:264:30)
+    at BrowserRouter (webpack-internal:///./node_modules/react-router-dom/esm/react-router-dom.js:46:35)
+    at App @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:70
+[  191818ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  191818ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  255883ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  255883ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612
+[  383956ms] [ERROR] WebSocket connection to 'ws://localhost:8088/ws' failed: Error during WebSocket handshake: Unexpected response code: 404 @ webpack-internal:///./node_modules/webpack-dev-server/client/clients/WebSocketClient.js:28
+[  383956ms] [ERROR] [webpack-dev-server] Event @ webpack-internal:///./node_modules/webpack-dev-server/client/modules/logger/index.js:612

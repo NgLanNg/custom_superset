@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: superset
+    schema: public
+    tables:
+      - name: silver_scenario_equity_share
+        columns:
+          - name: scenario_name
+            tests:
+              - not_null
+          - name: bu
+            tests:
+              - not_null
+          - name: opu
+            tests:
+              - not_null
+          - name: year
+            tests:
+              - not_null
+
+models:
+  - name: stg_scenario_equity_share

@@ -1,0 +1,72 @@
+{
+ "name": "business-doc-diagram-rules",
+ "version": "1.0.0",
+ "rules": [
+ {
+ "id": "process_flow",
+ "type": "mermaid",
+ "diagram_type": "flowchart",
+ "trigger": "keywords_any(['process', 'workflow', 'flow', 'steps', 'procedure']) OR document_type IN ['brd', 'project_plan']",
+ "priority": 1,
+ "description": "Process flowchart showing business workflow",
+ "template": "flowchart"
+ },
+ {
+ "id": "gantt",
+ "type": "mermaid",
+ "diagram_type": "gantt",
+ "trigger": "keywords_any(['timeline', 'schedule', 'milestone', 'phase', 'deadline']) OR timeline != '' OR document_type == 'project_plan'",
+ "priority": 2,
+ "description": "Gantt chart showing project timeline",
+ "template": "gantt"
+ },
+ {
+ "id": "org_chart",
+ "type": "mermaid",
+ "diagram_type": "graph",
+ "trigger": "keywords_any(['team', 'organization', 'org', 'role', 'responsibility', 'reporting'])",
+ "priority": 3,
+ "description": "Organization chart showing team structure",
+ "template": "org_chart"
+ },
+ {
+ "id": "decision_tree",
+ "type": "mermaid",
+ "diagram_type": "flowchart",
+ "trigger": "keywords_any(['decision', 'criteria', 'option', 'alternative', 'choice', 'evaluation'])",
+ "priority": 4,
+ "description": "Decision tree showing evaluation criteria",
+ "template": "decision_tree"
+ },
+ {
+ "id": "pie_chart",
+ "type": "mermaid",
+ "diagram_type": "pie",
+ "trigger": "keywords_any(['budget', 'breakdown', 'distribution', 'allocation', 'percentage'])",
+ "priority": 5,
+ "description": "Pie chart showing budget or resource distribution",
+ "template": "pie"
+ }
+ ],
+ "templates": {
+ "flowchart": {
+ "mermaid": "flowchart TD\n Start([Start])\n {{#steps}}\n {{id}}[{{name}}]\n {{/steps}}\n End([End])\n \n Start --> {{first_step}}\n {{#transitions}}\n {{from}} --> {{to}}\n {{/transitions}}\n {{last_step}} --> End"
+ },
+ "gantt": {
+ "mermaid": "gantt\n title {{project_name}} Timeline\n dateFormat YYYY-MM-DD\n \n {{#sections}}\n section {{name}}\n {{#tasks}}\n {{name}} :{{#milestone}}milestone,{{/milestone}} {{start}}, {{duration}}\n {{/tasks}}\n {{/sections}}"
+ },
+ "org_chart": {
+ "mermaid": "graph TD\n {{#roles}}\n {{id}}[{{title}}<br/>{{name}}]\n {{/roles}}\n \n {{#reporting}}\n {{manager}} --> {{report}}\n {{/reporting}}"
+ },
+ "decision_tree": {
+ "mermaid": "flowchart TD\n Start{{{question}}}\n {{#options}}\n {{id}}[{{name}}]\n Start -->|{{label}}| {{id}}\n {{#outcome}}\n {{id}} --> Outcome{{index}}[{{outcome}}]\n {{/outcome}}\n {{/options}}"
+ },
+ "pie": {
+ "mermaid": "pie title {{title}}\n {{#items}}\n \"{{label}}\" : {{value}}\n {{/items}}"
+ }
+ },
+ "keyword_extraction": {
+ "method": "case_insensitive_search",
+ "fields": ["problem_statement", "proposed_solution", "phases", "resources", "risks"]
+ }
+}

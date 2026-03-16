@@ -1,0 +1,46 @@
+{
+  "native_filter_configuration": [
+    {
+      "id": "NATIVE_FILTER-year",
+      "name": "Year",
+      "filterType": "filter_select",
+      "targets": [{"datasetId": 2, "column": {"name": "year"}}, {"datasetId": 3, "column": {"name": "year"}}],
+      "controlValues": {
+        "multiSelect": true,
+        "inverseSelection": false,
+        "required": false,
+        "defaultToFirstItem": false,
+        "sortAscending": true
+      },
+      "type": "NATIVE_FILTER",
+      "scope": {"rootPath": ["ROOT_ID"], "excluded": []},
+      "cascadingFilters": [],
+      "description": "Filter by Year"
+    },
+    {
+      "id": "NATIVE_FILTER-opu",
+      "name": "OPU / Metric",
+      "filterType": "filter_select",
+      "targets": [{"datasetId": 2, "column": {"name": "metric"}}],
+      "controlValues": {
+        "multiSelect": true,
+        "inverseSelection": false,
+        "required": false,
+        "defaultToFirstItem": false,
+        "sortAscending": true
+      },
+      "type": "NATIVE_FILTER",
+      "scope": {"rootPath": ["ROOT_ID"], "excluded": []},
+      "cascadingFilters": [],
+      "description": "Filter by OPU/Metric"
+    }
+  ],
+  "global_parameters": {},
+  "color_scheme": "supersetColors",
+  "expanded_slices": {},
+  "label_colors": {},
+  "timed_refresh_immune_slices": [],
+  "filter_scopes": {},
+  "refresh_frequency": 0,
+  "default_filters": "{}"
+}

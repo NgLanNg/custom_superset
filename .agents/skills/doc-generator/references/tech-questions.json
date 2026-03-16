@@ -1,0 +1,123 @@
+{
+ "name": "tech-doc",
+ "description": "Generate technical documentation with guided requirements gathering",
+ "version": "1.0.0",
+ "structured_questions": [
+ {
+ "id": "system_name",
+ "question": "What system, feature, or component are you documenting?",
+ "type": "text",
+ "required": true,
+ "placeholder": "e.g., API Gateway, User Authentication Service, Payment Processing Module"
+ },
+ {
+ "id": "audience",
+ "question": "Who is the primary audience for this document?",
+ "type": "choice",
+ "required": true,
+ "options": [
+ {"value": "engineers", "label": "Engineers (implementation details)"},
+ {"value": "architects", "label": "Architects (design decisions)"},
+ {"value": "product", "label": "Product/Business (high-level overview)"},
+ {"value": "executives", "label": "Executives (strategic context)"},
+ {"value": "mixed", "label": "Mixed audience"}
+ ]
+ },
+ {
+ "id": "scope",
+ "question": "What level of detail do you need?",
+ "type": "choice",
+ "required": true,
+ "options": [
+ {"value": "overview", "label": "High-level overview (architecture, key decisions)"},
+ {"value": "detailed", "label": "Detailed design (components, interfaces, data models)"},
+ {"value": "implementation", "label": "Implementation guide (code-level details, deployment)"}
+ ]
+ },
+ {
+ "id": "integrations",
+ "question": "Does this integrate with existing systems?",
+ "type": "text",
+ "required": false,
+ "placeholder": "List systems or 'None'"
+ },
+ {
+ "id": "constraints",
+ "question": "What are the key technical constraints or requirements?",
+ "type": "text",
+ "required": false,
+ "placeholder": "e.g., Performance (<100ms latency), Security (SOC2 compliance), Scalability (10K req/s)"
+ }
+ ],
+ "adaptive_rules": [
+ {
+ "trigger": "scope == 'detailed' || scope == 'implementation'",
+ "questions": [
+ {
+ "id": "components",
+ "question": "What are the main components or modules in this system?",
+ "type": "text"
+ },
+ {
+ "id": "data_model",
+ "question": "Describe the key data entities and their relationships",
+ "type": "text"
+ }
+ ]
+ },
+ {
+ "trigger": "integrations != 'None' && integrations != ''",
+ "questions": [
+ {
+ "id": "integration_details",
+ "question": "Describe the integration points: protocols, data formats, authentication",
+ "type": "text"
+ }
+ ]
+ },
+ {
+ "trigger": "constraints != ''",
+ "questions": [
+ {
+ "id": "constraint_details",
+ "question": "How will you meet these constraints? Specific approaches or technologies?",
+ "type": "text"
+ }
+ ]
+ },
+ {
+ "trigger": "scope == 'implementation'",
+ "questions": [
+ {
+ "id": "deployment",
+ "question": "Describe the deployment environment and infrastructure",
+ "type": "text",
+ "placeholder": "e.g., AWS ECS, Kubernetes, serverless, on-prem"
+ },
+ {
+ "id": "tech_stack",
+ "question": "What technologies and frameworks are you using?",
+ "type": "text",
+ "placeholder": "e.g., Node.js, PostgreSQL, Redis, React"
+ }
+ ]
+ }
+ ],
+ "completeness_checks": [
+ {
+ "field": "system_name",
+ "rule": "not_empty",
+ "message": "System name is required"
+ },
+ {
+ "field": "audience",
+ "rule": "not_empty",
+ "message": "Please specify the target audience"
+ },
+ {
+ "field": "scope",
+ "rule": "not_empty",
+ "message": "Please specify the desired level of detail"
+ }
+ ]
+}

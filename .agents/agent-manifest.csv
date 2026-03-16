@@ -1,0 +1,5 @@
+id,name,role
+.agents/roles/dev.yaml,Devyd,Senior Software Engineer
+.agents/roles/po.yaml,Pody,Product Owner / Requirements Engineer
+.agents/roles/pm.yaml,Pam,Product Manager
+.agents/roles/qa.yaml,Quad,QA / Test Engineer

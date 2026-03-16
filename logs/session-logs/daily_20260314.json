@@ -1,0 +1,70 @@
+{
+  "date": "20260314",
+  "session_count": 18,
+  "sessions": [
+    "session_20260314_014515.json",
+    "session_20260314_014725.json",
+    "session_20260314_042911.json",
+    "session_20260314_165709.json",
+    "session_20260314_170946.json",
+    "session_20260314_180956.json",
+    "session_20260314_183407.json",
+    "session_20260314_183947.json",
+    "session_20260314_184410.json",
+    "session_20260314_185348.json",
+    "session_20260314_185902.json",
+    "session_20260314_194657.json",
+    "session_20260314_200054.json",
+    "session_20260314_200549.json",
+    "session_20260314_201533.json",
+    "session_20260314_204121.json",
+    "session_20260314_205142.json",
+    "session_20260314_215119.json"
+  ],
+  "usage": {
+    "input": 464859850,
+    "output": 987398,
+    "cache_read": 0,
+    "cache_create": 27995835,
+    "calls": 7673,
+    "cost_usd": 1301.1383
+  },
+  "models": {
+    "kimi-k2.5": {
+      "input": 31230238,
+      "output": 57526,
+      "cache_read": 0,
+      "cache_create": 0,
+      "calls": 606,
+      "cost_usd": 15.7302
+    },
+    "<synthetic>": {
+      "input": 0,
+      "output": 0,
+      "cache_read": 0,
+      "cache_create": 0,
+      "calls": 17,
+      "cost_usd": 0.0
+    },
+    "qwen3.5-plus": {
+      "input": 11327012,
+      "output": 85490,
+      "cache_read": 0,
+      "cache_create": 27995835,
+      "calls": 818,
+      "cost_usd": 5.8345
+    },
+    "qwen3-coder-next": {
+      "input": 422302600,
+      "output": 844382,
+      "cache_read": 0,
+      "cache_create": 0,
+      "calls": 6232,
+      "cost_usd": 1279.5736
+    }
+  },
+  "end_reasons": {
+    "unknown": 18
+  },
+  "generated_at": "2026-03-14T23:02:19.385302+00:00"
+}

@@ -1,0 +1,161 @@
+step:
+  id: "00-brainstorm"
+  name: "Brainstorm & Ideation"
+  phase: "Phase 1: Analysis"
+
+  execution:
+    primary_role: "po"
+    required_system: "Brainstorming Frameworks"
+
+  contracts:
+    inputs:
+      - path: "vault/active_context.md"
+        must_exist: true
+      - path: "docs/project-context.md"
+        must_exist: false
+    outputs:
+      - path: "docs/plans/YYYY-MM-DD-{topic}-design.md"
+        type: "design-doc"
+
+  strict_nyquist_rules:
+    - "Focus on WHAT and WHY, NOT HOW during brainstorming."
+    - "Generate 2-3 distinct approaches before synthesizing."
+    - "Scores approaches using Impact x Feasibility / Risk formula."
+    - "Never propose solutions before fully understanding the problem."
+
+  # Step File Mapping (for reference)
+  steps:
+    step_01_connect: "steps/step-01-connect.md"
+    step_02_ideate: "steps/step-02-ideate.md"
+    step_03_synthesize: "steps/step-03-synthesize.md"
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# Based on 3-step brainstorming workflow:
+# 1. Connect & Align (problem understanding)
+# 2. Explore & Ideate (solution generation)
+# 3. Synthesize & Design (decision making)
+# ============================================
+graph:
+  initial: step_01_connect
+
+  nodes:
+    step_01_connect:
+      type: action
+      action: connect_and_align
+      description: "Understand user's idea, identify constraints, set success criteria"
+      file: "steps/step-01-connect.md"
+      outputs:
+        - problem_statement
+        - constraints
+        - success_criteria
+        - target_user
+      next: checkpoint_01
+
+    checkpoint_01:
+      type: checkpoint
+      description: "User validates problem understanding"
+      human_in_loop: true
+      options:
+        A: step_02_ideate
+        C: step_01_connect
+        P: pause
+
+    step_02_ideate:
+      type: action
+      action: explore_and_generate
+      description: "Generate 2-3 distinct approaches using brainstorming frameworks"
+      file: "steps/step-02-ideate.md"
+      inputs:
+        - problem_statement
+        - constraints
+      outputs:
+        - approach_1
+        - approach_2
+        - approach_3
+        - pros_cons_matrix
+      next: checkpoint_02
+
+    checkpoint_02:
+      type: checkpoint
+      description: "User reviews generated approaches"
+      human_in_loop: true
+      options:
+        A: step_03_synthesize
+        C: step_02_ideate
+        P: pause
+
+    step_03_synthesize:
+      type: action
+      action: synthesize_and_score
+      description: "Score approaches, select winner, create design document"
+      file: "steps/step-03-synthesize.md"
+      inputs:
+        - approach_1
+        - approach_2
+        - approach_3
+        - success_criteria
+      outputs:
+        - selected_approach
+        - impact_feasibility_score
+        - design_document_path
+      next: checkpoint_03
+
+    checkpoint_03:
+      type: checkpoint
+      description: "User validates final design direction"
+      human_in_loop: true
+      options:
+        A: complete
+        C: step_03_synthesize
+        P: pause
+
+    pause:
+      type: decision
+      description: "Wait for user instruction"
+      branches:
+        resume: step_01_connect
+        abort: failed
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "Brainstorm workflow complete - design ready for PRD"
+      next_phase: "phase-1-analysis/01-project-context"
+
+    failed:
+      type: terminal
+      action: mark_failed
+      description: "Workflow aborted by user"
+
+  edges:
+    - from: step_01_connect
+      to: checkpoint_01
+    - from: checkpoint_01
+      to:
+        A: step_02_ideate
+        C: step_01_connect
+        P: pause
+    - from: step_02_ideate
+      to: checkpoint_02
+    - from: checkpoint_02
+      to:
+        A: step_03_synthesize
+        C: step_02_ideate
+        P: pause
+    - from: step_03_synthesize
+      to: checkpoint_03
+    - from: checkpoint_03
+      to:
+        A: complete
+        C: step_03_synthesize
+        P: pause
+    - from: pause
+      to:
+        resume: step_01_connect
+        abort: failed
+
+  checkpoints:
+    - checkpoint_01
+    - checkpoint_02
+    - checkpoint_03

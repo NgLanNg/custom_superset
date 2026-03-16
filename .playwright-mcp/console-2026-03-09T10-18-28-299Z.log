@@ -1,0 +1,2 @@
+[     180ms] [ERROR] Failed to load resource: the server responded with a status of 404 (NOT FOUND) @ http://localhost:8088/api/v1/scenario/health:0
+[     192ms] [ERROR] Failed to load resource: the server responded with a status of 404 (NOT FOUND) @ http://localhost:8088/favicon.ico:0

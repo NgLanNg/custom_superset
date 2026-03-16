@@ -1,0 +1,176 @@
+step:
+  id: "00-quick-flow/quick-spec"
+  name: "Quick Spec Generation"
+  phase: "Phase 4: Implementation"
+
+  execution:
+    primary_role: "dev"
+    required_system: "Spec Writing Framework"
+
+  contracts:
+    inputs:
+      - path: "vault/active_context.md"
+        must_exist: true
+    outputs:
+      - path: "docs/specs/YYYY-MM-DD-{topic}-spec.md"
+        type: "tech-spec"
+
+  strict_nyquist_rules:
+    - "Create implementation-ready specs for small changes or features."
+    - "Every task has a clear file path and specific action."
+    - "All ACs follow Given/When/Then format."
+    - "No placeholders or TBDs in completed specs."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# ============================================
+graph:
+  initial: clarify_intent
+
+  nodes:
+    clarify_intent:
+      type: action
+      action: understand_user_request
+      description: "Clarify user intent and scope for quick spec"
+      file: "00-quick-flow/quick-spec/workflow.md"
+      outputs:
+        - user_request
+        - scope
+        - success_criteria
+      next: checkpoint_01
+
+    checkpoint_01:
+      type: checkpoint
+      description: "User clarifies quick spec intent"
+      human_in_loop: true
+      options:
+        A: investigate_codebase
+        P: pause
+        C: clarify_intent
+
+    investigate_codebase:
+      type: action
+      action: scan_existing_code
+      description: "Investigate existing code structure"
+      file: "00-quick-flow/quick-spec/workflow.md"
+      inputs:
+        - user_request
+      outputs:
+        - codebase_patterns
+        - relevant_files
+        - dependency_map
+      next: checkpoint_02
+
+    checkpoint_02:
+      type: checkpoint
+      description: "User validates codebase investigation"
+      human_in_loop: true
+      options:
+        A: draft_spec
+        P: pause
+        C: investigate_codebase
+
+    draft_spec:
+      type: action
+      action: write_tech_spec
+      description: "Write implementation-ready tech spec"
+      file: "00-quick-flow/quick-spec/workflow.md"
+      inputs:
+        - user_request
+        - codebase_patterns
+        - investigation_results
+      outputs:
+        - spec_draft_path
+        - acceptance_criteria
+        - implementation_tasks
+      next: checkpoint_03
+
+    checkpoint_03:
+      type: checkpoint
+      description: "User validates spec draft"
+      human_in_loop: true
+      options:
+        A: review_spec
+        P: pause
+        C: draft_spec
+
+    review_spec:
+      type: action
+      action: self_audit_spec
+      description: "Self-audit spec against Ready for Dev standard"
+      file: "00-quick-flow/quick-spec/workflow.md"
+      inputs:
+        - spec_draft_path
+      outputs:
+        - audit_results
+        - spec_status
+      next: checkpoint_04
+
+    checkpoint_04:
+      type: checkpoint
+      description: "User approves final spec"
+      human_in_loop: true
+      options:
+        A: complete
+        P: pause
+        C: review_spec
+
+    pause:
+      type: decision
+      description: "Wait for user instruction"
+      branches:
+        resume: checkpoint_01
+        abort: failed
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "Quick spec workflow complete"
+      outputs:
+        - spec_status
+        - spec_path
+
+    failed:
+      type: terminal
+      action: mark_failed
+      description: "Workflow aborted by user"
+
+  edges:
+    - from: clarify_intent
+      to: checkpoint_01
+    - from: checkpoint_01
+      to:
+        A: investigate_codebase
+        P: pause
+        C: clarify_intent
+    - from: investigate_codebase
+      to: checkpoint_02
+    - from: checkpoint_02
+      to:
+        A: draft_spec
+        P: pause
+        C: investigate_codebase
+    - from: draft_spec
+      to: checkpoint_03
+    - from: checkpoint_03
+      to:
+        A: review_spec
+        P: pause
+        C: draft_spec
+    - from: review_spec
+      to: checkpoint_04
+    - from: checkpoint_04
+      to:
+        A: complete
+        P: pause
+        C: review_spec
+    - from: pause
+      to:
+        resume: checkpoint_01
+        abort: failed
+
+  checkpoints:
+    - checkpoint_01
+    - checkpoint_02
+    - checkpoint_03
+    - checkpoint_04

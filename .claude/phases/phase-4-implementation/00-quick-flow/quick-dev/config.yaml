@@ -1,0 +1,315 @@
+step:
+  id: "00-quick-flow/quick-dev"
+  name: "Quick Development"
+  phase: "Phase 4: Implementation"
+
+  execution:
+    primary_role: "dev"
+    required_system: "Git + IDE + Testing Framework"
+
+  contracts:
+    inputs:
+      - path: "vault/active_context.md"
+        must_exist: true
+    outputs:
+      - path: "src/modified-files"
+        type: "code-changes"
+      - path: "docs/implementation_summary.md"
+        type: "ops-record"
+
+  strict_nyquist_rules:
+    - "Quick dev is for small, focused changes (single file or small feature)."
+    - "Use quick-spec or full BMAD flow for complex/system-level work."
+    - "Always run tests before completing."
+    - "Document escape hatches: use quick-spec for multi-component changes."
+
+# ============================================
+# State Graph Definition (LangGraph-style v2.0)
+# Quick Dev supports two execution modes:
+#
+# Mode A (Tech-Spec): User provides tech-spec file path
+#   Route: mode-detection -> load-spec -> execute -> self-check -> adversarial
+#
+# Mode B (Direct): User provides task description directly
+#   Route: mode-detection -> context-gather -> execute -> self-check -> adversarial
+# ============================================
+graph:
+  initial: mode_detection
+
+  nodes:
+    mode_detection:
+      type: action
+      action: detect_execution_mode
+      description: "Determine execution mode (tech-spec vs direct), capture baseline, evaluate escalation"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      outputs:
+        - baseline_commit
+        - execution_mode
+        - tech_spec_path
+        - project_context
+        - escalation_level
+      branches:
+        mode_a: execute_mode_a
+        mode_b: context_gathering
+        escalate_spec: quick_spec_redirect
+        escalate_full: full_flow_redirect
+
+    execute_mode_a:
+      type: action
+      action: load_tech_spec
+      description: "Load and parse tech-spec file, extract tasks and AC"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - tech_spec_path
+      outputs:
+        - tasks
+        - acceptance_criteria
+        - implementation_plan
+      next: execute_loop_a
+
+    execute_loop_a:
+      type: action
+      action: iterate_tasks
+      description: "Iterate through tech-spec tasks, write code, run tests"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - tasks
+        - acceptance_criteria
+      outputs:
+        - code_changes
+        - test_results
+      branches:
+        all_complete: self_check_a
+        blocker: execution_halt
+
+    context_gathering:
+      type: action
+      action: gather_direct_context
+      description: "Quick context gathering for direct instructions"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - baseline_commit
+        - user_request
+      outputs:
+        - files_to_modify
+        - project_patterns
+        - dependencies
+        - mental_plan
+        - inferred_ac
+      branches:
+        confirm: execute_loop_b
+        adjust: context_gathering
+        escape_spec: quick_spec_redirect
+        escape_full: full_flow_redirect
+
+    execute_loop_b:
+      type: action
+      action: iterate_tasks_direct
+      description: "Execute tasks from mental plan"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - mental_plan
+        - inferred_ac
+        - files_to_modify
+      outputs:
+        - code_changes
+        - test_results
+      branches:
+        complete: self_check_b
+        blocker: execution_halt
+
+    self_check_a:
+      type: action
+      action: self_audit_techspec
+      description: "Self-audit implementation against tech-spec tasks"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - tasks
+        - code_changes
+        - test_results
+      outputs:
+        - audit_results
+        - tech_spec_updated
+      next: adversarial_review
+
+    self_check_b:
+      type: action
+      action: self_audit_direct
+      description: "Self-audit implementation against inferred AC"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - mental_plan
+        - code_changes
+        - test_results
+      outputs:
+        - audit_results
+      next: adversarial_review
+
+    adversarial_review:
+      type: action
+      action: invoke_adversarial_review
+      description: "Construct diff, invoke adversarial review, process findings"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - baseline_commit
+        - code_changes
+      outputs:
+        - review_findings
+        - severity_classification
+      next: resolve_findings
+
+    resolve_findings:
+      type: action
+      action: handle_review_findings
+      description: "Present resolution options to user"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - review_findings
+        - execution_mode
+        - tech_spec_path
+      outputs:
+        - resolved_findings
+        - updated_code
+      branches:
+        walk_through: resolve_walkthrough
+        auto_fix: resolve_auto
+        skip: resolve_skip
+
+    resolve_walkthrough:
+      type: action
+      action: walk_through_findings
+      description: "Interactive walkthrough of findings with user"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - review_findings
+      outputs:
+        - user_decisions
+      next: post_resolution
+
+    resolve_auto:
+      type: action
+      action: auto_fix_findings
+      description: "Automatically fix 'real' findings"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - review_findings
+      outputs:
+        - fixes_applied
+      next: post_resolution
+
+    resolve_skip:
+      type: action
+      action: skip_findings
+      description: "Acknowledge findings and proceed"
+      file: "00-quick-flow/quick-dev/workflow.md"
+      inputs:
+        - review_findings
+      outputs:
+        - skipped_findings
+      next: post_resolution
+
+    post_resolution:
+      type: decision
+      description: "Check resolution status"
+      branches:
+        needs_more: adversarial_review
+        complete: checkpoint_complete
+
+    checkpoint_complete:
+      type: checkpoint
+      description: "User confirms completion"
+      human_in_loop: true
+      options:
+        A: complete
+        C: post_resolution
+        P: pause
+
+    execution_halt:
+      type: decision
+      description: "Handle execution blocker"
+      branches:
+        escalate_spec: quick_spec_redirect
+        escalate_full: full_flow_redirect
+        manual_intervention: pause
+
+    quick_spec_redirect:
+      type: terminal
+      action: redirect_to_quick_spec
+      description: "User should use quick-spec workflow instead"
+
+    full_flow_redirect:
+      type: terminal
+      action: redirect_to_full_flow
+      description: "User should use full BMAD PRD workflow instead"
+
+    pause:
+      type: terminal
+      action: pause_workflow
+      description: "Workflow paused for user intervention"
+
+    complete:
+      type: terminal
+      action: mark_complete
+      description: "Quick dev workflow complete"
+      outputs:
+        - implementation_summary
+        - files_modified
+        - test_status
+
+  edges:
+    - from: mode_detection
+      to:
+        mode_a: execute_mode_a
+        mode_b: context_gathering
+        escalate_spec: quick_spec_redirect
+        escalate_full: full_flow_redirect
+    - from: execute_mode_a
+      to: execute_loop_a
+    - from: execute_loop_a
+      to:
+        all_complete: self_check_a
+        blocker: execution_halt
+    - from: context_gathering
+      to:
+        confirm: execute_loop_b
+        adjust: context_gathering
+        escape_spec: quick_spec_redirect
+        escape_full: full_flow_redirect
+    - from: execute_loop_b
+      to:
+        complete: self_check_b
+        blocker: execution_halt
+    - from: self_check_a
+      to: adversarial_review
+    - from: self_check_b
+      to: adversarial_review
+    - from: adversarial_review
+      to: resolve_findings
+    - from: resolve_findings
+      to:
+        walk_through: resolve_walkthrough
+        auto_fix: resolve_auto
+        skip: resolve_skip
+    - from: resolve_walkthrough
+      to: post_resolution
+    - from: resolve_auto
+      to: post_resolution
+    - from: resolve_skip
+      to: post_resolution
+    - from: post_resolution
+      to:
+        needs_more: adversarial_review
+        complete: checkpoint_complete
+    - from: checkpoint_complete
+      to:
+        A: complete
+        C: post_resolution
+        P: pause
+    - from: execution_halt
+      to:
+        escalate_spec: quick_spec_redirect
+        escalate_full: full_flow_redirect
+        manual_intervention: pause
+
+  checkpoints:
+    - checkpoint_complete
